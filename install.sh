@@ -1,5 +1,11 @@
 # Script to install your dotfiles in the Home Directory.
 
+# Git configuration file
+cp gitconfig ~/.gitconfig
+
+# ESLint config file
+cp eslintrc ~/.eslintrc 
+
 # Create .vim folder in Home if it doesn't exist.
 mkdir -p ~/.vim/ 
 mkdir -p ~/.vim/tmp

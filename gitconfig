@@ -1,0 +1,19 @@
+[user]
+	name = Juan D. Acosta
+	email = juandacorias@gmail.com
+	username = juandaco
+[core]
+	editor = vim
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	dr = log --oneline --graph --all
+
