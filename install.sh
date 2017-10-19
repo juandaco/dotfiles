@@ -5,7 +5,7 @@
 cp -v gitconfig ~/.gitconfig
 
 # ESLint config file
-cp -v eslintrc ~/.eslintrc 
+cp -v eslintrc.json ~/.eslintrc 
 
 
 #############
