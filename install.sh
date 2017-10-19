@@ -1,22 +1,28 @@
-# Script to install your dotfiles in the Home Directory.
+# Automation Script to install my 
+# configuration files (dotfiles).
 
 # Git configuration file
-cp gitconfig ~/.gitconfig
+cp -v gitconfig ~/.gitconfig
 
 # ESLint config file
-cp eslintrc ~/.eslintrc 
+cp -v eslintrc ~/.eslintrc 
+
+
+#############
+#           #
+# vim SETUP #
+#           #
+#############
 
 # Create .vim folder in Home if it doesn't exist.
 mkdir -p ~/.vim/ 
 mkdir -p ~/.vim/tmp
 
 # Copy the vimrc.
-echo "Copying vimrc:"
-cp -vi vimrc ~/.vim/vimrc
+cp -v vimrc ~/.vim/vimrc
 
 # Copy the gvimrc.
-echo "Copying vimrc:"
-cp -vi gvimrc ~/.vim/gvimrc
+cp -v gvimrc ~/.vim/gvimrc
 
 # Install Plug Package manager.
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

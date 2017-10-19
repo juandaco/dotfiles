@@ -25,6 +25,8 @@ call plug#begin('~/.vim/plugged')
   " Status Bar Plugin
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  " Disable the whitespac trailing info.
+  " silent! call airline#extensions#whitespace#disable()
 
   " NERD TREE
   Plug 'scrooloose/nerdtree'
@@ -122,25 +124,12 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 
 "
-" KEY RE-MAPPING
+" KEYBOARD RE-MAPPING
 "
 
-"" Tab mappings.
-"map <leader>tt :tabnew<cr>
-"map <leader>te :tabedit
-"map <leader>tc :tabclose<cr>
-"map <leader>to :tabonly<cr>
-"map <leader>tn :tabnext<cr>
-"map <leader>tp :tabprevious<cr>
-"map <leader>tf :tabfirst<cr>
-"map <leader>tl :tablast<cr>
-"map <leader>tm :tabmove
-
-
-"" Controversial...swap colon and semicolon for easier commands
-""nnoremap ; :
-""nnoremap : ;
-
-""vnoremap ; :
-""vnoremap : ;
+" Swap colon and semicolon for easier commands
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
