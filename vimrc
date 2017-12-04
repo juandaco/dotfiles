@@ -44,7 +44,6 @@ call plug#begin('~/.vim/plugged')
 
   " git wrapper.
   Plug 'tpope/vim-fugitive'
-
   
   " Syntax Highlighting Plugin 
   Plug 'vim-syntastic/syntastic'
@@ -110,12 +109,10 @@ set viminfo+=n$HOME/.vim/tmp/.viminfo
 " Enable 24bit color in supported Terminals.
 set termguicolors 
 
-" Color Scheme Settings.
+" Color Scheme Settings, only if installed
 if isdirectory('plugged/base16-vim')
-  echom "HAS DIR"
   set background=dark
   colorscheme base16-oceanicnext
-  " colorscheme base16-brewer
 endif
 
 " Display Line Numbers.
@@ -161,4 +158,3 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-" nmap <Leader>e :NERDTreeToggle<CR>
