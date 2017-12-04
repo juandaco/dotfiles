@@ -45,12 +45,15 @@ call plug#begin('~/.vim/plugged')
   " git wrapper.
   Plug 'tpope/vim-fugitive'
 
-  " Autocompletion Plugin
-  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --cs-completer' }
   
   " Syntax Highlighting Plugin 
   Plug 'vim-syntastic/syntastic'
 
+  " Install only on powerful CPUs
+  if system('uname -m') =~ "x86_64"
+    " Autocompletion Plugin
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --cs-completer' }
+  endif
 
   "
   " SPECIFIC
@@ -69,11 +72,17 @@ call plug#begin('~/.vim/plugged')
   au! BufRead,BufNewFile *.ss	setfiletype racket
   au! BufRead,BufNewFile *.rkt	setfiletype racket
 
-  " Adds Support for Plist files on MacOS
-  " Plug 'darfink/vim-plist'
 
-  " Search Dash.app from vim
-  " Plug 'rizzatti/dash.vim'
+  "
+  " MAC OS
+  "
+  if has('osx')
+    " Adds Support for Plist files on MacOS
+    Plug 'darfink/vim-plist'
+
+    " Search Dash.app from vim
+    Plug 'rizzatti/dash.vim'
+  endif
 
 
   "
@@ -102,9 +111,12 @@ set viminfo+=n$HOME/.vim/tmp/.viminfo
 set termguicolors 
 
 " Color Scheme Settings.
-set background=dark
-" colorscheme base16-oceanicnext
-colorscheme base16-brewer
+if isdirectory('plugged/base16-vim')
+  echom "HAS DIR"
+  set background=dark
+  colorscheme base16-oceanicnext
+  " colorscheme base16-brewer
+endif
 
 " Display Line Numbers.
 set number
@@ -149,3 +161,4 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
+" nmap <Leader>e :NERDTreeToggle<CR>
