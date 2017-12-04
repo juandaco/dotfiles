@@ -110,7 +110,7 @@ set viminfo+=n$HOME/.vim/tmp/.viminfo
 set termguicolors 
 
 " Color Scheme Settings, only if installed
-if isdirectory('plugged/base16-vim')
+if !empty(glob("~/.vim/plugged/base16-vim/"))
   set background=dark
   colorscheme base16-oceanicnext
 endif
