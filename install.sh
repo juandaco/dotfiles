@@ -9,10 +9,6 @@ cp -v gitconfig ~/.gitconfig
 # ESLint config file
 cp -v eslintrc.json ~/.eslintrc.json
 
-# Initialize a git Repo to track possible changes
-cp -v gitignore ~/.vim/.gitignore
-
-
 #############
 #           #
 # vim SETUP #
@@ -35,12 +31,4 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # Run vim and Install all packages.
 vim -c "PlugInstall" "+q" "+q"
-
-cd ~/.vim
-if [ ! -d '.git' ];
-then
-  git init -q
-  git add .
-  git commit -m "Install commit"
-fi
 
