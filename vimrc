@@ -53,7 +53,7 @@ call plug#begin('~/.vim/plugged')
     " Autocompletion Plugin
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --cs-completer' }
   endif
-
+  
   "
   " SPECIFIC
   "
@@ -64,7 +64,7 @@ call plug#begin('~/.vim/plugged')
 
   " Emmet for HTML and CSS
   Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'scss'] }
-  " let g:user_emmet_leader_key='<C-E>'
+  let g:user_emmet_leader_key='<Leader-E>'
 
   " Racket Plugin
   Plug 'wlangstroth/vim-racket'
@@ -158,3 +158,4 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
+nmap <Leader>e :E
