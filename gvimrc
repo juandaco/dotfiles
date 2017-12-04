@@ -5,6 +5,7 @@ set guifont=Monaco:h16
 set background=dark
 colorscheme base16-oceanicnext
 
-" Remove the right scrollbar.
+" Remove scrollbars
 set guioptions-=r
+set guioptions-=L
 
