@@ -158,4 +158,4 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-nmap <Leader>e :E
+" nmap <Leader>e :E

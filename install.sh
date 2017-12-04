@@ -37,7 +37,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim -c "PlugInstall" "+q" "+q"
 
 cd ~/.vim
-if [ -d '.git' ];
+if [ ! -d '.git' ];
 then
   git init -q
   git add .
