@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Automation Script to install my 
 # configuration files (dotfiles).
 
@@ -13,6 +15,8 @@ cp -v eslintrc.json ~/.eslintrc
 # vim SETUP #
 #           #
 #############
+
+
 
 # Create .vim folder in Home if it doesn't exist.
 mkdir -p ~/.vim/ 

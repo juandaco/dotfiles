@@ -1,9 +1,11 @@
-
 "
-" PLUG PACKAGE MANAGER
+" PACKAGES
 "
 call plug#begin('~/.vim/plugged')
 
+  "
+  " GENERAL
+  "
   " Sannity set of vim rules.
   Plug 'tpope/vim-sensible'
 
@@ -22,21 +24,37 @@ call plug#begin('~/.vim/plugged')
   " Surround with parenthesis/quotes Operator `ys`.
   Plug 'tpope/vim-surround'
 
+  " Distraction Free coding.
+  Plug 'junegunn/goyo.vim'
+
   " Status Bar Plugin
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   " Disable the whitespac trailing info.
   " silent! call airline#extensions#whitespace#disable()
 
-  " NERD TREE
+  " Nerd Tree
   Plug 'scrooloose/nerdtree'
-  
-  " Autocompletion Plugin
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer --clang-completer' }
 
+  " Line indentation plugin
+  Plug 'yggdroot/indentline'
+  let g:indentLine_enabled = 0
+  " You can also use one of ¦, ┆, │, ⎸, or ▏ to display more beautiful lines.
+  let g:indentLine_char = '⎸'
+
+  " git wrapper.
+  Plug 'tpope/vim-fugitive'
+
+  " Autocompletion Plugin
+  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --cs-completer' }
+  
   " Syntax Highlighting Plugin 
   Plug 'vim-syntastic/syntastic'
 
+
+  "
+  " SPECIFIC
+  "
   " post install (yarn install | npm install) then load plugin only for editing supported files.
   Plug 'prettier/vim-prettier', {
     \ 'do': 'npm install',
@@ -46,29 +64,23 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'scss'] }
   " let g:user_emmet_leader_key='<C-E>'
 
-  " Search Dash.app from vim
-  Plug 'rizzatti/dash.vim'
-  
-  " git wrapper.
-  Plug 'tpope/vim-fugitive'
-
-  " Syntax Highligthing for React JSX
-  Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
-  let g:jsx_ext_required = 0
-  " For vim-jsx
-  Plug 'othree/yajs.vim', { 'for': ['javascript'] }
-
   " Racket Plugin
-  Plug 'wlangstroth/vim-racket' , { 'for': ['scheme'] }
- 
-  " Syntax Highligthing for Nand2Tetris Course
-  " Plug 'sevko/vim-nand2tetris-syntax'
+  Plug 'wlangstroth/vim-racket'
+  au! BufRead,BufNewFile *.ss	setfiletype racket
+  au! BufRead,BufNewFile *.rkt	setfiletype racket
+
+  " Adds Support for Plist files on MacOS
+  " Plug 'darfink/vim-plist'
+
+  " Search Dash.app from vim
+  " Plug 'rizzatti/dash.vim'
+
 
   "
   " COLOR SCHEMES
   "
   " Colorscheme pluggin.
-  " Plug 'flazz/vim-colorschemes'
+  Plug 'flazz/vim-colorschemes'
 
   " Base16
   Plug 'chriskempson/base16-vim'
@@ -80,8 +92,12 @@ call plug#end()
 
 
 "
-" BASIC CONFIGURATIONS
+" GENERAL CONFIGURATIONS
 "
+
+" Move viminfo into the tmp folder
+set viminfo+=n$HOME/.vim/tmp/.viminfo
+
 " Enable 24bit color in supported Terminals.
 set termguicolors 
 
@@ -96,9 +112,9 @@ set number
 set relativenumber  
 
 " Convert tabs to 4 spaces.
-set tabstop=4  
-set shiftwidth=4  
-set expandtab  
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " Case-insensitive searching.
 set ignorecase
