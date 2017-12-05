@@ -159,3 +159,14 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " KEYBOARD RE-MAPPING
 "
 
+" Search Dash for Term under the cursor
+if has('osx')
+  map <Leader>d :Dash <CR>
+endif
+
+" Format with Prettier
+map <Leader>f :PrettierAsync <CR>
+
+" Toggle Directory Folder
+map <Leader>e :NERDTreeToggle <CR>
+
