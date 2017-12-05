@@ -57,7 +57,15 @@ call plug#begin('~/.vim/plugged')
   "
   " SPECIFIC
   "
-  " post install (yarn install | npm install) then load plugin only for editing supported files.
+
+  " JavaScript Highlighting
+  Plug 'pangloss/vim-javascript', { 'for': ['html', 'javascript'] }
+
+  " Add support for JSX
+  Plug 'mxw/vim-jsx'
+  let g:jsx_ext_required = 0
+
+  " Prettier formatter
   Plug 'prettier/vim-prettier', {
     \ 'do': 'npm install',
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
@@ -150,10 +158,4 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 "
 " KEYBOARD RE-MAPPING
 "
-
-" Swap colon and semicolon for easier commands
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
 
