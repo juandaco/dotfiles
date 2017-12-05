@@ -49,7 +49,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-syntastic/syntastic'
 
   " Install only on powerful CPUs
-  if system('uname -m') =~ "x86_64"
+  if has('osx')
     " Autocompletion Plugin
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --cs-completer' }
   endif
