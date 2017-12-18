@@ -9,14 +9,15 @@
   "parserOptions": {
     "ecmaVersion": 6,
     "ecmaFeatures": {
-    "jsx": true
+      "jsx": true
     }
   },
   "extends": "eslint:recommended",
   "rules": {
-    "quotes": [1, "single"],
-    "indent": [1, 2, { "SwitchCase": 1} ],
-    "no-unused-vars": [1, {"args":"none"}],
+    "comma-dangle": [1, "always-multiline"],
+    "quotes": [1, "single", { "avoidEscape": true }],
+    "indent": [1, 2, { "SwitchCase": 1 }],
+    "no-unused-vars": [1, { "args": "none" }],
     "no-console": 0,
     "semi": [2, "always"]
   }

@@ -127,9 +127,9 @@ set number
 " Line Numbers relative to the Cursor's position.
 set relativenumber  
 
-" Convert tabs to 4 spaces.
-set tabstop=4
-set shiftwidth=4
+" Convert tabs to 2 spaces.
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 " Case-insensitive searching.
