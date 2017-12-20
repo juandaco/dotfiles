@@ -119,7 +119,7 @@ set termguicolors
 " Color Scheme Settings, only if installed
 if !empty(glob("~/.vim/plugged/base16-vim/"))
   set background=dark
-  colorscheme base16-oceanicnext
+  colorscheme base16-brewer
 endif
 
 " Display Line Numbers.
