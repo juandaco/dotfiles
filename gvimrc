@@ -3,7 +3,7 @@ set guifont=Monaco:h16
 
 " Color Scheme settings.
 set background=dark
-colorscheme base16-oceanicnext
+colorscheme base16-brewer
 
 " Remove scrollbars
 set guioptions-=r
