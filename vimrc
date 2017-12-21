@@ -28,10 +28,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/goyo.vim'
 
   " Status Bar Plugin
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  " Disable the whitespac trailing info.
-  " silent! call airline#extensions#whitespace#disable()
+  if has('osx')
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    " Disable the whitespac trailing info.
+    " silent! call airline#extensions#whitespace#disable()
+  endif
 
   " Nerd Tree
   Plug 'scrooloose/nerdtree'
@@ -117,10 +119,8 @@ set viminfo+=n$HOME/.vim/tmp/.viminfo
 set termguicolors 
 
 " Color Scheme Settings, only if installed
-if !empty(glob("~/.vim/plugged/base16-vim/"))
-  set background=dark
-  colorscheme base16-brewer
-endif
+set background=dark
+silent! colorscheme base16-brewer
 
 " Display Line Numbers.
 set number
@@ -156,6 +156,20 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 
 "
+" FUNCTIONS
+"
+function! SetColorScheme(_color, _bg, ...)
+  execute "colorscheme" a:_color
+  execute "set bg=". a:_bg
+
+  let air_theme = get(a:, 1, "")
+  if air_theme != "" && has('osx')
+    execute "AirlineTheme" air_theme
+  endif
+endfunction
+
+
+"
 " KEYBOARD RE-MAPPING
 "
 
@@ -169,4 +183,11 @@ map <Leader>f :PrettierAsync <CR>
 
 " Toggle Directory Folder
 map <Leader>e :NERDTreeToggle <CR>
+
+" Set Color Scheme with keyboard shortcuts
+map <Leader>tsd :call SetColorScheme("base16-solarized-dark", "dark") <CR>
+map <Leader>tsl :call SetColorScheme("base16-solarized-light", "light") <CR>
+map <Leader>tm :call SetColorScheme("macvim", "light", "base16") <CR>
+map <Leader>tb :call SetColorScheme("base16-brewer", "dark") <CR>
+map <Leader>to :call SetColorScheme("base16-oceanicnext", "dark") <CR>
 
