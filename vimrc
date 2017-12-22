@@ -190,4 +190,5 @@ map <Leader>tsl :call SetColorScheme("base16-solarized-light", "light") <CR>
 map <Leader>tm :call SetColorScheme("macvim", "light", "base16") <CR>
 map <Leader>tb :call SetColorScheme("base16-brewer", "dark") <CR>
 map <Leader>to :call SetColorScheme("base16-oceanicnext", "dark") <CR>
+map <Leader>tf :call SetColorScheme("base16-flat", "dark") <CR>
 
