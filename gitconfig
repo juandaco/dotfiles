@@ -15,5 +15,5 @@
 	st = status
 	unstage = reset HEAD --
 	last = log -1 HEAD
-	dr = log --oneline --graph --all
+	dr = log --oneline --graph --all --decorate
 
