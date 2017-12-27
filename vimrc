@@ -127,9 +127,9 @@ set number
 " Line Numbers relative to the Cursor's position.
 set relativenumber  
 
-" Convert tabs to 2 spaces.
-set tabstop=2
-set shiftwidth=2
+" Convert tabs to 4 spaces.
+set tabstop=4
+set shiftwidth=4
 set expandtab
 
 " Case-insensitive searching.
@@ -192,3 +192,7 @@ map <Leader>tb :call SetColorScheme("base16-brewer", "dark") <CR>
 map <Leader>to :call SetColorScheme("base16-oceanicnext", "dark") <CR>
 map <Leader>tf :call SetColorScheme("base16-flat", "dark") <CR>
 
+" Set Tab to 4 spaces
+map <Leader>4 :set sw=4 ts=4 <CR>
+" Set Tab to 2 spaces
+map <Leader>2 :set sw=2 ts=2 <CR>
