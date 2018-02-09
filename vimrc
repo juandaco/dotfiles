@@ -46,8 +46,8 @@ call plug#begin('~/.vim/plugged')
 
   " git wrapper.
   Plug 'tpope/vim-fugitive'
-  
-  " Syntax Highlighting Plugin 
+
+  " Syntax Highlighting Plugin
   Plug 'vim-syntastic/syntastic'
 
   " Install only on powerful CPUs
@@ -55,7 +55,7 @@ call plug#begin('~/.vim/plugged')
     " Autocompletion Plugin
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --cs-completer' }
   endif
-  
+
   "
   " SPECIFIC
   "
@@ -116,7 +116,7 @@ call plug#end()
 set viminfo+=n$HOME/.vim/tmp/.viminfo
 
 " Enable 24bit color in supported Terminals.
-set termguicolors 
+set termguicolors
 
 " Color Scheme Settings, only if installed
 set background=dark
@@ -125,7 +125,7 @@ silent! colorscheme base16-brewer
 " Display Line Numbers.
 set number
 " Line Numbers relative to the Cursor's position.
-set relativenumber  
+set relativenumber
 
 " Convert tabs to 4 spaces.
 set tabstop=4
@@ -196,3 +196,8 @@ map <Leader>tf :call SetColorScheme("base16-flat", "dark") <CR>
 map <Leader>4 :set sw=4 ts=4 <CR>
 " Set Tab to 2 spaces
 map <Leader>2 :set sw=2 ts=2 <CR>
+
+" Set Wrap
+map <Leader>w :set wrap <CR>
+" Set No Wrap
+map <Leader>nw :set nowrap <CR>
