@@ -2,8 +2,10 @@
 set guifont=Monaco:h16
 
 " Color Scheme settings.
-set background=dark
-silent! colorscheme base16-brewer
+set background=light
+silent! colorscheme macvim
+execute "AirlineTheme base16"
+
 
 " Remove scrollbars
 set guioptions-=r
