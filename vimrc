@@ -37,6 +37,7 @@ call plug#begin('~/.vim/plugged')
 
   " Nerd Tree
   Plug 'scrooloose/nerdtree'
+  let NERDTreeIgnore = ['node_modules$[[dir]]']
 
   " Line indentation plugin
   Plug 'yggdroot/indentline'
@@ -55,6 +56,10 @@ call plug#begin('~/.vim/plugged')
     " Autocompletion Plugin
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --cs-completer' }
   endif
+
+  " FZF Fuzzy file search plugin.
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf.vim'
 
   "
   " SPECIFIC
@@ -179,7 +184,7 @@ if has('mac')
 endif
 
 " Format with Prettier
-map <Leader>f :PrettierAsync <CR>
+map <Leader>F :PrettierAsync <CR>
 
 " Toggle Directory Folder
 map <Leader>e :NERDTreeToggle <CR>
@@ -201,3 +206,7 @@ map <Leader>2 :set sw=2 ts=2 <CR>
 map <Leader>w :set wrap <CR>
 " Set No Wrap
 map <Leader>nw :set nowrap <CR>
+
+" FZF Fuzzy file search
+map <Leader>f :Files <CR>
+
