@@ -28,7 +28,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/goyo.vim'
 
   " Status Bar Plugin
-  if has('osx')
+  if has('mac')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     " Disable the whitespac trailing info.
@@ -51,7 +51,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-syntastic/syntastic'
 
   " Install only on powerful CPUs
-  if has('osx')
+  if has('mac')
     " Autocompletion Plugin
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --cs-completer' }
   endif
@@ -84,7 +84,7 @@ call plug#begin('~/.vim/plugged')
   "
   " MAC OS
   "
-  if has('osx')
+  if has('mac')
     " Adds Support for Plist files on MacOS
     Plug 'darfink/vim-plist'
 
@@ -163,7 +163,7 @@ function! SetColorScheme(_color, _bg, ...)
   execute "set bg=". a:_bg
 
   let air_theme = get(a:, 1, "")
-  if air_theme != "" && has('osx')
+  if air_theme != "" && has('mac')
     execute "AirlineTheme" air_theme
   endif
 endfunction
@@ -174,7 +174,7 @@ endfunction
 "
 
 " Search Dash for Term under the cursor
-if has('osx')
+if has('mac')
   map <Leader>d :Dash <CR>
 endif
 
