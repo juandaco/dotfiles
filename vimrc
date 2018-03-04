@@ -31,8 +31,6 @@ call plug#begin('~/.vim/plugged')
   if has('mac')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    " Disable the whitespac trailing info.
-    " silent! call airline#extensions#whitespace#disable()
   endif
 
   " Nerd Tree
@@ -58,7 +56,11 @@ call plug#begin('~/.vim/plugged')
   endif
 
   " FZF Fuzzy file search plugin.
-  Plug '/usr/local/bin/fzf'
+  if has('mac')
+      Plug '/usr/local/bin/fzf'
+  else
+      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  endif
   Plug 'junegunn/fzf.vim'
 
   " Argument Text Object
@@ -68,10 +70,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'bkad/camelcasemotion'
   silent! call camelcasemotion#CreateMotionMappings('<leader>')
 
+
   "
   " SPECIFIC
   "
-
   " JavaScript Highlighting
   Plug 'pangloss/vim-javascript', { 'for': ['html', 'javascript'] }
 
