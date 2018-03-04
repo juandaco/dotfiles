@@ -58,8 +58,15 @@ call plug#begin('~/.vim/plugged')
   endif
 
   " FZF Fuzzy file search plugin.
-  Plug '/usr/local/opt/fzf'
+  Plug '/usr/local/bin/fzf'
   Plug 'junegunn/fzf.vim'
+
+  " Argument Text Object
+  Plug 'vim-scripts/argtextobj.vim'
+
+  " Camel Case Motion
+  Plug 'bkad/camelcasemotion'
+  silent! call camelcasemotion#CreateMotionMappings('<leader>')
 
   "
   " SPECIFIC
@@ -107,6 +114,13 @@ call plug#begin('~/.vim/plugged')
   " Base16
   Plug 'chriskempson/base16-vim'
 
+  " Lucario
+  Plug 't1mxg0d/vim-lucario'
+
+  " AYU
+  Plug 'ayu-theme/ayu-vim'
+  let ayucolor="mirage" " light/mirage/dark
+
   " Solarized Colorscheme
   Plug 'altercation/vim-colors-solarized'
 
@@ -135,6 +149,7 @@ set relativenumber
 " Convert tabs to 4 spaces.
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 set expandtab
 
 " Case-insensitive searching.
@@ -158,6 +173,9 @@ set directory=~/.vim/tmp//,.
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+" Set character for tab and return when visible with 'set list'
+set listchars=tab:▸\ ,eol:¬
 
 
 "
@@ -187,25 +205,30 @@ endif
 map <Leader>F :PrettierAsync <CR>
 
 " Toggle Directory Folder
-map <Leader>e :NERDTreeToggle <CR>
+map <Leader><Tab> :NERDTreeToggle <CR>
 
 " Set Color Scheme with keyboard shortcuts
 map <Leader>tsd :call SetColorScheme("base16-solarized-dark", "dark") <CR>
 map <Leader>tsl :call SetColorScheme("base16-solarized-light", "light") <CR>
-map <Leader>tm :call SetColorScheme("macvim", "light", "base16") <CR>
+map <Leader>tmv :call SetColorScheme("macvim", "light", "base16") <CR>
+map <Leader>tmo :call SetColorScheme("monokai", "dark") <CR>
 map <Leader>tb :call SetColorScheme("base16-brewer", "dark") <CR>
 map <Leader>to :call SetColorScheme("base16-oceanicnext", "dark") <CR>
 map <Leader>tf :call SetColorScheme("base16-flat", "dark") <CR>
+map <Leader>tl :call SetColorScheme("lucario", "dark", "base16") <CR>
+map <Leader>tt :call SetColorScheme("Tomorrow", "light") <CR>
+map <Leader>tg :call SetColorScheme("base16-github", "light") <CR>
+map <Leader>ta :call SetColorScheme("ayu", "dark", "ayu") <CR>
 
 " Set Tab to 4 spaces
-map <Leader>4 :set sw=4 ts=4 <CR>
+map <Leader>4 :set sw=4 ts=4 sts=4 <CR>
 " Set Tab to 2 spaces
-map <Leader>2 :set sw=2 ts=2 <CR>
+map <Leader>2 :set sw=2 ts=2 sts=2 <CR>
 
 " Set Wrap
-map <Leader>w :set wrap <CR>
+map <Leader>W :set wrap <CR>
 " Set No Wrap
-map <Leader>nw :set nowrap <CR>
+map <Leader>nW :set nowrap <CR>
 
 " FZF Fuzzy file search
 map <Leader>f :Files <CR>
