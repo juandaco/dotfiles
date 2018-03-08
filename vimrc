@@ -57,7 +57,7 @@ call plug#begin('~/.vim/plugged')
 
   " FZF Fuzzy file search plugin.
   if has('mac')
-      Plug '/usr/local/bin/fzf'
+      Plug '/usr/local/opt/fzf'
   else
       Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   endif
@@ -65,6 +65,10 @@ call plug#begin('~/.vim/plugged')
 
   " Argument Text Object
   Plug 'vim-scripts/argtextobj.vim'
+
+  " Entire Buffer Text Object
+  Plug 'kana/vim-textobj-user'
+  Plug 'kana/vim-textobj-entire'
 
   " Camel Case Motion
   Plug 'bkad/camelcasemotion'
