@@ -46,8 +46,25 @@ call plug#begin('~/.vim/plugged')
   " git wrapper.
   Plug 'tpope/vim-fugitive'
 
-  " Syntax Highlighting Plugin
-  Plug 'vim-syntastic/syntastic'
+  " A.L.E. (Asynchronous Linter Engine)
+  Plug 'w0rp/ale'
+  " Configure Linters
+  let g:ale_linters = {
+    \   'javascript': ['eslint'],
+    \}
+
+  " Configure Auto-Formatters
+  let g:ale_fixers = {
+  \   'javascript': [
+  \       'eslint',
+  \       {buffer, lines -> filter(lines, 'v:val !=~ ''^\s*//''')},
+  \   ],
+  \   'java': [ 'google_java_format' ],
+  \}
+
+  " Only Lint files on Save.
+  let g:ale_lint_on_text_changed = 'never'
+  let g:ale_lint_on_enter = 0
 
   " Install only on powerful CPUs
   if has('mac')
@@ -152,10 +169,10 @@ set number
 " Line Numbers relative to the Cursor's position.
 set relativenumber
 
-" Convert tabs to 4 spaces.
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+" Convert tabs to 2 spaces.
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 " Case-insensitive searching.
