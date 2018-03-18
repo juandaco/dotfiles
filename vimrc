@@ -9,6 +9,13 @@ call plug#begin('~/.vim/plugged')
   " Sannity set of vim rules.
   Plug 'tpope/vim-sensible'
 
+  " Local vimrc
+  Plug 'embear/vim-localvimrc'
+  " Don't ask before sourcing the .lvimrc file
+  let g:localvimrc_ask = 0
+  " Disable sandbox
+  let g:localvimrc_sandbox = 0
+
   " Enables repetition with . for plugins.
   Plug 'tpope/vim-repeat'
 
