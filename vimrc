@@ -196,6 +196,9 @@ set showcmd
 " No beeping
 set visualbell
 
+" Allow moving buffers without saving.
+set hidden
+
 " Keep swap files inside the .vim/tmp folder.
 set directory=~/.vim/tmp//,.
 
@@ -226,13 +229,25 @@ endfunction
 " KEYBOARD RE-MAPPING
 "
 
+" Use space as the Leader
+map <Space> \
+
+
+" Fzf Files
+map <Leader>f :Files <CR>
+
+" Fzf Buffers
+map <Leader>b :Buffers <CR>
+
+" Write current buffer.
+map <Leader>s :w <CR>
+
+
 " Search Dash for Term under the cursor
 if has('mac')
   map <Leader>d :Dash <CR>
 endif
-
-" Format with Prettier
-map <Leader>F :PrettierAsync <CR>
+"
 
 " Toggle Directory Folder
 map <Leader><Tab> :NERDTreeToggle <CR>
@@ -243,6 +258,7 @@ map <Leader>tsl :call SetColorScheme("base16-solarized-light", "light") <CR>
 map <Leader>tmv :call SetColorScheme("macvim", "light", "base16") <CR>
 map <Leader>tmo :call SetColorScheme("monokai", "dark") <CR>
 map <Leader>tb :call SetColorScheme("base16-brewer", "dark") <CR>
+map <Leader>td :call SetColorScheme("base16-dracula", "dark", "base16") <CR>
 map <Leader>to :call SetColorScheme("base16-oceanicnext", "dark") <CR>
 map <Leader>tf :call SetColorScheme("base16-flat", "dark") <CR>
 map <Leader>tl :call SetColorScheme("lucario", "dark", "base16") <CR>
@@ -255,11 +271,11 @@ map <Leader>4 :set sw=4 ts=4 sts=4 <CR>
 " Set Tab to 2 spaces
 map <Leader>2 :set sw=2 ts=2 sts=2 <CR>
 
-" Set Wrap
-map <Leader>W :set wrap <CR>
-" Set No Wrap
-map <Leader>nW :set nowrap <CR>
+" Toggle Wrap
+execute "set <A-w>=\ew"
+nnoremap <A-w> :set wrap! <bar> :set wrap? <CR>
 
-" FZF Fuzzy file search
-map <Leader>f :Files <CR>
+" Autoformat with Prettier
+execute "set <A-F>=\eF"
+nnoremap <A-F> :PrettierAsync <CR>
 

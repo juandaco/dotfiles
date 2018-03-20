@@ -25,9 +25,12 @@ cp -v vimrc ~/.vim/vimrc
 # Copy the gvimrc.
 cp -v gvimrc ~/.vim/gvimrc
 
-# Install Plug Package manager.
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+# Install Plug Package manager if not installed.
+if [ ! -f ~/.vim/autoload/plug.vim ]; then
+  echo "Installing Plug Package Manager... \n"
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
 # Run vim and Install all packages.
 vim -c "PlugInstall" "+q" "+q"
