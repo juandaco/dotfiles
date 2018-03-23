@@ -38,6 +38,7 @@ call plug#begin('~/.vim/plugged')
   if has('mac')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    let g:airline#extensions#tabline#enabled = 1
   endif
 
   " Nerd Tree
@@ -239,6 +240,13 @@ map <Leader>f :Files <CR>
 " Fzf Buffers
 map <Leader>b :Buffers <CR>
 
+" Navigate Buffers
+execute "set <A-,>=\e,"
+map <A-,> :bp <CR>
+execute "set <A-.>=\e."
+map <A-.> :bn <CR>
+
+
 " Write current buffer.
 map <Leader>s :w <CR>
 
@@ -256,7 +264,7 @@ map <Leader><Tab> :NERDTreeToggle <CR>
 map <Leader>tsd :call SetColorScheme("base16-solarized-dark", "dark") <CR>
 map <Leader>tsl :call SetColorScheme("base16-solarized-light", "light") <CR>
 map <Leader>tmv :call SetColorScheme("macvim", "light", "base16") <CR>
-map <Leader>tmo :call SetColorScheme("monokai", "dark") <CR>
+map <Leader>tmo :call SetColorScheme("base16-monokai", "dark", "base16") <CR>
 map <Leader>tb :call SetColorScheme("base16-brewer", "dark") <CR>
 map <Leader>td :call SetColorScheme("base16-dracula", "dark", "base16") <CR>
 map <Leader>to :call SetColorScheme("base16-oceanicnext", "dark") <CR>

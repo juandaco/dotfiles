@@ -10,6 +10,16 @@ execute "AirlineTheme base16"
 set guioptions-=r
 set guioptions-=L
 
+"
+" MAPPINGS
+"
+
+" Autoformat
 map ƒ :PrettierAsync <CR>
+
+" Toggle Wrap
 map ∑ :set wrap! <bar> :set wrap? <CR>
 
+" Navigate Buffers
+map ≤ :bp <CR>
+map ≥ :bn <CR>
