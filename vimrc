@@ -39,6 +39,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#show_close_button = 0
+    let g:airline#extensions#tabline#show_tab_nr = 0
+
   endif
 
   " Nerd Tree
@@ -53,6 +56,10 @@ call plug#begin('~/.vim/plugged')
 
   " git wrapper.
   Plug 'tpope/vim-fugitive'
+
+  " Git Gutter
+  Plug 'airblade/vim-gitgutter'
+  let g:gitgutter_enabled = 0
 
   " A.L.E. (Asynchronous Linter Engine)
   Plug 'w0rp/ale'
@@ -99,6 +106,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'bkad/camelcasemotion'
   silent! call camelcasemotion#CreateMotionMappings('<leader>')
 
+  " Better Sessions Management
+  Plug 'vim-scripts/vim-misc'
+  Plug 'xolox/vim-session'
+  let g:session_autosave = 'no'
 
   "
   " SPECIFIC
@@ -117,6 +128,9 @@ call plug#begin('~/.vim/plugged')
 
   " Emmet for HTML and CSS
   Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'scss'] }
+
+  " CSSComb Autoformatter
+  Plug 'csscomb/vim-csscomb'
 
   " Racket Plugin
   Plug 'wlangstroth/vim-racket'
@@ -233,12 +247,9 @@ endfunction
 " Use space as the Leader
 map <Space> \
 
-
 " Fzf Files
 map <Leader>f :Files <CR>
 
-" Fzf Buffers
-map <Leader>b :Buffers <CR>
 
 " Navigate Buffers
 execute "set <A-,>=\e,"
@@ -248,7 +259,7 @@ map <A-.> :bn <CR>
 
 
 " Write current buffer.
-map <Leader>s :w <CR>
+map <Leader>w :w <CR>
 
 
 " Search Dash for Term under the cursor
