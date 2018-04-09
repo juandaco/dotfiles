@@ -44,6 +44,18 @@ call plug#begin('~/.vim/plugged')
 
   endif
 
+  " Sippets Engine
+  Plug 'SirVer/ultisnips'
+  let g:UltiSnipsExpandTrigger='<c-space>'
+  let g:UltiSnipsSnippetsDir='~/.vim/snippets'
+  let g:UltiSnipsEditSplit='vertical'
+  " Load React Snippets
+  autocmd FileType javascript.jsx UltiSnipsAddFiletypes javascript-react
+  autocmd BufRead,BufNewFile */reducers/* UltiSnipsAddFiletypes javascript-redux
+
+  " Snippets package
+  " Plug 'honza/vim-snippets'
+
   " Nerd Tree
   Plug 'scrooloose/nerdtree'
   let NERDTreeIgnore = ['node_modules$[[dir]]']
@@ -66,20 +78,19 @@ call plug#begin('~/.vim/plugged')
   " Configure Linters
   let g:ale_linters = {
     \   'javascript': ['eslint'],
+    \   'scss': ['stylelint'],
     \}
 
   " Configure Auto-Formatters
   let g:ale_fixers = {
-  \   'javascript': [
-  \       'eslint',
-  \       {buffer, lines -> filter(lines, 'v:val !=~ ''^\s*//''')},
-  \   ],
-  \   'java': [ 'google_java_format' ],
+  \   'javascript': ['prettier'],
+  \   'scss': ['stylelint'],
+  \   'java': ['google_java_format'],
   \}
 
   " Only Lint files on Save.
-  let g:ale_lint_on_text_changed = 'never'
-  let g:ale_lint_on_enter = 0
+  " let g:ale_lint_on_text_changed = 'never'
+  " let g:ale_lint_on_enter = 0
 
   " Install only on powerful CPUs
   if has('mac')
@@ -122,15 +133,14 @@ call plug#begin('~/.vim/plugged')
   let g:jsx_ext_required = 0
 
   " Prettier formatter
-  Plug 'prettier/vim-prettier', {
-    \ 'do': 'npm install',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
+  Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
   " Emmet for HTML and CSS
-  Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'scss'] }
+  Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'scss', 'javascript.jsx'] }
 
-  " CSSComb Autoformatter
-  Plug 'csscomb/vim-csscomb'
+  " CSSComb Formatter
+  " Plug 'csscomb/vim-csscomb'
+  Plug 'batsuev/csscomb-vim'
 
   " Racket Plugin
   Plug 'wlangstroth/vim-racket'
@@ -169,6 +179,9 @@ call plug#begin('~/.vim/plugged')
   " Solarized Colorscheme
   Plug 'altercation/vim-colors-solarized'
 
+  " VS Code Dark
+  Plug 'tomasiser/vim-code-dark'
+
 call plug#end()
 
 
@@ -196,6 +209,9 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+
+" Set nowrap by default
+set nowrap
 
 " Case-insensitive searching.
 set ignorecase
@@ -284,6 +300,7 @@ map <Leader>tl :call SetColorScheme("lucario", "dark", "base16") <CR>
 map <Leader>tt :call SetColorScheme("Tomorrow", "light") <CR>
 map <Leader>tg :call SetColorScheme("base16-github", "light") <CR>
 map <Leader>ta :call SetColorScheme("ayu", "dark", "ayu") <CR>
+map <Leader>tvd :call SetColorScheme("codedark", "dark", "codedark") <CR>
 
 " Set Tab to 4 spaces
 map <Leader>4 :set sw=4 ts=4 sts=4 <CR>
@@ -294,7 +311,9 @@ map <Leader>2 :set sw=2 ts=2 sts=2 <CR>
 execute "set <A-w>=\ew"
 nnoremap <A-w> :set wrap! <bar> :set wrap? <CR>
 
-" Autoformat with Prettier
+" Autoformat with ALEFix
 execute "set <A-F>=\eF"
-nnoremap <A-F> :PrettierAsync <CR>
+noremap <A-F> :ALEFix <CR>
 
+" ALE Toggle
+map <Leader>l :ALEToggle <CR>

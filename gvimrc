@@ -15,7 +15,7 @@ set guioptions-=L
 "
 
 " Autoformat
-map ƒ :PrettierAsync <CR>
+map ƒ :ALEFix <CR>
 
 " Toggle Wrap
 map ∑ :set wrap! <bar> :set wrap? <CR>
