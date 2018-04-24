@@ -31,6 +31,9 @@ call plug#begin('~/.vim/plugged')
   " Surround with parenthesis/quotes Operator `ys`.
   Plug 'tpope/vim-surround'
 
+  " Bracket Mapping
+  Plug 'tpope/vim-unimpaired'
+
   " Distraction Free coding.
   Plug 'junegunn/goyo.vim'
 
@@ -41,30 +44,21 @@ call plug#begin('~/.vim/plugged')
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#show_close_button = 0
     let g:airline#extensions#tabline#show_tab_nr = 0
-
+    " Enable Powerline Fonts
+    let g:airline_powerline_fonts = 1
   endif
 
   " Sippets Engine
   Plug 'SirVer/ultisnips'
   let g:UltiSnipsExpandTrigger='<c-space>'
-  let g:UltiSnipsSnippetsDir='~/.vim/snippets'
+  let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
   let g:UltiSnipsEditSplit='vertical'
-  " Load React Snippets
-  autocmd FileType javascript.jsx UltiSnipsAddFiletypes javascript-react
-  autocmd BufRead,BufNewFile */reducers/* UltiSnipsAddFiletypes javascript-redux
-
-  " Snippets package
-  " Plug 'honza/vim-snippets'
-
-  " Nerd Tree
-  Plug 'scrooloose/nerdtree'
-  let NERDTreeIgnore = ['node_modules$[[dir]]']
-
-  " Line indentation plugin
-  Plug 'yggdroot/indentline'
-  let g:indentLine_enabled = 0
-  " You can also use one of ¦, ┆, │, ⎸, or ▏ to display more beautiful lines.
-  let g:indentLine_char = '⎸'
+  " Load Snippets based on pattern
+  autocmd BufRead,BufNewFile */src/index.js,*/components/*.js,*/containers/*.js UltiSnipsAddFiletypes javascript-react
+  autocmd BufRead,BufNewFile */reducers/* UltiSnipsAddFiletypes javascript-redux-reducers
+  autocmd BufRead,BufNewFile */actions/* UltiSnipsAddFiletypes javascript-redux-actions
+  autocmd BufRead,BufNewFile *.{test,spec}.js UltiSnipsAddFiletypes javascript-jest
+  autocmd BufRead,BufNewFile */actions/*.{test,spec}.js UltiSnipsAddFiletypes javascript-redux-actions-test
 
   " git wrapper.
   Plug 'tpope/vim-fugitive'
@@ -80,7 +74,6 @@ call plug#begin('~/.vim/plugged')
     \   'javascript': ['eslint'],
     \   'scss': ['stylelint'],
     \}
-
   " Configure Auto-Formatters
   let g:ale_fixers = {
   \   'javascript': ['prettier'],
@@ -113,14 +106,19 @@ call plug#begin('~/.vim/plugged')
   Plug 'kana/vim-textobj-user'
   Plug 'kana/vim-textobj-entire'
 
-  " Camel Case Motion
-  Plug 'bkad/camelcasemotion'
-  silent! call camelcasemotion#CreateMotionMappings('<leader>')
-
   " Better Sessions Management
   Plug 'vim-scripts/vim-misc'
   Plug 'xolox/vim-session'
   let g:session_autosave = 'no'
+
+  " Rename Tabs Plugin
+  Plug 'gcmt/taboo.vim'
+  set sessionoptions+=tabpages,globals
+
+  if has('mac')
+    " Debugger
+    Plug 'joonty/vdebug'
+  endif
 
   "
   " SPECIFIC
@@ -139,13 +137,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'scss', 'javascript.jsx'] }
 
   " CSSComb Formatter
-  " Plug 'csscomb/vim-csscomb'
   Plug 'batsuev/csscomb-vim'
-
-  " Racket Plugin
-  Plug 'wlangstroth/vim-racket'
-  au! BufRead,BufNewFile *.ss	setfiletype racket
-  au! BufRead,BufNewFile *.rkt	setfiletype racket
 
 
   "
@@ -221,6 +213,9 @@ set smartcase
 " Vertical Split to the right.
 set splitright
 
+" Horizontal Split on the bottom.
+set splitbelow
+
 " Display incomplete commands.
 set showcmd
 
@@ -266,6 +261,8 @@ map <Space> \
 " Fzf Files
 map <Leader>f :Files <CR>
 
+" Fzf Colors
+map <Leader>c :Colors <CR>
 
 " Navigate Buffers
 execute "set <A-,>=\e,"
@@ -277,15 +274,11 @@ map <A-.> :bn <CR>
 " Write current buffer.
 map <Leader>w :w <CR>
 
-
 " Search Dash for Term under the cursor
 if has('mac')
-  map <Leader>d :Dash <CR>
+  map <C-h> :Dash <CR>
 endif
 "
-
-" Toggle Directory Folder
-map <Leader><Tab> :NERDTreeToggle <CR>
 
 " Set Color Scheme with keyboard shortcuts
 map <Leader>tsd :call SetColorScheme("base16-solarized-dark", "dark") <CR>
@@ -317,3 +310,6 @@ noremap <A-F> :ALEFix <CR>
 
 " ALE Toggle
 map <Leader>l :ALEToggle <CR>
+
+map <Leader>s :vsplit %:p:r.test.%:e <CR>
+

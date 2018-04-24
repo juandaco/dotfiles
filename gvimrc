@@ -1,5 +1,5 @@
 " Set the font family and size.
-set guifont=Monaco:h16
+set guifont=Inconsolata-g\ for\ Powerline:h16
 
 " Color Scheme settings.
 set background=dark
