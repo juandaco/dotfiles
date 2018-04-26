@@ -56,7 +56,7 @@ call plug#begin('~/.vim/plugged')
   " Load Snippets based on pattern
   autocmd BufRead,BufNewFile */src/index.js,*/components/*.js,*/containers/*.js UltiSnipsAddFiletypes javascript-react
   autocmd BufRead,BufNewFile */reducers/* UltiSnipsAddFiletypes javascript-redux-reducers
-  autocmd BufRead,BufNewFile */actions/* UltiSnipsAddFiletypes javascript-redux-actions
+  autocmd BufRead,BufNewFile */actions/*,*/actionTypes.js UltiSnipsAddFiletypes javascript-redux-actions
   autocmd BufRead,BufNewFile *.{test,spec}.js UltiSnipsAddFiletypes javascript-jest
   autocmd BufRead,BufNewFile */actions/*.{test,spec}.js UltiSnipsAddFiletypes javascript-redux-actions-test
 
@@ -285,6 +285,7 @@ map <Leader>tsd :call SetColorScheme("base16-solarized-dark", "dark") <CR>
 map <Leader>tsl :call SetColorScheme("base16-solarized-light", "light") <CR>
 map <Leader>tmv :call SetColorScheme("macvim", "light", "base16") <CR>
 map <Leader>tmo :call SetColorScheme("base16-monokai", "dark", "base16") <CR>
+map <Leader>tma :call SetColorScheme("base16-material", "dark", "base16") <CR>
 map <Leader>tb :call SetColorScheme("base16-brewer", "dark") <CR>
 map <Leader>td :call SetColorScheme("base16-dracula", "dark", "base16") <CR>
 map <Leader>to :call SetColorScheme("base16-oceanicnext", "dark") <CR>
@@ -312,4 +313,3 @@ noremap <A-F> :ALEFix <CR>
 map <Leader>l :ALEToggle <CR>
 
 map <Leader>s :vsplit %:p:r.test.%:e <CR>
-
