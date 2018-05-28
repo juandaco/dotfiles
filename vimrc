@@ -9,12 +9,12 @@ call plug#begin('~/.vim/plugged')
   " Sannity set of vim rules.
   Plug 'tpope/vim-sensible'
 
-  " Local vimrc
-  Plug 'embear/vim-localvimrc'
-  " Don't ask before sourcing the .lvimrc file
-  let g:localvimrc_ask = 0
-  " Disable sandbox
-  let g:localvimrc_sandbox = 0
+"   " Local vimrc
+"   Plug 'embear/vim-localvimrc'
+"   " Don't ask before sourcing the .lvimrc file
+"   let g:localvimrc_ask = 0
+"   " Disable sandbox
+"   let g:localvimrc_sandbox = 0
 
   " Enables repetition with . for plugins.
   Plug 'tpope/vim-repeat'
@@ -72,18 +72,20 @@ call plug#begin('~/.vim/plugged')
   " Configure Linters
   let g:ale_linters = {
     \   'javascript': ['eslint'],
+    \   'php': ['phpcs'],
     \   'scss': ['stylelint'],
     \}
   " Configure Auto-Formatters
   let g:ale_fixers = {
   \   'javascript': ['prettier'],
+  \   'php': ['phpcbf'],
   \   'scss': ['stylelint'],
   \   'java': ['google_java_format'],
   \}
 
   " Only Lint files on Save.
   " let g:ale_lint_on_text_changed = 'never'
-  " let g:ale_lint_on_enter = 0
+  let g:ale_lint_on_enter = 0
 
   " Install only on powerful CPUs
   if has('mac')
@@ -139,6 +141,15 @@ call plug#begin('~/.vim/plugged')
   " CSSComb Formatter
   Plug 'batsuev/csscomb-vim'
 
+  " Markdown Previewer
+  Plug 'suan/vim-instant-markdown'
+  " let g:instant_markdown_slow = 1
+  let g:instant_markdown_autostart = 0
+
+  " PostgreSQL Improved Syntax
+  Plug 'lifepillar/pgsql.vim'
+  " Set PostgreSQL as the default SQL dialect
+  let g:sql_type_default = 'pgsql'
 
   "
   " MAC OS
