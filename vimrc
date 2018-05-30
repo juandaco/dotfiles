@@ -74,6 +74,7 @@ call plug#begin('~/.vim/plugged')
     \   'javascript': ['eslint'],
     \   'php': ['phpcs'],
     \   'scss': ['stylelint'],
+    \   'sh': ['shellcheck'],
     \}
   " Configure Auto-Formatters
   let g:ale_fixers = {
@@ -81,6 +82,7 @@ call plug#begin('~/.vim/plugged')
   \   'php': ['phpcbf'],
   \   'scss': ['stylelint'],
   \   'java': ['google_java_format'],
+  \   'sh': ['shfmt'],
   \}
 
   " Only Lint files on Save.
@@ -147,9 +149,9 @@ call plug#begin('~/.vim/plugged')
   let g:instant_markdown_autostart = 0
 
   " PostgreSQL Improved Syntax
-  Plug 'lifepillar/pgsql.vim'
+  " Plug 'lifepillar/pgsql.vim'
   " Set PostgreSQL as the default SQL dialect
-  let g:sql_type_default = 'pgsql'
+  " let g:sql_type_default = 'pgsql'
 
   "
   " MAC OS
