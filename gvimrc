@@ -3,7 +3,7 @@ set guifont=Inconsolata-dz\ for\ Powerline:h15
 
 " Color Scheme settings.
 set background=dark
-silent! colorscheme base16-brewer
+silent! colorscheme base16-monokai
 execute "AirlineTheme base16"
 
 " Remove scrollbars

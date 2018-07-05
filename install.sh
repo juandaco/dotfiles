@@ -19,17 +19,26 @@ cp -v eslintrc.json ~/.eslintrc.json
 mkdir -p ~/.vim/
 mkdir -p ~/.vim/tmp
 
-# Copy the vimrc.
+# Copy vimrc.
 cp -v vimrc ~/.vim/vimrc
 
 # Copy the gvimrc.
 cp -v gvimrc ~/.vim/gvimrc
 
+# Copy pluggins.vim
+cp -v pluggins.vim ~/.vim/pluggins.vim
+
+# Copy mappings.vim
+cp -v mappings.vim ~/.vim/mappings.vim
+
+# Copy functions.vim
+cp -v functions.vim ~/.vim/functions.vim
+
 # Install Plug Package manager if not installed.
 if [ ! -f ~/.vim/autoload/plug.vim ]; then
-	echo "Installing Plug Package Manager... \n"
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  printf "Installing Plug Package Manager... \\n"
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 # Run vim and Install all packages.
