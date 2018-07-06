@@ -1,18 +1,25 @@
+" Temporary fix for issues with Python 3.7
+if has('python3')
+  silent! python3 1
+endif
+
 " Add Plugins
-source ~/.vim/pluggins.vim
+runtime pluggins.vim
 
 " Add Helper Functions
-source ~/.vim/functions.vim
+runtime functions.vim
 
 " Add Keyboard Mappings
-source ~/.vim/mappings.vim
+runtime mappings.vim
 
 "
 " GENERAL CONFIGURATIONS
 "
 
 " Move viminfo into the tmp folder
-set viminfo+=n$HOME/.vim/tmp/.viminfo
+if ! has('nvim')
+  set viminfo+=n~/.vim/tmp/viminfo
+endif
 
 " Enable 24bit color in supported Terminals.
 set termguicolors
@@ -56,7 +63,7 @@ set visualbell
 set hidden
 
 " Keep swap files inside the .vim/tmp folder.
-set directory=~/.vim/tmp//,.
+set directory=~/.vim/tmp/,.
 
 " Make cursor thin in Insert Mode
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"

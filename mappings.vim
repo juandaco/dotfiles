@@ -41,11 +41,11 @@ map <Leader>4 :set sw=4 ts=4 sts=4 <CR>
 map <Leader>2 :set sw=2 ts=2 sts=2 <CR>
 
 " Toggle Wrap
-execute "set <A-w>=\ew"
+silent! execute "set <A-w>=\ew"
 nnoremap <A-w> :set wrap! <bar> :set wrap? <CR>
 
 " Autoformat with ALEFix
-execute "set <A-F>=\eF"
+silent! execute "set <A-F>=\eF"
 noremap <A-F> :ALEFix <CR>
 
 " ALE Toggle
