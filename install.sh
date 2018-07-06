@@ -3,11 +3,11 @@
 # Automation Script to install my
 # configuration files (dotfiles).
 
-# Git configuration file
-cp -v gitconfig ~/.gitconfig
+# Link Git configuration file
+ln -vf gitconfig ~/.gitconfig
 
-# ESLint config file
-cp -v eslintrc.json ~/.eslintrc.json
+# Link ESLint config file
+ln -vf eslintrc.json ~/.eslintrc.json
 
 #############
 #           #
@@ -19,20 +19,29 @@ cp -v eslintrc.json ~/.eslintrc.json
 mkdir -p ~/.vim/
 mkdir -p ~/.vim/tmp
 
-# Copy vimrc.
-cp -v vimrc ~/.vim/vimrc
+# Create .config/nvim folder in Home if it doesn't exist.
+mkdir -p ~/.config/nvim/
+mkdir -p ~/.config/nvim/tmp
 
-# Copy the gvimrc.
-cp -v gvimrc ~/.vim/gvimrc
+# Link vimrc.
+ln -vf vimrc ~/.vim/vimrc
+ln -vf vimrc ~/.config/nvim/init.vim
 
-# Copy pluggins.vim
-cp -v pluggins.vim ~/.vim/pluggins.vim
+# Link the gvimrc.
+ln -vf gvimrc ~/.vim/gvimrc
+ln -vf gvimrc ~/.config/nvim/ginit.vim
 
-# Copy mappings.vim
-cp -v mappings.vim ~/.vim/mappings.vim
+# Link pluggins.vim
+ln -vf pluggins.vim ~/.vim/pluggins.vim
+ln -vf pluggins.vim ~/.config/nvim/pluggins.vim
 
-# Copy functions.vim
-cp -v functions.vim ~/.vim/functions.vim
+# Link mappings.vim
+ln -vf mappings.vim ~/.vim/mappings.vim
+ln -vf mappings.vim ~/.config/nvim/mappings.vim
+
+# Link functions.vim
+ln -vf functions.vim ~/.vim/functions.vim
+ln -vf functions.vim ~/.config/nvim/functions.vim
 
 # Install Plug Package manager if not installed.
 if [ ! -f ~/.vim/autoload/plug.vim ]; then
