@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# Force ls to output color.
+alias ls='CLICOLOR_FORCE=1 ls -G'
+# Force less to interpret color
+alias less='less -R'
+# Colorize tree and avoid diplaying node_modules
+alias tree='tree -C -I node_modules'
+
+# ls helpers
+alias ll='ls -la'
+alias la='ls -a'
+alias l.='ll -d .*'
+
+# Colorize grep
+alias grep='grep --color=always'
+alias fgrep='fgrep --color=always'
+alias egrep='egrep --color=always'
+
+# Color coded cat
+alias ccat='pygmentize -g'
+alias hcat='highlight -O ansi --force'
+
+# Run vim instead of vi.
+alias vi='vim'
+
+# Open VLC app from the command line
+alias vlc='open -a VLC'
+
+# HomeBrew update shortcut
+alias upgrade="brew update && brew upgrade && brew cleanup"
+
+# Top as Activity Monitor
+alias ctop='top -o cpu -s 3 -n 37'
+alias mtop='top -o mem -s 3 -n 37'
+
+# Run VIM with a session
+alias gvims='gvim --servername' #session-name
+
+# Duplicate tab at same path location
+alias tab='open . -a iterm'
+
+# Chrome Debugger
+alias chrome-dev='open -a "Google Chrome" --args --remote-debugging-port=9222'
