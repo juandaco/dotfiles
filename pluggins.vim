@@ -176,6 +176,9 @@ call plug#begin('~/.vim/plugged')
   " Set PostgreSQL as the default SQL dialect
   " let g:sql_type_default = 'pgsql'
 
+  " Spacebars Support
+  Plug 'slava/vim-spacebars'
+
   "
   " MAC OS
   "
