@@ -177,7 +177,7 @@ call plug#begin('~/.vim/plugged')
   " let g:sql_type_default = 'pgsql'
 
   " Spacebars Support
-  Plug 'slava/vim-spacebars'
+  Plug 'slava/vim-spacebars', { 'for': ['spacebars'] }
 
   "
   " MAC OS

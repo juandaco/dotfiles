@@ -22,7 +22,9 @@ if ! has('nvim')
 endif
 
 " Enable 24bit color in supported Terminals.
-set termguicolors
+if has('termguicolors') 
+  set termguicolors
+endif
 
 " Color Scheme Settings, only if installed
 set background=dark

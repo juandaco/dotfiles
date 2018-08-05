@@ -42,3 +42,7 @@ alias tab='open . -a iterm'
 
 # Chrome Debugger
 alias chrome-dev='open -a "Google Chrome" --args --remote-debugging-port=9222'
+
+# Run Artimo app with my Username
+alias dbmeteor='MONGO_URL=mongodb://jacosta:z4hMnX5Q5Gux63D@54.85.56.50:8984/Artimo meteor'
+
