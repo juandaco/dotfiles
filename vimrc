@@ -25,6 +25,9 @@ endif
 if has('termguicolors') 
   set termguicolors
 endif
+if &term =~ '256color'
+  set t_ut=
+endif
 
 " Color Scheme Settings, only if installed
 set background=dark
