@@ -1,5 +1,5 @@
 " Set the font family and size.
-set guifont=Inconsolata-dz\ for\ Powerline:h15
+set guifont=Inconsolata\ Nerd\ \Font:h16
 
 " Color Scheme settings.
 set background=dark

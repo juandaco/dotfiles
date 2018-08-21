@@ -1,23 +1,18 @@
 {
   "env": {
-    "es6": true,
+    "es8": true,
     "browser": true,
     "node": true,
     "commonjs": true,
     "mongo": true
   },
-  "parserOptions": {
-    "ecmaVersion": 8,
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
+  "parserOptions": {"ecmaVersion": 8, "ecmaFeatures": {"jsx": true}},
   "extends": "eslint:recommended",
   "rules": {
     "comma-dangle": [1, "always-multiline"],
-    "quotes": [1, "single", { "avoidEscape": true }],
-    "indent": [1, 2, { "SwitchCase": 1 }],
-    "no-unused-vars": [1, { "args": "none" }],
+    "quotes": [1, "single", {"avoidEscape": true}],
+    "indent": [1, 2, {"SwitchCase": 1}],
+    "no-unused-vars": [1, {"args": "none"}],
     "no-console": 0,
     "semi": [2, "always"]
   }

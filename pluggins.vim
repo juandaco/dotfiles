@@ -176,8 +176,11 @@ call plug#begin('~/.vim/plugged')
   " Set PostgreSQL as the default SQL dialect
   " let g:sql_type_default = 'pgsql'
 
-  " Spacebars Support
-  Plug 'slava/vim-spacebars', { 'for': ['spacebars'] }
+  " Add Handlebars support to work with Meteor
+  Plug 'slava/vim-spacebars', { 'for': ['html'] }
+  " Set spacebars for all html
+  au BufReadPost *.html set syntax=html.spacebars
+
 
   "
   " MAC OS

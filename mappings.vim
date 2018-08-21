@@ -45,7 +45,7 @@ silent! execute "set <A-w>=\ew"
 nnoremap <A-w> :set wrap! <bar> :set wrap? <CR>
 
 " Autoformat with ALEFix
-silent! execute "set <A-F>=\eF"
+silent! execute "set <A-F>=\ef"
 noremap <A-F> :ALEFix <CR>
 
 " ALE Toggle
