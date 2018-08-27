@@ -1,5 +1,5 @@
 " Set the font family and size.
-set guifont=Inconsolata\ Nerd\ \Font:h16
+set guifont=InconsolataGO\ Nerd\ \Font:h16
 
 " Color Scheme settings.
 set background=dark

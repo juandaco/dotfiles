@@ -46,11 +46,12 @@ ln -vf functions.vim ~/.vim/functions.vim
 ln -vf functions.vim ~/.config/nvim/functions.vim
 
 # Install Plug Package manager if not installed.
-if [ ! -f ~/.vim/autoload/plug.vim ]; then
+if [ ! -d ~/.vim/pack/minpac/opt/minpac ]; then
   printf "Installing Plug Package Manager... \\n"
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  mkdir -p ~/.vim/pack/minpac/opt
+  cd ~/.vim/pack/minpac/opt || echo 'Failed to ' || exit
+  git clone https://github.com/k-takata/minpac
 fi
 
 # Run vim and Install all packages.
-vim -c "PlugInstall" "+q" "+q"
+vim -c "call minpac#update('', { 'do': 'quit' })"

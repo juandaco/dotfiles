@@ -1,220 +1,216 @@
 "
 " Plug Plugins
 "
-call plug#begin('~/.vim/plugged')
 
-  "
-  " GENERAL
-  "
-  " Sannity set of vim rules.
-  Plug 'tpope/vim-sensible'
+packadd minpac
+call minpac#init()
 
-"   " Local vimrc
-"   Plug 'embear/vim-localvimrc'
-"   " Don't ask before sourcing the .lvimrc file
-"   let g:localvimrc_ask = 0
-"   " Disable sandbox
-"   let g:localvimrc_sandbox = 0
+" Update MinPac itself and add it as optional
+call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  " Enables repetition with . for plugins.
-  Plug 'tpope/vim-repeat'
+"
+" GENERAL
+"
+" Sannity set of vim rules
+call minpac#add('tpope/vim-sensible')
 
-  " Multiple Cursors.
-  Plug 'terryma/vim-multiple-cursors'
+" Bracket Mapping for shortcuts
+call minpac#add('tpope/vim-unimpaired')
 
-  " Commenting stuff out with Operator `gc`.
-  Plug 'tpope/vim-commentary'
+" Surround with parenthesis/quotes
+call minpac#add('tpope/vim-surround')
 
-  " Automatic Bracket closing.
-  Plug 'jiangmiao/auto-pairs'
+" Commenting stuff out with Operator `gc`
+call minpac#add('tpope/vim-commentary')
 
-  " Surround with parenthesis/quotes Operator `ys`.
-  Plug 'tpope/vim-surround'
+" Enables repetition with . for plugins
+call minpac#add('tpope/vim-repeat')
 
-  " Bracket Mapping
-  Plug 'tpope/vim-unimpaired'
+" Automatic bracket closing
+call minpac#add('tpope/vim-endwise')
+" call minpac#add('jiangmiao/auto-pairs')
 
-  " Distraction Free coding.
-  Plug 'junegunn/goyo.vim'
+" Multiple Cursor Support
+call minpac#add('terryma/vim-multiple-cursors')
 
-  " Status Bar Plugin
-  if has('mac')
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#show_close_button = 0
-    let g:airline#extensions#tabline#show_tab_nr = 0
-    " Enable Powerline Fonts
-    let g:airline_powerline_fonts = 1
-  endif
+" Zen Mode. Distraction Free coding
+call minpac#add('junegunn/goyo.vim')
 
-  " Sippets Engine
-  Plug 'SirVer/ultisnips'
-  let g:UltiSnipsExpandTrigger='<c-space>'
-  let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
-  let g:UltiSnipsEditSplit='vertical'
-  " Load Snippets based on pattern
-  autocmd BufRead,BufNewFile */src/index.js,*/components/*.js,*/containers/*.js UltiSnipsAddFiletypes javascript-react
-  autocmd BufRead,BufNewFile */reducers/* UltiSnipsAddFiletypes javascript-redux-reducers
-  autocmd BufRead,BufNewFile */actions/*,*/actionTypes.js UltiSnipsAddFiletypes javascript-redux-actions
-  autocmd BufRead,BufNewFile *.{test,spec}.js UltiSnipsAddFiletypes javascript-jest
-  autocmd BufRead,BufNewFile */actions/*.{test,spec}.js UltiSnipsAddFiletypes javascript-redux-actions-test
-  autocmd BufRead,BufNewFile */wp-content/plugins/*/*.php UltiSnipsAddFiletypes wordpress-plugin
+"
+" TEXT OBJECTS
+"
+" Argument Text Object
+call minpac#add('vim-scripts/argtextobj.vim')
 
-  " git wrapper.
-  Plug 'tpope/vim-fugitive'
+" Entire Buffer Text Object
+call minpac#add('kana/vim-textobj-user')
+call minpac#add('kana/vim-textobj-entire')
 
-  " Git Gutter
-  Plug 'airblade/vim-gitgutter'
-  let g:gitgutter_enabled = 0
+"
+" COMPLEX
+"
+" AirLine Status Bar Plugin
+call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes')
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_tab_nr = 0
+" Enable Powerline Fonts
+let g:airline_powerline_fonts = 1
 
-  " A.L.E. (Asynchronous Linter Engine)
-  Plug 'w0rp/ale'
-  " Configure Linters
-  let g:ale_linters = {
-    \   'javascript': ['eslint'],
-    \   'json': ['jsonlint'],
-    \   'php': ['phpcs'],
-    \   'scss': ['stylelint'],
-    \   'sh': ['shellcheck'],
-    \}
-  " Configure Auto-Formatters
-  let g:ale_fixers = {
-  \   'javascript': ['prettier'],
-  \   'json': ['fixjson'],
-  \   'html': ['prettier'],
-  \   'css': ['stylelint'],
-  \   'php': ['phpcbf'],
+" UltiSnips Sippets Engine
+call minpac#add('SirVer/ultisnips')
+let g:UltiSnipsExpandTrigger='<c-space>'
+let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
+let g:UltiSnipsEditSplit='vertical'
+" Load Snippets based on pattern
+autocmd BufRead,BufNewFile */src/index.js,*/components/*.js,*/containers/*.js UltiSnipsAddFiletypes javascript-react
+autocmd BufRead,BufNewFile */reducers/* UltiSnipsAddFiletypes javascript-redux-reducers
+autocmd BufRead,BufNewFile */actions/*,*/actionTypes.js UltiSnipsAddFiletypes javascript-redux-actions
+autocmd BufRead,BufNewFile *.{test,spec}.js UltiSnipsAddFiletypes javascript-jest
+autocmd BufRead,BufNewFile */actions/*.{test,spec}.js UltiSnipsAddFiletypes javascript-redux-actions-test
+autocmd BufRead,BufNewFile */wp-content/plugins/*/*.php UltiSnipsAddFiletypes wordpress-plugin
+
+" A.L.E. (Asynchronous Linter Engine)
+call minpac#add('w0rp/ale')
+" Configure Linters
+let g:ale_linters = {
+  \   'javascript': ['eslint'],
+  \   'json': ['jsonlint'],
+  \   'php': ['phpcs'],
   \   'scss': ['stylelint'],
-  \   'java': ['google_java_format'],
-  \   'sh': ['shfmt'],
+  \   'sh': ['shellcheck'],
   \}
+" Configure Auto-Formatters
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'json': ['fixjson'],
+\   'html': ['prettier'],
+\   'css': ['stylelint'],
+\   'php': ['phpcbf'],
+\   'scss': ['stylelint'],
+\   'java': ['google_java_format'],
+\   'sh': ['shfmt'],
+\}
 
-  " Only Lint files on Save.
-  " let g:ale_lint_on_text_changed = 'never'
-  let g:ale_lint_on_enter = 0
+" Only Lint files on Save.
+" let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+" ALE options for shellcheck (Bash Linter)
+let g:ale_sh_shellcheck_options = '-e SC1090 -x'
+" ALE options for shfmt (Bash Autoformatter)
+let g:ale_sh_shfmt_options = '-i 2 -ci'
+" ALE options for PHP linting and autoformatting
+let g:ale_php_phpcs_standard = 'WordPress'
+let g:ale_php_phpcbf_standard = 'WordPress'
 
-  " ALE options for shellcheck (Bash Linter)
-  let g:ale_sh_shellcheck_options = '-e SC1090 -x'
-  " ALE options for shfmt (Bash Autoformatter)
-  let g:ale_sh_shfmt_options = '-i 2 -ci'
+" Autocompletion Plugin
+if has('mac')
+  call minpac#add('Valloric/YouCompleteMe', { 'do': '! ./install.py --clang-completer --js-completer' })
+endif
 
-  " ALE options for PHP linting and autoformatting
-  let g:ale_php_phpcs_standard = 'WordPress'
-  let g:ale_php_phpcbf_standard = 'WordPress'
-
-  " Install only on powerful CPUs
-  if has('mac')
-    " Autocompletion Plugin
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --cs-completer' }
-  endif
-
-  " FZF Fuzzy file search plugin.
-  if has('mac')
-      Plug '/usr/local/opt/fzf'
-  else
-      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  endif
-  Plug 'junegunn/fzf.vim'
-
-  " Argument Text Object
-  Plug 'vim-scripts/argtextobj.vim'
-
-  " Entire Buffer Text Object
-  Plug 'kana/vim-textobj-user'
-  Plug 'kana/vim-textobj-entire'
-
-  " Better Sessions Management
-  Plug 'vim-scripts/vim-misc'
-  Plug 'xolox/vim-session'
-  let g:session_autosave = 'no'
-
-  " Rename Tabs Plugin
-  Plug 'gcmt/taboo.vim'
-  set sessionoptions+=tabpages,globals
-
-  if has('mac')
-    " Debugger
-    " Plug 'joonty/vdebug'
-  endif
-
-  "
-  " SPECIFIC
-  "
-  " JavaScript Highlighting
-  Plug 'pangloss/vim-javascript', { 'for': ['html', 'javascript'] }
-
-  " Add support for JSX
-  Plug 'mxw/vim-jsx'
-  let g:jsx_ext_required = 0
-
-  " Prettier formatter
-  Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-
-  " Emmet for HTML and CSS
-  Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'scss', 'javascript.jsx', 'php'] }
-
-  " CSSComb Formatter
-  Plug 'batsuev/csscomb-vim'
-
-  " Markdown Previewer
-  Plug 'suan/vim-instant-markdown'
-  " let g:instant_markdown_slow = 1
-  let g:instant_markdown_autostart = 0
-
-  " Better PHP Syntax Highlighting
-  Plug 'StanAngeloff/php.vim'
-
-  " PHP Autocompletion
-  Plug 'shawncplus/phpcomplete.vim'
-
-  " WordPress Development Plugin
-  Plug 'dsawardekar/wordpress.vim'
-
-  " PostgreSQL Improved Syntax
-  " Plug 'lifepillar/pgsql.vim'
-  " Set PostgreSQL as the default SQL dialect
-  " let g:sql_type_default = 'pgsql'
-
-  " Add Handlebars support to work with Meteor
-  Plug 'slava/vim-spacebars', { 'for': ['html'] }
-  " Set spacebars for all html
-  au BufReadPost *.html set syntax=html.spacebars
+" Fuzzy Match completer
+call minpac#add('junegunn/fzf', { 'do': '! ./install --all' })
+call minpac#add('junegunn/fzf.vim')
 
 
-  "
-  " MAC OS
-  "
-  if has('mac')
-    " Adds Support for Plist files on MacOS
-    Plug 'darfink/vim-plist'
+" git wrapper.
+call minpac#add('tpope/vim-fugitive')
 
-    " Search Dash.app from vim
-    Plug 'rizzatti/dash.vim'
-  endif
+" Git Gutter
+call minpac#add('airblade/vim-gitgutter')
+let g:gitgutter_enabled = 0
+
+" Better Sessions Management
+call minpac#add('vim-scripts/vim-misc')
+call minpac#add('xolox/vim-session')
+let g:session_autosave = 'no'
+
+" Rename Tabs Plugin
+call minpac#add('gcmt/taboo.vim')
+set sessionoptions+=tabpages,globals
+
+"
+" MAC OS
+"
+if has('mac')
+  " Adds Support for Plist files on MacOS
+  call minpac#add('darfink/vim-plist', { 'type': 'opt' })
+
+  " Search Dash.app from vim
+  call minpac#add('rizzatti/dash.vim')
+endif
 
 
-  "
-  " COLOR SCHEMES
-  "
-  " Colorscheme pluggin.
-  Plug 'flazz/vim-colorschemes'
 
-  " Base16
-  Plug 'chriskempson/base16-vim'
+"
+" SPECIFIC
+"
+" JavaScript Highlighting
+call minpac#add('pangloss/vim-javascript', { 'type': 'opt' })
 
-  " Lucario
-  Plug 't1mxg0d/vim-lucario'
+" Add support for JSX
+call minpac#add('mxw/vim-jsx', { 'type': 'opt' })
+let g:jsx_ext_required = 0
 
-  " AYU
-  Plug 'ayu-theme/ayu-vim'
-  let ayucolor="mirage" " light/mirage/dark
+" Prettier formatter
+call minpac#add('prettier/vim-prettier', { 'type': 'opt' })
 
-  " Solarized Colorscheme
-  Plug 'altercation/vim-colors-solarized'
+" Emmet for HTML and CSS
+call minpac#add('mattn/emmet-vim', { 'type': 'opt' })
 
-  " VS Code Dark
-  Plug 'tomasiser/vim-code-dark'
+" CSSComb Formatter
+call minpac#add('batsuev/csscomb-vim', { 'type': 'opt' })
 
-call plug#end()
+" Markdown Previewer
+call minpac#add('suan/vim-instant-markdown', { 'type': 'opt' })
+" let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
 
+" Better PHP Syntax Highlighting
+call minpac#add('StanAngeloff/php.vim', { 'type': 'opt' })
+
+" PHP Autocompletion
+call minpac#add('shawncplus/phpcomplete.vim', { 'type': 'opt' })
+
+" WordPress Development Plugin
+call minpac#add('dsawardekar/wordpress.vim', { 'type': 'opt' })
+
+" PostgreSQL Improved Syntax
+" call minpac#add('lifepillar/pgsql.vim'
+" Set PostgreSQL as the default SQL dialect
+" let g:sql_type_default = 'pgsql'
+
+" Add Handlebars support to work with Meteor
+call minpac#add('slava/vim-spacebars', { 'type': 'opt' })
+" Set spacebars for all html
+au BufReadPost *.html set syntax=html.spacebars
+
+
+
+"
+" COLOR SCHEMES
+"
+" Colorscheme pluggin.
+call minpac#add('flazz/vim-colorschemes')
+
+" Base16
+call minpac#add('chriskempson/base16-vim')
+
+" Lucario
+call minpac#add('t1mxg0d/vim-lucario')
+
+" AYU
+call minpac#add('ayu-theme/ayu-vim')
+let ayucolor="mirage" " light/mirage/dark
+
+" Solarized Colorscheme
+call minpac#add('altercation/vim-colors-solarized')
+
+" VS Code Dark
+call minpac#add('tomasiser/vim-code-dark')
+
+
+" Define user commands for updating/cleaning the plugins.
+command! PackUpdate call minpac#update()
+command! PackClean call minpac#clean()
