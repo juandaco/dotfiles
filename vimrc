@@ -1,7 +1,3 @@
-" Temporary fix for issues with Python 3.7
-if has('python3')
-  silent! python3 1
-endif
 
 " Add Plugins
 runtime pluggins.vim
@@ -22,7 +18,7 @@ if ! has('nvim')
 endif
 
 " Enable 24bit color in supported Terminals.
-if has('termguicolors') 
+if has('termguicolors')
   set termguicolors
 endif
 if &term =~ '256color'

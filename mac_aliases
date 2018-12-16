@@ -28,7 +28,7 @@ alias vi='vim'
 alias vlc='open -a VLC'
 
 # HomeBrew update shortcut
-alias upgrade="brew update && brew upgrade && brew cleanup"
+alias upgrade="brew update && brew upgrade && brew cleanup && npm -g update && gem update"
 
 # Top as Activity Monitor
 alias ctop='top -o cpu -s 3 -n 37'
@@ -45,3 +45,16 @@ alias chrome-dev='open -a "Google Chrome" --args --remote-debugging-port=9222'
 
 # Correct error when running the Swift REPL with Python's Homebrew
 alias swift='PATH="/usr/bin:$PATH" swift'
+
+# cd to Artimo
+alias artimo='cd ~/Programming/artimo/src/lap/app/'
+
+# Rum MIT Scheme with REPL completions (add -c for file completion)
+alias scheme='rlwrap -r -f "$HOME"/.scheme_repl_history scheme'
+
+# Connect to Android Phone
+alias nexus6p='adb tcpip 5555 && adb connect 192.168.1.2 && sleep 1 && adb shell'
+
+# Source aliases not public for containing passwords
+source ~/.bash_aliases_private
+

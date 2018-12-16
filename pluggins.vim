@@ -27,8 +27,7 @@ call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-repeat')
 
 " Automatic bracket closing
-call minpac#add('tpope/vim-endwise')
-" call minpac#add('jiangmiao/auto-pairs')
+call minpac#add('jiangmiao/auto-pairs')
 
 " Multiple Cursor Support
 call minpac#add('terryma/vim-multiple-cursors')
@@ -148,6 +147,7 @@ endif
 "
 " JavaScript Highlighting
 call minpac#add('pangloss/vim-javascript', { 'type': 'opt' })
+let g:javascript_plugin_jsdoc = 1
 
 " Add support for JSX
 call minpac#add('mxw/vim-jsx', { 'type': 'opt' })
@@ -158,9 +158,12 @@ call minpac#add('prettier/vim-prettier', { 'type': 'opt' })
 
 " Emmet for HTML and CSS
 call minpac#add('mattn/emmet-vim', { 'type': 'opt' })
-
-" CSSComb Formatter
-call minpac#add('batsuev/csscomb-vim', { 'type': 'opt' })
+" Enable in JavaScript for JSX
+let g:user_emmet_settings = {
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
 
 " Markdown Previewer
 call minpac#add('suan/vim-instant-markdown', { 'type': 'opt' })
@@ -185,7 +188,6 @@ call minpac#add('dsawardekar/wordpress.vim', { 'type': 'opt' })
 call minpac#add('slava/vim-spacebars', { 'type': 'opt' })
 " Set spacebars for all html
 au BufReadPost *.html set syntax=html.spacebars
-
 
 
 "
@@ -214,3 +216,4 @@ call minpac#add('tomasiser/vim-code-dark')
 " Define user commands for updating/cleaning the plugins.
 command! PackUpdate call minpac#update()
 command! PackClean call minpac#clean()
+
