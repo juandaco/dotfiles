@@ -170,6 +170,9 @@ call minpac#add('suan/vim-instant-markdown', { 'type': 'opt' })
 " let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
 
+" AppleScript Syntax
+call minpac#add('vim-scripts/applescript.vim', { 'type': 'opt' })
+
 " Better PHP Syntax Highlighting
 call minpac#add('StanAngeloff/php.vim', { 'type': 'opt' })
 

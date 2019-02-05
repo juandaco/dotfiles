@@ -1,19 +1,20 @@
 [user]
-	name = Juan D. Acosta
-	email = jacost@equitel.com.co
-	username = juandaco
+  name = Juan D. Acosta
+  email = juandacorias@gmail.com
+  username = juandaco
 [core]
-	editor = vim
+  editor = vim
 [diff]
-	tool = vimdiff
-[difftool]
-	prompt = false
+  tool = default-difftool
+[difftool "default-difftool"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+  prompt = false
 [alias]
-	co = checkout
-	br = branch
-	ci = commit
-	st = status
-	unstage = reset HEAD --
-	last = log -1 HEAD
-	dr = log --oneline --graph --all --decorate
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  unstage = reset HEAD --
+  last = log -1 HEAD
+  dr = log --oneline --graph --all --decorate
 

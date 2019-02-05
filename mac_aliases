@@ -55,6 +55,14 @@ alias scheme='rlwrap -r -f "$HOME"/.scheme_repl_history scheme'
 # Connect to Android Phone
 alias nexus6p='adb tcpip 5555 && adb connect 192.168.1.2 && sleep 1 && adb shell'
 
+#
+alias wifi-password='security find-generic-password -wa $(ssid)'
+
 # Source aliases not public for containing passwords
 source ~/.bash_aliases_private
+
+# Artimo queries
+alias query='QUERY_PATH=/Users/juandaco/Programming/artimo-queries/; find $QUERY_PATH -name *.js -exec basename {} \; | cat "$QUERY_PATH""$(fzf)" | pbcopy'
+
+alias stash-recover='git log --graph --oneline --decorate $(git fsck --no-reflogs | awk '\''/dangling commit/ {print $3}'\'')'
 
