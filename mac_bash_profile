@@ -13,12 +13,6 @@ if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
   source "$(brew --prefix)/etc/bash_completion"
 fi
 
-# For Homebrew
-PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-
-# Folder for my executable Scripts
-PATH="$HOME/bin:$PATH"
-
 # Setting up Language for installed applications
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
@@ -33,16 +27,6 @@ export EDITOR="$VISUAL"
 export HISTCONTROL=ignoredups
 export HISTSIZE=1000
 
-# Don't store less history file.
-export LESSHISTFILE="/dev/null"
-
-# Java External Libraries
-export CLASSPATH=".:/Users/juandaco/Programming/java/lib/*"
-
-# For Android Development.
-export GRADLE_HOME='/usr/local/opt/gradle'
-export PATH=$GRADLE_HOME/bin:$PATH
-
 # Alias file
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
@@ -50,19 +34,56 @@ export PATH=$GRADLE_HOME/bin:$PATH
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
+# Don't store less history file.
+export LESSHISTFILE="/dev/null"
 
-export PATH="$HOME/.cargo/bin:$PATH"
+# Java External Libraries
+export CLASSPATH="/Users/juandaco/Programming/java/lib/*"
 
-# Alacrity completions
-source ~/.config/alacritty/alacritty-completions.bash
-
-# cargo Rust package manager
-export PATH="$HOME/.cargo/bin:$PATH"
-
+# For Homebrew
+HOMEBREW_BIN_PATHS="/usr/local/bin:/usr/local/sbin"
+# Folder for my executable Scripts
+HOME_BIN_PATH="$HOME/bin"
+# Added Homebrew Ruby path
+RUBY_BIN_PATH="/usr/local/opt/ruby/bin"
 # Add go installed binaries
-export PATH="$PATH:~/go/bin"
+GO_BIN_PATH="$HOME/go/bin"
+# For Android Development.
+GRADLE_BIN_PATH='/usr/local/opt/gradle/bin'
+# SQLite
+SQLITE_BIN_PATH='/usr/local/opt/sqlite/bin'
+# cargo Rust package manager
+CARGO_BIN_PATH="$HOME/.cargo/bin"
+
+PATH="
+$HOMEBREW_BIN_PATHS:\
+$HOME_BIN_PATH:\
+$PATH:\
+$RUBY_BIN_PATH:\
+$GO_BIN_PATH:\
+$GRADLE_BIN_PATH:\
+$SQLITE_BIN_PATH:\
+$CARGO_BIN_PATH\
+"
 
 # Add nvm path
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+export NVM_DIR=~/.nvm
+function nvm() {
+  if [ -s "$NVM_DIR/nvm.sh" ]; then
+    . "$NVM_DIR/nvm.sh"
+    nvm use system
+    nvm "$@"
+  fi
+}
+
+# Get Network SSID
+function ssid() {
+  if [ $# -eq 0 ]; then
+    networksetup -getairportnetwork "${1:-en0}" | cut -c 24-
+  elif [ $# -eq 1 ]; then
+    networksetup -getairportnetwork "$1"
+  else
+    echo "Pass network interface(en0, lo0) as an argument."
+  fi
+}
+

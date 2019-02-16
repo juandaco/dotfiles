@@ -6,10 +6,8 @@
 # Link Git configuration file
 ln -vf gitconfig ~/.gitconfig
 
-# Link ESLint config file
-ln -vf eslintrc.json ~/.eslintrc.json
-
 [ "$(uname -s)" = 'Darwin' ] && ln -vf mac_aliases ~/.bash_aliases
+[ "$(uname -s)" = 'Darwin' ] && ln -vf mac_bash_profile ~/.bash_profile
 
 #############
 #           #
