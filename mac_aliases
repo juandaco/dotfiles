@@ -46,8 +46,6 @@ alias chrome-dev='open -a "Google Chrome" --args --remote-debugging-port=9222'
 # Correct error when running the Swift REPL with Python's Homebrew
 alias swift='PATH="/usr/bin:$PATH" swift'
 
-# cd to Artimo
-alias artimo='cd ~/Programming/artimo/src/lap/app/'
 
 # Rum MIT Scheme with REPL completions (add -c for file completion)
 alias scheme='rlwrap -r -f "$HOME"/.scheme_repl_history scheme'
@@ -55,14 +53,25 @@ alias scheme='rlwrap -r -f "$HOME"/.scheme_repl_history scheme'
 # Connect to Android Phone
 alias nexus6p='adb tcpip 5555 && adb connect 192.168.1.2 && sleep 1 && adb shell'
 
-#
+# Get Wifi Password
 alias wifi-password='security find-generic-password -wa $(ssid)'
 
-# Source aliases not public for containing passwords
-source ~/.bash_aliases_private
+# Artimo
+# Start Application
+alias dbmeteor='MONGO_URL=mongodb://jacosta:9ljO2K0WbGRPE01@54.85.56.50:2236/Artimo meteor run --inspect'
 
-# Artimo queries
+SRC_DIR=''
+if [ -d "$HOME/Programming" ]; then
+  SRC_DIR="Programming"
+else
+  SRC_DIR="src"
+fi
+
+# cd to Artimo directory
+alias artimo="cd ~/$SRC_DIR/artimo/src/lap/app/"
+
+# Common Artimo Queries
 alias query='QUERY_PATH=/Users/juandaco/Programming/artimo-queries/; find $QUERY_PATH -name *.js -exec basename {} \; | cat "$QUERY_PATH""$(fzf)" | pbcopy'
 
+# Git
 alias stash-recover='git log --graph --oneline --decorate $(git fsck --no-reflogs | awk '\''/dangling commit/ {print $3}'\'')'
-
