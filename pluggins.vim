@@ -124,6 +124,7 @@ let g:gitgutter_enabled = 0
 call minpac#add('vim-scripts/vim-misc')
 call minpac#add('xolox/vim-session')
 let g:session_autosave = 'no'
+let g:session_autoload = 'no'
 
 " Rename Tabs Plugin
 call minpac#add('gcmt/taboo.vim')
