@@ -1,10 +1,10 @@
 " Set the font family and size.
 set guifont=InconsolataGO\ Nerd\ \Font:h16
 
-" Color Scheme settings.
-set background=dark
-silent! colorscheme base16-monokai
-execute "AirlineTheme base16"
+" " Color Scheme settings.
+" set background=dark
+" silent! colorscheme base16-monokai
+" execute 'AirlineTheme base16'
 
 " Remove scrollbars
 set guioptions-=r
