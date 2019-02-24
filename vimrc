@@ -68,9 +68,15 @@ set hidden
 set directory=~/.vim/tmp/,.
 
 " Make cursor thin in Insert Mode
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" Start INSERT Mode
+let s:VERTICAL_LINE_BLINKING = 6
+let &t_SI = "\e[" . s:VERTICAL_LINE_BLINKING . " q"
+" Start REPLACE Mode
+let s:UNDERLINE_BLINKING = 4
+let &t_SR = "\e[" . s:UNDERLINE_BLINKING . " q"
+" NORMAL Mode
+let s:BLOCK_BLINKING = 0
+let &t_EI = "\e[" . s:BLOCK_BLINKING . " q"
 
 " Set character for tab and return when visible with 'set list'
 set listchars=tab:▸\ ,eol:¬
