@@ -4,9 +4,9 @@
 "
 
 " Commands for minpac
-command! PackUpdate packadd minpac | source $MYVIMRC | redraw | call minpac#update()
-command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
-command! PackStatus  packadd minpac | source $MYVIMRC | call minpac#status()
+command! PackUpdate packadd minpac | source ~/.vim/packages.vim | redraw | call minpac#update()
+command! PackClean  packadd minpac | source ~/.vim/packages.vim | call minpac#clean()
+command! PackStatus  packadd minpac | source ~/.vim/packages.vim | call minpac#status()
 
 " Don't continue if minpac not loaded
 if !exists('*minpac#init')
