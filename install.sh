@@ -31,6 +31,10 @@ ln -vf vimrc ~/.config/nvim/init.vim
 ln -vf gvimrc ~/.vim/gvimrc
 ln -vf gvimrc ~/.config/nvim/ginit.vim
 
+# Link packages.vim
+ln -vf packages.vim ~/.vim/packages.vim
+ln -vf packages.vim ~/.config/nvim/packages.vim
+
 # Link pluggins.vim
 ln -vf pluggins.vim ~/.vim/pluggins.vim
 ln -vf pluggins.vim ~/.config/nvim/pluggins.vim
@@ -52,4 +56,5 @@ if [ ! -d ~/.vim/pack/minpac/opt/minpac ]; then
 fi
 
 # Run vim and Install all packages.
-vim -c "call minpac#update('', { 'do': 'quit' })"
+vim -c "packadd minpac | call minpac#init() | call minpac#update('', { 'do': 'quit' })"
+

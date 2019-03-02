@@ -1,5 +1,8 @@
 
-" Add Plugins
+" Add Packages
+runtime packages.vim
+
+" Add Plugin Configurations
 runtime pluggins.vim
 
 " Add Helper Functions
