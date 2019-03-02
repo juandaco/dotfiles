@@ -56,5 +56,5 @@ if [ ! -d ~/.vim/pack/minpac/opt/minpac ]; then
 fi
 
 # Run vim and Install all packages.
-vim -c "packadd minpac | call minpac#init() | call minpac#update('', { 'do': 'quit' })"
+vim -c "packadd minpac | source ~/.vim/vimrc | redraw | call minpac#update('', { 'do': 'quit' })"
 
