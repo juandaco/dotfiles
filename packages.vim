@@ -16,7 +16,7 @@ endif
 call minpac#init()
 
 " Update MinPac itself and add it as optional
-call minpac#add('k-takata/minpac', {'type': 'opt'})
+call minpac#add('k-takata/minpac', { 'type': 'opt' })
 
 "
 " GENERAL
@@ -67,7 +67,6 @@ call minpac#add('SirVer/ultisnips')
 
 " A.L.E. (Asynchronous Linter Engine)
 call minpac#add('w0rp/ale')
-" Configure Linters
 
 " Autocompletion Plugin
 if has('mac')
@@ -78,7 +77,6 @@ endif
 call minpac#add('junegunn/fzf', { 'do': '! ./install --all' })
 call minpac#add('junegunn/fzf.vim')
 
-
 " git wrapper.
 call minpac#add('tpope/vim-fugitive')
 
@@ -86,12 +84,12 @@ call minpac#add('tpope/vim-fugitive')
 call minpac#add('airblade/vim-gitgutter')
 
 " Better Sessions Management
-call minpac#add('vim-scripts/vim-misc')
+call minpac#add('xolox/vim-misc')
 call minpac#add('xolox/vim-session')
 
 " Rename Tabs Plugin
 call minpac#add('gcmt/taboo.vim')
-set sessionoptions+=tabpages,globals
+" set sessionoptions+=tabpages,globals
 
 "
 " MAC OS
@@ -122,10 +120,9 @@ call minpac#add('mattn/emmet-vim', { 'type': 'opt' })
 " Markdown Syntax
 call minpac#add('plasticboy/vim-markdown', { 'type': 'opt' })
 
-" Markdown Previewer
-" call minpac#add('suan/vim-instant-markdown', { 'type': 'opt' })
-" " let g:instant_markdown_slow = 1
-" let g:instant_markdown_autostart = 0
+" Typescript Support
+call minpac#add('leafgarland/typescript-vim', { 'type': 'opt' })
+call minpac#add('peitalin/vim-jsx-typescript', { 'type': 'opt' })
 
 " AppleScript Syntax
 call minpac#add('vim-scripts/applescript.vim', { 'type': 'opt' })
@@ -135,9 +132,6 @@ call minpac#add('StanAngeloff/php.vim', { 'type': 'opt' })
 
 " PHP Autocompletion
 call minpac#add('shawncplus/phpcomplete.vim', { 'type': 'opt' })
-
-" WordPress Development Plugin
-call minpac#add('dsawardekar/wordpress.vim', { 'type': 'opt' })
 
 " Add Handlebars support to work with Meteor
 call minpac#add('slava/vim-spacebars', { 'type': 'opt' })

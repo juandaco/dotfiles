@@ -8,23 +8,23 @@
 "
 " ALE
 let g:ale_linters = {
-      \   'javascript': ['eslint'],
-      \   'json': ['jsonlint'],
-      \   'php': ['phpcs'],
-      \   'scss': ['stylelint'],
-      \   'sh': ['shellcheck'],
-      \}
+  \   'javascript': ['eslint'],
+  \   'json': ['jsonlint'],
+  \   'php': ['phpcs'],
+  \   'scss': ['stylelint'],
+  \   'sh': ['shellcheck'],
+  \}
 " ALE Auto-Formatters
 let g:ale_fixers = {
-      \   'javascript': ['prettier'],
-      \   'json': ['fixjson'],
-      \   'html': ['prettier'],
-      \   'css': ['stylelint'],
-      \   'php': ['phpcbf'],
-      \   'scss': ['stylelint'],
-      \   'java': ['google_java_format'],
-      \   'sh': ['shfmt'],
-      \}
+  \   'javascript': ['prettier'],
+  \   'json': ['fixjson'],
+  \   'html': ['prettier'],
+  \   'css': ['stylelint'],
+  \   'php': ['phpcbf'],
+  \   'scss': ['stylelint'],
+  \   'java': ['google_java_format'],
+  \   'sh': ['shfmt'],
+  \}
 let g:ale_lint_on_enter = 0
 " ALE options for shellcheck (Bash Linter)
 let g:ale_sh_shellcheck_options = '-e SC1090 -x'
@@ -39,9 +39,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline_powerline_fonts = 1
-
-" GitGutter
-let g:gitgutter_enabled = 0
 
 " Sessions config
 let g:session_autosave = 'no'
@@ -58,6 +55,9 @@ autocmd BufRead,BufNewFile */actions/*,*/actionTypes.js UltiSnipsAddFiletypes ja
 autocmd BufRead,BufNewFile *.{test,spec}.js UltiSnipsAddFiletypes javascript-jest
 autocmd BufRead,BufNewFile */actions/*.{test,spec}.js UltiSnipsAddFiletypes javascript-redux-actions-test
 autocmd BufRead,BufNewFile */wp-content/plugins/*/*.php UltiSnipsAddFiletypes wordpress-plugin
+
+" Markdown
+let g:vim_markdown_fenced_languages = ['js=javascript', 'python']
 
 " AYU Colorscheme
 let ayucolor="mirage" " light/mirage/dark
@@ -77,7 +77,6 @@ let g:user_emmet_settings = {
       \  },
       \}
 
-" Spacebars
-" Set spacebars for all html
-au BufReadPost *.html set syntax=html.spacebars
+" TypeScript
+autocmd BufRead,BufNewFile *.ts{x,} setfiletype typescript.tsx
 
