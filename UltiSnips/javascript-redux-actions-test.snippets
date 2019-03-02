@@ -1,0 +1,30 @@
+global !p
+import re
+first_cap_re = re.compile('(.)([A-Z][a-z]+)')
+all_cap_re = re.compile('([a-z0-9])([A-Z])')
+
+def toConstant(str):
+    s1 = first_cap_re.sub(r'\1_\2', str)
+    return all_cap_re.sub(r'\1_\2', s1).upper()
+
+def toCamelCase(str):
+	x = str.title().replace('_', '')
+	return x[:1].lower() + x[1:]
+
+def argsToVals(str):
+	args = str.replace('(', '').replace(')', '').replace(' ', '').split(',')
+	spread = ''.join(['  ' + x + ',\n' for x in args ])
+	return '' if args[0] == '' else '\n' + spread[:-1]
+
+endglobal
+
+snippet tac "Test Action Creator" b
+it('creates a `!p snip.rv=toConstant(t[1])` action', () => {
+	const expected = {
+		type: types.`!p snip.rv=toConstant(t[1])`,`!p snip.rv=argsToVals(t[2])`
+	};
+
+	expect(actions.$1($2)).toEqual(expected);
+	expect(actions.$1($2)).toMatchSnapshot();
+});
+endsnippet

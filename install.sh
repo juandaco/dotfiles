@@ -47,6 +47,18 @@ ln -vf mappings.vim ~/.config/nvim/mappings.vim
 ln -vf functions.vim ~/.vim/functions.vim
 ln -vf functions.vim ~/.config/nvim/functions.vim
 
+# ftplugin
+mkdir -p ~/.vim/ftplugin
+for file in ftplugin/*; do
+  ln -vf "$file" "$HOME/.vim/$file"
+done
+
+# UltiSinps
+mkdir -p ~/.vim/UltiSnips
+for file in UltiSnips/*; do
+  ln -vf "$file" "$HOME/.vim/$file"
+done
+
 # Install Plug Package manager if not installed.
 if [ ! -d ~/.vim/pack/minpac/opt/minpac ]; then
   printf "Installing Plug Package Manager... \\n"

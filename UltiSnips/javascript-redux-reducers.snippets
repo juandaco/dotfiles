@@ -1,0 +1,15 @@
+snippet reducer "Reducer Function" b
+const reducer = (state = {}, action) => {
+	switch(action.type) {
+		case ${1:SOME_ACTION}:
+			return {
+				...state
+				$0
+			};
+		default:
+			return state;
+	}
+}
+
+export default reducer;
+endsnippet

@@ -1,0 +1,276 @@
+snippet rcc "React Class Component" b
+import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
+// import './$1.css';
+
+class ${1:`!v expand('%:t:r')`} extends Component {
+	render() {
+		return (
+			<div className="$1">
+				$0
+			</div>
+		);
+	}
+}
+
+$1.defaultProps = {};
+
+$1.propTypes = {};
+
+export default $1;
+endsnippet
+
+
+snippet rfc "React Functional Component" b
+import React from 'react';
+// import PropTypes from 'prop-types';
+// import './$1.css';
+
+const ${1:`!v expand('%:t:r')`} = ({${2:props}}) =>
+(<div className="$1">
+	$0
+</div>);
+
+$1.defaultProps = {};
+
+$1.propTypes = {};
+
+export default $1;
+endsnippet
+
+
+snippet rrcc "React Redux Class Component" b
+import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+// import {} from '../actions/index';
+// import './$1.css';
+
+export class ${1:`!v expand('%:t:r')`} extends Component {
+	render() {
+		const { ${2:props} } = this.props;
+		return (
+			<div className="$1">
+				$0
+			</div>
+		);
+	}
+}
+
+$1.defaultProps = {};
+
+$1.propTypes = {};
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)($1);
+endsnippet
+
+
+snippet rrfc "React Redux Functional Component" b
+import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+// import {} from '../actions/index';
+// import './$1.css';
+
+const ${1:`!v expand('%:t:r')`} = ({${2:props}}) =>
+(<div className="$1">
+	$0
+</div>);
+
+$1.defaultProps = {};
+
+$1.propTypes = {};
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)($1);
+endsnippet
+
+
+snippet con "Constructor" b
+constructor(props) {
+	super(props);
+	$0
+}
+endsnippet
+
+snippet cn "className"
+className="$0"
+endsnippet
+
+snippet dp "Default Props" b
+${1:`!v expand('%:t:r')`.}defaultProps = {
+	$0
+};
+endsnippet
+
+snippet sst "Set State"
+this.setState({
+	${1}: ${0}
+});
+endsnippet
+
+snippet props "Get Property" i
+this.props.${1}
+endsnippet
+
+snippet dpr "Destructure props" i
+const { ${1:val} } = this.props;
+endsnippet
+
+snippet state "Get State" i
+this.state.${1}
+endsnippet
+
+snippet dst "Destructure state" i
+const { ${1:val} } = this.state;
+endsnippet
+
+snippet ref "Ref" i
+ref={x => this.${1:name} = x}
+endsnippet
+
+snippet ren "render() function of React Class Components" b
+render() {
+	return (
+		<div className="${1:`!v expand('%:t:r')`}">
+			$0
+		</div>
+	);
+}
+endsnippet
+
+# Component Lifecycle
+snippet cwm "Component Will Mount" b
+componentWillMount() {
+	$0
+}
+endsnippet
+
+snippet cdm "Component Did Mount" b
+componentDidMount() {
+	$0
+}
+endsnippet
+
+snippet cwrp "Component Will Receive Props" b
+componentWillReceiveProps(nextProps) {
+	$0
+}
+endsnippet
+
+snippet scup "Should Component Update" b
+shouldComponentUpdate(nextProps, nextState) {
+	$0
+}
+endsnippet
+
+snippet cwup "Component Will Update" b
+componentWillUpdate(nextProps, nextState) {
+	$0
+}
+endsnippet
+
+snippet cdup "Component Did Update" b
+componentDidUpdate(prevProps, prevState) {
+	$0
+}
+endsnippet
+
+snippet cwu "Component Will Unmount" b
+componentWillUnmount() {
+	$0
+}
+endsnippet
+
+
+# PropTypes
+snippet pt "PropTypes Definition" b
+${1:`!v expand('%:t:r')`.}propTypes = {
+	${2:className}: ${3:PropTypes.string},
+};
+endsnippet
+
+snippet pt.a "PropTypes Array" w
+PropTypes.array${1:,}
+endsnippet
+
+snippet pt.b "PropTypes Boolean" w
+PropTypes.bool${1:,}
+endsnippet
+
+snippet pt.f "PropTypes Function" w
+PropTypes.func${1:,}
+endsnippet
+
+snippet pt.n "PropTypes Number" w
+PropTypes.number${1:,}
+endsnippet
+
+snippet pt.o "PropTypes Object" w
+PropTypes.object${1:,}
+endsnippet
+
+snippet pt.s "PropType String" w
+PropTypes.string${1:,}
+endsnippet
+
+snippet pt.no "PropTypes Node" w
+PropTypes.node${1:,}
+endsnippet
+
+snippet pt.e "PropTypes Element" w
+PropTypes.element${1:,}
+endsnippet
+
+snippet pt.io "PropTypes instanceOf" w
+PropTypes.instanceOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet pt.one "PropTypes oneOf" w
+PropTypes.oneOf(['$2'$3])${1:,}
+endsnippet
+
+snippet pt.onet "PropTypes oneOfType" w
+PropTypes.oneOfType([
+	$2
+])${1:,}
+endsnippet
+
+snippet pt.ao "PropTypes arrayOf" w
+PropTypes.arrayOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet pt.oo "PropTypes objectOf" w
+PropTypes.objectOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet pt.sh "PropTyes Shape" w
+PropTypes.shape({
+	$2
+})${1:,}
+endsnippet
+
+snippet ir "isRequired" w
+isRequired,
+endsnippet
+
+
+# React Redux
+snippet mdtp "mapDispatchToProps" b
+const mapDispatchToProps = dispatch => ({$1});
+endsnippet
+
+snippet mstp "mapStateToProps" b
+const mapStateToProps = state => ({$1});
+endsnippet
+
+snippet connect "Connect Visual Replacer"
+connect(mapStateToProps, mapDispatchToProps)(`!v expand('%:t:r')`);
+endsnippet
