@@ -143,7 +143,8 @@ call minpac#add('slava/vim-spacebars', { 'type': 'opt' })
 call minpac#add('flazz/vim-colorschemes')
 
 " Base16
-call minpac#add('chriskempson/base16-vim')
+" call minpac#add('chriskempson/base16-vim')
+call minpac#add('danielwe/base16-vim')
 
 " Lucario
 call minpac#add('t1mxg0d/vim-lucario')
