@@ -58,7 +58,7 @@ alias wifi-password='security find-generic-password -wa $(ssid)'
 
 # Artimo
 # Start Application
-alias dbmeteor='MONGO_URL=mongodb://jacosta:9ljO2K0WbGRPE01@54.85.56.50:2236/Artimo meteor run --inspect'
+alias dbmeteor='MONGO_URL=mongodb://127.0.0.1:27017/Artimo meteor run --inspect'
 
 export SRC_DIR=''
 if [ -d "$HOME/Programming" ]; then

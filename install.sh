@@ -53,7 +53,7 @@ for file in ftplugin/*; do
   ln -vf "$file" "$HOME/.vim/$file"
 done
 
-# UltiSinps
+# UltiSnips
 mkdir -p ~/.vim/UltiSnips
 for file in UltiSnips/*; do
   ln -vf "$file" "$HOME/.vim/$file"
