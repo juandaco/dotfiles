@@ -56,9 +56,8 @@ alias nexus6p='adb tcpip 5555 && adb connect 192.168.1.2 && sleep 1 && adb shell
 # Get Wifi Password
 alias wifi-password='security find-generic-password -wa $(ssid)'
 
-# Artimo
-# Start Application
-alias dbmeteor='MONGO_URL=mongodb://127.0.0.1:27017/Artimo meteor run --inspect'
+# Git
+alias stash-recover='git log --graph --oneline --decorate $(git fsck --no-reflogs | awk '\''/dangling commit/ {print $3}'\'')'
 
 export SRC_DIR=''
 if [ -d "$HOME/Programming" ]; then
@@ -69,10 +68,15 @@ fi
 
 # cd to Artimo directory
 alias artimo='cd ~/$SRC_DIR/artimo/src/lap/app/'
+alias artimo-build='meteor npm install && meteor build ~/Desktop/build --architecture os.linux.x86_64'
 
 # Common Artimo Queries
 alias query='QUERY_PATH=/Users/juandaco/$SRC_DIR/artimo-queries/; find $QUERY_PATH -name *.js -exec basename {} \; | cat "$QUERY_PATH""$(fzf)" | pbcopy'
 
-# Git
-alias stash-recover='git log --graph --oneline --decorate $(git fsck --no-reflogs | awk '\''/dangling commit/ {print $3}'\'')'
+
+# Artimo
+# Start Application
+alias lmeteor='MONGO_URL=mongodb://127.0.0.1:27017/Artimo meteor run --inspect'
+source "$HOME/.artimo_mongo_env_vars"
+alias rmeteor="MONGO_URL=mongodb://$USERNAME:$PASSWORD@$HOST:$PORT/Artimo meteor run --inspect"
 
