@@ -70,6 +70,9 @@ alias artimo-copy-build-stage="scp -o ProxyCommand='ssh -W %h:%p $ARTIMO_USER@34
 alias artimo-copy-build-app1="scp -o ProxyCommand='ssh -W %h:%p $ARTIMO_USER@34.227.184.167' $DEPLOY_DIR/app.tar.gz $ARTIMO_USER@10.0.33.81:."
 alias artimo-copy-build-app2="scp -o ProxyCommand='ssh -W %h:%p $ARTIMO_USER@34.227.184.167' $DEPLOY_DIR/app.tar.gz $ARTIMO_USER@10.0.33.82:."
 
+# Show the icons currently ine Artimo
+alias artimo-open-icons="open $APP_DIR/public/css/iconos-artimo/demo.html"
+
 # Common Artimo Queries
 alias query='QUERY_PATH=/Users/juandaco/src/artimo-queries/; find "$QUERY_PATH" -name *.js -exec basename {} \; | cat "$QUERY_PATH""$(fzf)" | pbcopy'
 
@@ -77,5 +80,4 @@ alias query='QUERY_PATH=/Users/juandaco/src/artimo-queries/; find "$QUERY_PATH" 
 # Start Application
 alias lmeteor='MONGO_URL=mongodb://127.0.0.1:27017/Artimo meteor run --inspect'
 alias rmeteor="MONGO_URL=mongodb://$USERNAME:$PASSWORD@$HOST:$PORT/Artimo meteor run --inspect"
-
 
