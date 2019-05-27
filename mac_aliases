@@ -17,10 +17,6 @@ alias grep='grep --color=always'
 alias fgrep='fgrep --color=always'
 alias egrep='egrep --color=always'
 
-# Color coded cat
-alias ccat='pygmentize -g'
-alias hcat='highlight -O ansi --force'
-
 # Run vim instead of vi.
 alias vi='vim'
 
