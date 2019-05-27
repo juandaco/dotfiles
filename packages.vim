@@ -74,7 +74,6 @@ if has('mac')
 endif
 
 " Fuzzy Match completer
-call minpac#add('junegunn/fzf', { 'do': '! ./install --all' })
 call minpac#add('junegunn/fzf.vim')
 
 " git wrapper.

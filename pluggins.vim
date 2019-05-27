@@ -62,6 +62,13 @@ let g:vim_markdown_fenced_languages = ['js=javascript', 'python']
 " AYU Colorscheme
 let ayucolor="mirage" " light/mirage/dark
 
+" Set FZF Runtimepath
+if has('mac')
+  set rtp+=/usr/local/opt/fzf
+else
+  set rtp+=~/.fzf
+endif
+
 "
 " SPECIFIC
 "
