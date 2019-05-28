@@ -70,8 +70,9 @@ fi
 OS="$(uname -s)"
 if [[ $OS =~ "Darwin" ]]; then
   # MacOS
-  command -v fzf || brew install fzf
-  command -v fd || brew install fd
+  command -v fzf >> /dev/null || brew install fzf
+  command -v fd >> /dev/null|| brew install fd
+  command -v bat >> /dev/null|| brew install bat
 
 elif [[ $OS =~ "Linux" ]]; then
   #Linux
@@ -82,18 +83,18 @@ elif [[ $OS =~ "Linux" ]]; then
     ~/.fzf/install
   else
     # Update if needed
-    pushd ~/.fzf
+    pushd ~/.fzf >> /dev/null || exit
     git fetch origin
-    if [ ! -z "$(git log HEAD..origin/master --oneline)" ]; then
+    if [ -n "$(git log HEAD..origin/master --oneline)" ]; then
       git pull
       ./install
     fi
-    popd
+    popd >> /dev/null || exit
   fi
 
   # Install fd
   if [ -z "$(command -v fd)" ]; then
-    pushd ~/bin
+    pushd ~/bin >> /dev/null || exit
     FD_PACKAGE_VERSION='v7.3.0'
     FD_PACKAGE_NAME="fd-$FD_PACKAGE_VERSION-arm-unknown-linux-gnueabihf"
     wget "https://github.com/sharkdp/fd/releases/download/$FD_PACKAGE_VERSION/$FD_PACKAGE_NAME.tar.gz"
@@ -101,7 +102,18 @@ elif [[ $OS =~ "Linux" ]]; then
     cp "$FD_PACKAGE_NAME/fd" .
     cp "$FD_PACKAGE_NAME/autocomplete/fd.bash-completion" /etc/bash_completion.d/
     rm -rf "$FD_PACKAGE_NAME"
-    popd
+    popd >> /dev/null || exit
+  fi
+
+  if [ -z "$(command -v bat)" ]; then
+    pushd ~/bin >> /dev/null || exit
+    BAT_PACKAGE_VERSION="v0.11.0"
+    BAT_PACKAGE_NAME="bat-$BAT_PACKAGE_VERSION-arm-unknown-linux-gnueabihf"
+    wget "https://github.com/sharkdp/bat/releases/download/$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME.tar.gz"
+    tar -xzf "$BAT_PACKAGE_NAME.tar.gz" && rm "$BAT_PACKAGE_NAME.tar.gz"
+    cp "$BAT_PACKAGE_NAME/bat" .
+    rm -rf "$BAT_PACKAGE_NAME"
+    popd >> /dev/null || exit
   fi
 fi
 
