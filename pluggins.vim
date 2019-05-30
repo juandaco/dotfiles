@@ -64,9 +64,9 @@ let ayucolor="mirage" " light/mirage/dark
 
 " Set FZF Runtimepath
 if has('mac')
-  set rtp+=/usr/local/opt/fzf
+  set runtimepath+=/usr/local/opt/fzf
 else
-  set rtp+=~/.fzf
+  set runtimepath+=~/.fzf
 endif
 
 "

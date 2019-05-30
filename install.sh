@@ -71,12 +71,13 @@ OS="$(uname -s)"
 if [[ $OS =~ "Darwin" ]]; then
   # MacOS
   command -v fzf >> /dev/null || brew install fzf
-  command -v fd >> /dev/null|| brew install fd
-  command -v bat >> /dev/null|| brew install bat
+  command -v fd >> /dev/null || brew install fd
+  command -v bat >> /dev/null || brew install bat
 
 elif [[ $OS =~ "Linux" ]]; then
   #Linux
 
+  # Install fzf
   if [ ! -d ~/.fzf ];then
     # Install fzf when not present
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -105,6 +106,7 @@ elif [[ $OS =~ "Linux" ]]; then
     popd >> /dev/null || exit
   fi
 
+  # Install bat
   if [ -z "$(command -v bat)" ]; then
     pushd ~/bin >> /dev/null || exit
     BAT_PACKAGE_VERSION="v0.11.0"
