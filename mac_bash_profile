@@ -33,6 +33,10 @@ export HISTSIZE=1000
 # Add fzf key bindings
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS='--reverse --height 90% --margin=3% --preview '\''[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -500'\'''
+export FZF_ALT_C_OPTS='--preview-window=hidden'
+export FZF_CTRL_R_OPTS='--layout=default --preview-window=hidden'
 
 # Don't store less history file.
 export LESSHISTFILE="/dev/null"

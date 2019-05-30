@@ -30,7 +30,7 @@ endif
 
 " Color Scheme Settings, only if installed
 set background=dark
-silent! colorscheme base16-monokai
+silent! colorscheme molokai
 
 " Display Line Numbers.
 set number
