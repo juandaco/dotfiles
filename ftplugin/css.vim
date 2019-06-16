@@ -1,1 +1,3 @@
-packadd emmet-vim
+if &rtp !~ 'emmet-vim'
+  packadd emmet-vim
+endif

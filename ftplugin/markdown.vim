@@ -1,2 +1,4 @@
 " Add syntax for Markdown
-packadd vim-markdown
+if &rtp !~ 'vim-markdown'
+  packadd vim-markdown
+endif

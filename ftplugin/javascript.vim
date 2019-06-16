@@ -2,15 +2,23 @@
 set filetype=javascript.jsx
 
 " Javascript improved Syntax Highlighting
-packadd vim-javascript
+if &rtp !~ 'vim-javascript'
+  packadd vim-javascript
+endif
 
 " Prettier Autoformatter
-packadd vim-prettier
+if &rtp !~ 'vim-prettier'
+  packadd vim-prettier
+endif
 
 " Emmet for JSX
-packadd emmet-vim
+if &rtp !~ 'emmet-vim'
+  packadd emmet-vim
+endif
 
 " Add JSX Support for React
-packadd vim-jsx
+if &rtp !~ 'vim-jsx'
+  packadd vim-jsx
+endif
 
 
