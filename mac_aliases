@@ -57,8 +57,8 @@ alias wifi-password='security find-generic-password -wa $(ssid)'
 alias stash-recover='git log --graph --oneline --decorate $(git fsck --no-reflogs | awk '\''/dangling commit/ {print $3}'\'')'
 
 # Add environment variables needed for Artimo aliases
-source "$HOME/.artimo_env_vars"
-source "$HOME/.artimo_mongo_env_vars"
+[ -f "$HOME/.artimo_env_vars"  ] && source "$HOME/.artimo_env_vars"
+[ -f "$HOME/.artimo_mongo_env_vars"  ] && source "$HOME/.artimo_mongo_env_vars"
 
 # cd to Artimo directory
 # shellcheck disable=SC2139
@@ -84,4 +84,10 @@ alias query='QUERY_PATH=/Users/juandaco/src/artimo-queries/; find "$QUERY_PATH" 
 alias lmeteor='MONGO_URL=mongodb://127.0.0.1:27017/Artimo meteor run --inspect'
 # shellcheck disable=SC2139
 alias rmeteor="MONGO_URL=mongodb://$USERNAME:$PASSWORD@$HOST:$PORT/Artimo meteor run --inspect"
+
+# Add copy paste commands from MacOS
+if [[ $(uname -s) == 'Linux' ]]; then
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
+fi
 

@@ -6,7 +6,7 @@
 # Link Git configuration file
 ln -vf gitconfig ~/.gitconfig
 
-[ "$(uname -s)" = 'Darwin' ] && ln -vf mac_aliases ~/.bash_aliases
+ln -vf mac_aliases ~/.bash_aliases
 [ "$(uname -s)" = 'Darwin' ] && ln -vf mac_bash_profile ~/.bash_profile
 
 #############
@@ -77,6 +77,9 @@ if [[ $OS =~ "Darwin" ]]; then
 elif [[ $OS =~ "Linux" ]]; then
   #Linux
 
+  # Create bin folder in user if it doesn't exist.
+  mkdir -p ~/bin
+
   # Install fzf
   if [ ! -d ~/.fzf ];then
     # Install fzf when not present
@@ -93,28 +96,52 @@ elif [[ $OS =~ "Linux" ]]; then
     popd >> /dev/null || exit
   fi
 
+
   # Install fd
   if [ -z "$(command -v fd)" ]; then
     pushd ~/bin >> /dev/null || exit
+
     FD_PACKAGE_VERSION='v7.3.0'
-    FD_PACKAGE_NAME="fd-$FD_PACKAGE_VERSION-arm-unknown-linux-gnueabihf"
-    wget "https://github.com/sharkdp/fd/releases/download/$FD_PACKAGE_VERSION/$FD_PACKAGE_NAME.tar.gz"
-    tar -xzf "$FD_PACKAGE_NAME.tar.gz" && rm "$FD_PACKAGE_NAME.tar.gz"
-    cp "$FD_PACKAGE_NAME/fd" .
-    cp "$FD_PACKAGE_NAME/autocomplete/fd.bash-completion" /etc/bash_completion.d/
-    rm -rf "$FD_PACKAGE_NAME"
+
+    if [[ $(uname -m) =~ 'arm' ]]; then
+      # Raspberry Pi
+      FD_PACKAGE_NAME="fd-$FD_PACKAGE_VERSION-arm-unknown-linux-gnueabihf"
+      wget "https://github.com/sharkdp/fd/releases/download/$FD_PACKAGE_VERSION/$FD_PACKAGE_NAME.tar.gz"
+      tar -xzf "$FD_PACKAGE_NAME.tar.gz" && rm "$FD_PACKAGE_NAME.tar.gz"
+      cp "$FD_PACKAGE_NAME/fd" .
+      cp "$FD_PACKAGE_NAME/autocomplete/fd.bash-completion" /etc/bash_completion.d/
+      rm -rf "$FD_PACKAGE_NAME"
+    else
+      # Regular Linux
+      FD_PACKAGE_NAME="fd_${FD_PACKAGE_VERSION:1}_amd64.deb"
+      wget "https://github.com/sharkdp/fd/releases/download/$FD_PACKAGE_VERSION/$FD_PACKAGE_NAME"
+      sudo dpkg -i "$FD_PACKAGE_NAME"
+      rm -rf "$FD_PACKAGE_NAME"
+    fi
+
     popd >> /dev/null || exit
   fi
 
   # Install bat
   if [ -z "$(command -v bat)" ]; then
     pushd ~/bin >> /dev/null || exit
+
     BAT_PACKAGE_VERSION="v0.11.0"
-    BAT_PACKAGE_NAME="bat-$BAT_PACKAGE_VERSION-arm-unknown-linux-gnueabihf"
-    wget "https://github.com/sharkdp/bat/releases/download/$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME.tar.gz"
-    tar -xzf "$BAT_PACKAGE_NAME.tar.gz" && rm "$BAT_PACKAGE_NAME.tar.gz"
-    cp "$BAT_PACKAGE_NAME/bat" .
-    rm -rf "$BAT_PACKAGE_NAME"
+
+    if [[ $(uname -m) =~ 'arm' ]]; then
+      # Raspberry Pi
+      BAT_PACKAGE_NAME="bat-$BAT_PACKAGE_VERSION-arm-unknown-linux-gnueabihf"
+      wget "https://github.com/sharkdp/bat/releases/download/$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME.tar.gz"
+      tar -xzf "$BAT_PACKAGE_NAME.tar.gz" && rm "$BAT_PACKAGE_NAME.tar.gz"
+      cp "$BAT_PACKAGE_NAME/bat" .
+      rm -rf "$BAT_PACKAGE_NAME"
+    else
+      # Regular Linux
+      BAT_PACKAGE_NAME="bat_${BAT_PACKAGE_VERSION:1}_amd64.deb"
+      wget "https://github.com/sharkdp/bat/releases/download/$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME"
+      sudo dpkg -i "$BAT_PACKAGE_NAME"
+      rm -rf "$BAT_PACKAGE_NAME"
+    fi
     popd >> /dev/null || exit
   fi
 fi
