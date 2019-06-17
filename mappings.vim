@@ -34,3 +34,5 @@ map <Leader>l :ALEToggle <CR>
 " Create a test file and vertical split it into the side
 map <Leader>s :vsplit %:p:r.test.%:e <CR>
 
+" Expand %% to current working directory
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
