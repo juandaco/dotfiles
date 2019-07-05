@@ -20,8 +20,12 @@ def argsToVals(str):
 endglobal
 
 
-snippet at "Action Type"
+snippet at "Action Type" b
 export const ${1:SOME_ACTION} = '$1';
+endsnippet
+
+snippet atp "Action Type Property" b
+${1:SOME_ACTION}: '$1',
 endsnippet
 
 

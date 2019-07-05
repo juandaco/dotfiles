@@ -91,3 +91,4 @@ if [[ $(uname -s) == 'Linux' ]]; then
   alias pbpaste='xsel --clipboard --output'
 fi
 
+alias copy-git-hash-HEAD='git rev-parse --short HEAD | tr -d "\n" | pbcopy'

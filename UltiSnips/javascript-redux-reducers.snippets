@@ -13,3 +13,10 @@ const reducer = (state = {}, action) => {
 
 export default reducer;
 endsnippet
+
+snippet cati "Reducer Case Action Type with immer" b
+case types.${1:SOME_ACTION}:
+	draft.${2:someAction} = action.$2;
+	return;
+$0
+endsnippet
