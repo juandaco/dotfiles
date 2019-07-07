@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Force ls to output color.
-alias ls='CLICOLOR_FORCE=1 ls -G'
+if [[ $(uname -s) == 'Darwin' ]]; then
+  alias ls='CLICOLOR_FORCE=1 ls -G'
+fi
 # Force less to interpret color
 alias less='less -R'
 # Colorize tree and avoid diplaying node_modules
