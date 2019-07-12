@@ -45,6 +45,9 @@ call minpac#add('terryma/vim-multiple-cursors')
 " Zen Mode. Distraction Free coding
 call minpac#add('junegunn/goyo.vim')
 
+" Add Search Visual selection with *
+call minpac#add('nelstrom/vim-visual-star-search')
+
 "
 " TEXT OBJECTS
 "
