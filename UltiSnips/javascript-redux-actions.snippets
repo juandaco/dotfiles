@@ -28,15 +28,14 @@ snippet atp "Action Type Property" b
 ${1:SOME_ACTION}: '$1',
 endsnippet
 
-
-snippet ac "Action Creator"
+snippet ac "Action Creator" b
 export const $1 = ($2) => ({
 	type: types.`!p snip.rv=toConstant(t[1])`,`!p snip.rv=argsToVals(t[2])`
 });
 endsnippet
 
 
-snippet agac "Async Get Action Creator"
+snippet agac "Async Get Action Creator" b
 export const $1 = ($2) => async dispatch => {
 	dispatch($1Request());
 
@@ -60,3 +59,4 @@ export const $1 = ($2) => async dispatch => {
 	}
 };
 endsnippet
+

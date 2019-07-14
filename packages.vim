@@ -93,6 +93,9 @@ call minpac#add('xolox/vim-session')
 call minpac#add('gcmt/taboo.vim')
 " set sessionoptions+=tabpages,globals
 
+" General Syntax Highlighting
+call minpac#add('sheerun/vim-polyglot')
+
 "
 " MAC OS
 "
@@ -103,37 +106,10 @@ if has('mac')
   " Search Dash.app from vim
   call minpac#add('rizzatti/dash.vim')
 endif
-
-"
 " SPECIFIC
 "
-" JavaScript Highlighting
-call minpac#add('pangloss/vim-javascript', { 'type': 'opt' })
-
-" Add support for JSX
-call minpac#add('mxw/vim-jsx', { 'type': 'opt' })
-
-" Prettier formatter
-call minpac#add('prettier/vim-prettier', { 'type': 'opt' })
-
 " Emmet for HTML and CSS
 call minpac#add('mattn/emmet-vim', { 'type': 'opt' })
-
-" Markdown Syntax
-call minpac#add('plasticboy/vim-markdown', { 'type': 'opt' })
-
-" Typescript Support
-call minpac#add('leafgarland/typescript-vim', { 'type': 'opt' })
-call minpac#add('peitalin/vim-jsx-typescript', { 'type': 'opt' })
-
-" AppleScript Syntax
-call minpac#add('vim-scripts/applescript.vim', { 'type': 'opt' })
-
-" Better PHP Syntax Highlighting
-call minpac#add('StanAngeloff/php.vim', { 'type': 'opt' })
-
-" PHP Autocompletion
-call minpac#add('shawncplus/phpcomplete.vim', { 'type': 'opt' })
 
 " Add Handlebars support to work with Meteor
 call minpac#add('slava/vim-spacebars', { 'type': 'opt' })

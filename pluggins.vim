@@ -9,18 +9,18 @@
 " ALE
 let g:ale_linters = {
   \   'javascript': ['eslint'],
+  \   'tyepscript': ['eslint'],
   \   'json': ['jsonlint'],
-  \   'php': ['phpcs'],
   \   'scss': ['stylelint'],
   \   'sh': ['shellcheck'],
   \}
 " ALE Auto-Formatters
 let g:ale_fixers = {
   \   'javascript': ['prettier'],
+  \   'typescript': ['prettier'],
   \   'json': ['fixjson'],
   \   'html': ['prettier'],
   \   'css': ['stylelint'],
-  \   'php': ['phpcbf'],
   \   'scss': ['stylelint'],
   \   'java': ['google_java_format'],
   \   'sh': ['shfmt'],
@@ -30,9 +30,6 @@ let g:ale_lint_on_enter = 0
 let g:ale_sh_shellcheck_options = '-e SC1090 -x'
 " ALE options for shfmt (Bash Autoformatter)
 let g:ale_sh_shfmt_options = '-i 2 -ci'
-" ALE options for PHP linting and autoformatting
-let g:ale_php_phpcs_standard = 'WordPress'
-let g:ale_php_phpcbf_standard = 'WordPress'
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -49,15 +46,11 @@ let g:UltiSnipsExpandTrigger='<c-space>'
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 let g:UltiSnipsEditSplit='vertical'
 " Load Snippets based on pattern
-autocmd BufRead,BufNewFile */src/index.js,*/components/*.js,*/containers/*.js UltiSnipsAddFiletypes javascript-react
+autocmd BufRead,BufNewFile **/components/*.js,**/containers/*.js UltiSnipsAddFiletypes javascript-react
 autocmd BufRead,BufNewFile **/reducers/* UltiSnipsAddFiletypes javascript-redux-reducers
 autocmd BufRead,BufNewFile **/actions/*,**/actionTypes.js UltiSnipsAddFiletypes javascript-redux-actions
-autocmd BufRead,BufNewFile *.{test,spec}.js UltiSnipsAddFiletypes javascript-jest
-autocmd BufRead,BufNewFile */actions/*.{test,spec}.js UltiSnipsAddFiletypes javascript-redux-actions-test
-autocmd BufRead,BufNewFile */wp-content/plugins/*/*.php UltiSnipsAddFiletypes wordpress-plugin
-
-" Markdown
-let g:vim_markdown_fenced_languages = ['js=javascript', 'python']
+autocmd BufRead,BufNewFile **.{test,spec}.js UltiSnipsAddFiletypes javascript-jest
+autocmd BufRead,BufNewFile **/actions/*.{test,spec}.js UltiSnipsAddFiletypes javascript-redux-actions-test
 
 " AYU Colorscheme
 let ayucolor="mirage" " light/mirage/dark
@@ -75,15 +68,16 @@ endif
 " JSX
 let g:jsx_ext_required = 0
 let g:javascript_plugin_jsdoc = 1
+let g:vim_jsx_pretty_colorful_config = 1
 
 " Emmet
 " Enable in JavaScript for JSX
 let g:user_emmet_settings = {
-      \  'javascript' : {
-      \      'extends' : 'jsx',
-      \  },
-      \}
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
 
-" TypeScript
-autocmd BufRead,BufNewFile *.ts{x,} setfiletype typescript.tsx
+" AWS config files
+autocmd BufRead,BufNewFile **/.ebextensions/*.config setfiletype yaml
 

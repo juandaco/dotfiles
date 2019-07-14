@@ -26,7 +26,7 @@ alias vi='vim'
 alias vlc='open -a VLC'
 
 # HomeBrew update shortcut
-alias upgrade="brew update && brew upgrade && brew cleanup && npm -g update && gem update"
+alias upgrade="brew update && brew upgrade && brew cleanup && npm -g update && gem update && brew cask upgrade"
 
 # Top as Activity Monitor
 alias ctop='top -o cpu -s 3 -n 37'

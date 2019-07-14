@@ -1,8 +1,4 @@
-" Load Plugins
-if &rtp !~ 'typescript-vim'
-  packadd typescript-vim
-endif
-
-if &rtp !~ 'vim-jsx-typescript'
-  packadd vim-jsx-typescript
+" Emmet for JSX
+if &rtp !~ 'emmet\-vim'
+  packadd emmet-vim
 endif

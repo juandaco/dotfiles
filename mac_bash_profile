@@ -43,6 +43,8 @@ export LESSHISTFILE="/dev/null"
 
 # Java External Libraries
 export CLASSPATH="/Users/juandaco/Programming/java/lib/*"
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export PENTAHO_JAVA_HOME="$JAVA_HOME"
 
 # For Homebrew
 HOMEBREW_BIN_PATHS="/usr/local/bin:/usr/local/sbin"
