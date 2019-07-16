@@ -40,6 +40,8 @@ let g:airline_powerline_fonts = 1
 " Sessions config
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
+" So it handles Taboo
+set sessionoptions+=tabpages,globals
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger='<c-space>'

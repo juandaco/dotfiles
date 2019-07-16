@@ -91,7 +91,6 @@ call minpac#add('xolox/vim-session')
 
 " Rename Tabs Plugin
 call minpac#add('gcmt/taboo.vim')
-" set sessionoptions+=tabpages,globals
 
 " General Syntax Highlighting
 call minpac#add('sheerun/vim-polyglot')
