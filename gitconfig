@@ -17,6 +17,7 @@
   unstage = reset HEAD --
   last = log -1 HEAD
   dr = log --oneline --graph --all --decorate
+  rb = rebase
   rbm = rebase upstream/master
   rbd = rebase upstream/develop
 
