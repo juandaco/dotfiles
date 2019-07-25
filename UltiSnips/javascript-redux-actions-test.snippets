@@ -4,8 +4,8 @@ first_cap_re = re.compile('(.)([A-Z][a-z]+)')
 all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
 def toConstant(str):
-    s1 = first_cap_re.sub(r'\1_\2', str)
-    return all_cap_re.sub(r'\1_\2', s1).upper()
+	s1 = first_cap_re.sub(r'\1_\2', str)
+	return all_cap_re.sub(r'\1_\2', s1).upper()
 
 def toCamelCase(str):
 	x = str.title().replace('_', '')

@@ -51,6 +51,7 @@ let g:UltiSnipsEditSplit='vertical'
 autocmd BufRead,BufNewFile **/components/*.js,**/containers/*.js UltiSnipsAddFiletypes javascript-react
 autocmd BufRead,BufNewFile **/reducers/* UltiSnipsAddFiletypes javascript-redux-reducers
 autocmd BufRead,BufNewFile **/actions/*,**/actionTypes.js UltiSnipsAddFiletypes javascript-redux-actions
+autocmd BufRead,BufNewFile **/selectors/*, UltiSnipsAddFiletypes javascript-redux-selectors
 autocmd BufRead,BufNewFile **.{test,spec}.js UltiSnipsAddFiletypes javascript-jest
 autocmd BufRead,BufNewFile **/actions/*.{test,spec}.js UltiSnipsAddFiletypes javascript-redux-actions-test
 

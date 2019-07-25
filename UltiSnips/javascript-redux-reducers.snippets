@@ -1,3 +1,33 @@
+snippet mri "Module Reducer with Immer" b
+/* eslint-disable default-case */
+
+import produce from 'immer';
+import types from '../actions/actionTypes';
+
+const initState = {
+	${3:someProperty}: ${4:false},
+};
+
+const ${1:moduleName}Reducer = (state = initState, action) =>
+	produce(state, draft => {
+		switch (action.type) {
+			case types.${2:SOME_ACTION}:
+				draft.$3 = action.$3;
+				return;
+		}
+	});
+
+export default $1Reducer;
+
+endsnippet
+
+snippet rci "Reducer Case with Immer" b
+case types.${1:SOME_ACTION}:
+	draft.${2:someProperty} = action.$2;
+	return;
+
+endsnippet
+
 snippet reducer "Reducer Function" b
 const reducer = (state = {}, action) => {
 	switch(action.type) {

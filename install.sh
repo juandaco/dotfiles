@@ -71,6 +71,7 @@ OS="$(uname -s)"
 if [[ $OS =~ "Darwin" ]]; then
   # MacOS
   command -v fzf >> /dev/null || brew install fzf
+  command -v fzf >> /dev/null || "$(brew --prefix)/opt/fzf/install"
   command -v fd >> /dev/null || brew install fd
   command -v bat >> /dev/null || brew install bat
 

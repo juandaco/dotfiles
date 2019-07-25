@@ -5,8 +5,8 @@ first_cap_re = re.compile('(.)([A-Z][a-z]+)')
 all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
 def toConstant(str):
-    s1 = first_cap_re.sub(r'\1_\2', str)
-    return all_cap_re.sub(r'\1_\2', s1).upper()
+	s1 = first_cap_re.sub(r'\1_\2', str)
+	return all_cap_re.sub(r'\1_\2', s1).upper()
 
 def toCamelCase(str):
 	x = str.title().replace('_', '')
@@ -19,6 +19,18 @@ def argsToVals(str):
 
 endglobal
 
+snippet nsat "Namespaced Action Types" b
+const ${1:moduleName}Actions = {
+	${2:SOME_ACTION}: '$2',
+};
+
+Object.keys($1Actions).forEach(action => {
+	$1Actions[action] = \`@$1/\${action}\`;
+});
+
+export default $1Actions;
+
+endsnippet
 
 snippet at "Action Type" b
 export const ${1:SOME_ACTION} = '$1';
@@ -58,5 +70,6 @@ export const $1 = ($2) => async dispatch => {
 		console.log(err);
 	}
 };
+
 endsnippet
 

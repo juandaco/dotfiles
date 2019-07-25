@@ -30,7 +30,7 @@ export HISTSIZE=1000
 # Alias file
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
-# Add fzf key bindings
+# fzf configurations
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
