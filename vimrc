@@ -23,6 +23,7 @@ endif
 " Enable 24bit color in supported Terminals.
 if has('termguicolors')
   set termguicolors
+  set term=xterm-256color
 endif
 if &term =~ '256color'
   set t_ut=

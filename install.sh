@@ -9,6 +9,8 @@ ln -vf gitconfig ~/.gitconfig
 ln -vf mac_aliases ~/.bash_aliases
 [ "$(uname -s)" = 'Darwin' ] && ln -vf mac_bash_profile ~/.bash_profile
 
+ln -vf tmux.conf ~/.tmux.conf
+
 #############
 #           #
 # vim SETUP #
