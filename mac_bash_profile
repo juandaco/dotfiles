@@ -40,7 +40,6 @@ if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
   source "$(brew --prefix)/etc/bash_completion"
 fi
 
-
 # fzf configurations
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
@@ -80,13 +79,14 @@ $GO_BIN_PATH:\
 $GRADLE_BIN_PATH:\
 $SQLITE_BIN_PATH:\
 $CARGO_BIN_PATH:\
-$PATH\
-"
+$PATH"
 
 # Add nvm path
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# This loads nvm
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+# This loads nvm bash_completion
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
 # Get Network SSID
 function ssid() {
@@ -98,4 +98,3 @@ function ssid() {
     echo "Pass network interface(en0, lo0) as an argument."
   fi
 }
-
