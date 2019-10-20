@@ -2,17 +2,7 @@
 " PACKAGES
 " Contains all the Packages that minpac installs without configuration
 "
-
-" Commands for minpac
-command! PackUpdate packadd minpac | source ~/.vim/packages.vim | redraw | call minpac#update()
-command! PackClean  packadd minpac | source ~/.vim/packages.vim | call minpac#clean()
-command! PackStatus  packadd minpac | source ~/.vim/packages.vim | call minpac#status()
-
-" Don't continue if minpac not loaded
-if !exists('*minpac#init')
-  finish
-endif
-
+packadd minpac
 call minpac#init()
 
 " Update MinPac itself and add it as optional
@@ -134,4 +124,11 @@ call minpac#add('altercation/vim-colors-solarized')
 
 " VS Code Dark
 call minpac#add('tomasiser/vim-code-dark')
+
+"
+" Commands for minpac
+"
+command! PackUpdate call minpac#update()
+command! PackClean call minpac#clean()
+command! PackStatus call minpac#status()
 

@@ -5,8 +5,8 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Set vim as default editor for Git.
-export VISUAL=vim
+# Set NeoVim as default editor.
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # Ignore duplicates in command history and increase
@@ -51,7 +51,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # Java External Libraries
 export CLASSPATH="/Users/juandaco/Programming/java/lib/*"
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+JHOME=$(/usr/libexec/java_home -v 1.8)
+export JAVA_HOME="$JHOME"
 export PENTAHO_JAVA_HOME="$JAVA_HOME"
 
 # For Homebrew
@@ -60,6 +61,7 @@ HOMEBREW_BIN_PATHS="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin"
 HOME_BIN_PATH="$HOME/bin"
 # Added Homebrew Ruby path
 RUBY_BIN_PATH="/usr/local/opt/ruby/bin"
+RUBY_GEMS_BIN_PATH="/usr/local/lib/ruby/gems/2.6.0/bin"
 # Add go installed binaries
 GO_BIN_PATH="$HOME/go/bin"
 # For Android Development.
@@ -68,15 +70,22 @@ GRADLE_BIN_PATH='/usr/local/opt/gradle/bin'
 SQLITE_BIN_PATH='/usr/local/opt/sqlite/bin'
 # cargo Rust package manager
 CARGO_BIN_PATH="$HOME/.cargo/bin"
+# OpenSSL
+OPEN_SSL_BIN_PATH="/usr/local/opt/openssl/bin"
+# Python pip PATH
+PYTHON_PIP3_PATH="/Users/juandaco/Library/Python/3.7/bin"
 
 PATH="\
 $HOMEBREW_BIN_PATHS:\
 $HOME_BIN_PATH:\
 $RUBY_BIN_PATH:\
+$RUBY_GEMS_BIN_PATH:\
 $GO_BIN_PATH:\
 $GRADLE_BIN_PATH:\
 $SQLITE_BIN_PATH:\
 $CARGO_BIN_PATH:\
+$OPEN_SSL_BIN_PATH:\
+$PYTHON_PIP3_PATH:\
 $PATH"
 
 # Get Network SSID

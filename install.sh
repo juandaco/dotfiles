@@ -23,11 +23,12 @@ mkdir -p ~/.vim/tmp
 
 # Create .config/nvim folder in Home if it doesn't exist.
 mkdir -p ~/.config/nvim/
-mkdir -p ~/.config/nvim/tmp
+
+# Link init.vim
+ln -vf init.vim ~/.config/nvim/init.vim
 
 # Link vimrc.
 ln -vf vimrc ~/.vim/vimrc
-ln -vf vimrc ~/.config/nvim/init.vim
 
 # Link the gvimrc.
 ln -vf gvimrc ~/.vim/gvimrc
@@ -35,19 +36,15 @@ ln -vf gvimrc ~/.config/nvim/ginit.vim
 
 # Link packages.vim
 ln -vf packages.vim ~/.vim/packages.vim
-ln -vf packages.vim ~/.config/nvim/packages.vim
 
 # Link pluggins.vim
 ln -vf pluggins.vim ~/.vim/pluggins.vim
-ln -vf pluggins.vim ~/.config/nvim/pluggins.vim
 
 # Link mappings.vim
 ln -vf mappings.vim ~/.vim/mappings.vim
-ln -vf mappings.vim ~/.config/nvim/mappings.vim
 
 # Link functions.vim
 ln -vf functions.vim ~/.vim/functions.vim
-ln -vf functions.vim ~/.config/nvim/functions.vim
 
 # ftplugin
 mkdir -p ~/.vim/ftplugin

@@ -20,7 +20,8 @@ alias fgrep='fgrep --color=always'
 alias egrep='egrep --color=always'
 
 # Run vim instead of vi.
-alias vi='vim'
+alias vi='nvim'
+alias vim='nvim'
 
 # Open VLC app from the command line
 alias vlc='open -a VLC'
