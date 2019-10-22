@@ -84,3 +84,5 @@ let &t_EI = "\e[" . s:BLOCK_BLINKING . " q"
 " Set character for tab and return when visible with 'set list'
 set listchars=tab:▸\ ,eol:¬
 
+" Use clipboard for unnamed operations instead of '*' or '+'
+set clipboard+=unnamedplus
