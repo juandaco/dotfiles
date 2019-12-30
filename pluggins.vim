@@ -6,31 +6,6 @@
 "
 " GENERAL
 "
-" ALE
-let g:ale_linters = {
-  \   'javascript': ['eslint'],
-  \   'tyepscript': ['eslint'],
-  \   'json': ['jsonlint'],
-  \   'scss': ['stylelint'],
-  \   'sh': ['shellcheck'],
-  \}
-" ALE Auto-Formatters
-let g:ale_fixers = {
-  \   'javascript': ['prettier'],
-  \   'typescript': ['prettier'],
-  \   'json': ['fixjson'],
-  \   'html': ['prettier'],
-  \   'css': ['stylelint'],
-  \   'scss': ['stylelint'],
-  \   'java': ['google_java_format'],
-  \   'sh': ['shfmt'],
-  \}
-let g:ale_lint_on_enter = 0
-" ALE options for shellcheck (Bash Linter)
-let g:ale_sh_shellcheck_options = '-e SC1090 -x'
-" ALE options for shfmt (Bash Autoformatter)
-let g:ale_sh_shfmt_options = '-i 2 -ci'
-
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_close_button = 0
@@ -44,7 +19,8 @@ let g:session_autoload = 'no'
 set sessionoptions+=tabpages,globals
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger='<c-space>'
+let g:UltiSnipsExpandTrigger = "<Nop>"
+let g:UltiSnipsListSnippets = "<Nop>"
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 let g:UltiSnipsEditSplit='vertical'
 " Load Snippets based on pattern
@@ -56,7 +32,8 @@ autocmd BufRead,BufNewFile **.{test,spec}.js UltiSnipsAddFiletypes javascript-je
 autocmd BufRead,BufNewFile **/actions/*.{test,spec}.js UltiSnipsAddFiletypes javascript-redux-actions-test
 
 " AYU Colorscheme
-let ayucolor="mirage" " light/mirage/dark
+" Options are light/mirage/dark
+let ayucolor="mirage"
 
 " Set FZF Runtimepath
 if has('mac')

@@ -1,134 +1,120 @@
 "
 " PACKAGES
-" Contains all the Packages that minpac installs without configuration
+" Contains all the packages
 "
-packadd minpac
-call minpac#init()
 
-" Update MinPac itself and add it as optional
-call minpac#add('k-takata/minpac', { 'type': 'opt' })
+" Add the dein installation directory into runtimepath
+set runtimepath+=~/.local/share/dein/repos/github.com/Shougo/dein.vim
 
-"
-" GENERAL
-"
-" Sannity set of vim rules
-call minpac#add('tpope/vim-sensible')
 
-" Bracket Mapping for shortcuts
-call minpac#add('tpope/vim-unimpaired')
+if dein#load_state('~/.local/share/dein')
+  call dein#begin('~/.local/share/dein')
 
-" Surround with parenthesis/quotes
-call minpac#add('tpope/vim-surround')
+    " Package Manager
+    call dein#add('~/.local/share/dein/repos/github.com/Shougo/dein.vim')
 
-" Commenting stuff out with Operator `gc`
-call minpac#add('tpope/vim-commentary')
+    "
+    " GENERAL
+    "
+    " Sannity set of vim rules
+    call dein#add('tpope/vim-sensible')
 
-" Enables repetition with . for plugins
-call minpac#add('tpope/vim-repeat')
+    " Bracket Mapping for shortcuts
+    call dein#add('tpope/vim-unimpaired')
 
-" Automatic bracket closing
-call minpac#add('jiangmiao/auto-pairs')
+    " Surround with parenthesis/quotes
+    call dein#add('tpope/vim-surround')
 
-" Multiple Cursor Support
-call minpac#add('terryma/vim-multiple-cursors')
+    " Commenting stuff out with Operator `gc`
+    call dein#add('tpope/vim-commentary')
 
-" Zen Mode. Distraction Free coding
-call minpac#add('junegunn/goyo.vim')
+    " Enables repetition with . for plugins
+    call dein#add('tpope/vim-repeat')
 
-" Add Search Visual selection with *
-call minpac#add('nelstrom/vim-visual-star-search')
+    " Zen Mode. Distraction Free coding
+    call dein#add('junegunn/goyo.vim')
 
-"
-" TEXT OBJECTS
-"
-" Argument Text Object
-call minpac#add('vim-scripts/argtextobj.vim')
+    "
+    " TEXT OBJECTS
+    "
+    " Argument Text Object
+    call dein#add('vim-scripts/argtextobj.vim')
 
-" Entire Buffer Text Object
-call minpac#add('kana/vim-textobj-user')
-call minpac#add('kana/vim-textobj-entire')
+    " Entire Buffer Text Object
+    call dein#add('kana/vim-textobj-user')
+    call dein#add('kana/vim-textobj-entire')
 
-"
-" COMPLEX
-"
-" AirLine Status Bar Plugin
-call minpac#add('vim-airline/vim-airline')
-call minpac#add('vim-airline/vim-airline-themes')
+    "
+    " COMPLEX
+    "
+    " AirLine Status Bar Plugin
+    call dein#add('vim-airline/vim-airline')
+    call dein#add('vim-airline/vim-airline-themes')
 
-" UltiSnips Sippets Engine
-call minpac#add('SirVer/ultisnips')
+    " UltiSnips Sippets Engine
+    call dein#add('SirVer/ultisnips')
 
-" A.L.E. (Asynchronous Linter Engine)
-call minpac#add('w0rp/ale')
+    " Autocompletion
+    call dein#add('neoclide/coc.nvim', { 'rev': 'release' })
 
-" Autocompletion Plugin
-if has('mac')
-  call minpac#add('Valloric/YouCompleteMe', { 'do': '! ./install.py --clang-completer --js-completer' })
+    " Fuzzy Match completer
+    call dein#add('junegunn/fzf.vim')
+
+    " git wrapper.
+    call dein#add('tpope/vim-fugitive')
+
+    " Git Gutter
+    call dein#add('airblade/vim-gitgutter')
+
+    " Better Sessions Management
+    call dein#add('xolox/vim-misc')
+    call dein#add('xolox/vim-session')
+
+    " Rename Tabs Plugin
+    call dein#add('gcmt/taboo.vim')
+
+    " General Syntax Highlighting
+    call dein#add('sheerun/vim-polyglot')
+
+    "
+    " MAC OS
+    "
+    if has('mac')
+    " Search Dash.app from vim
+    call dein#add('rizzatti/dash.vim')
+
+    " Adds Support for Plist files on MacOS
+    call dein#add('darfink/vim-plist')
+    endif
+
+    " SPECIFIC
+    "
+    " Emmet for HTML and CSS
+    call dein#add('mattn/emmet-vim')
+
+    "
+    " COLOR SCHEMES
+    "
+    " Colorscheme pluggin.
+    call dein#add('flazz/vim-colorschemes')
+
+    " Base16
+    " call dein#add('chriskempson/base16-vim')
+    call dein#add('danielwe/base16-vim')
+
+    " Lucario
+    call dein#add('t1mxg0d/vim-lucario')
+
+    " AYU
+    call dein#add('ayu-theme/ayu-vim')
+
+    " Solarized Colorscheme
+    call dein#add('altercation/vim-colors-solarized')
+
+    " VS Code Dark
+    call dein#add('tomasiser/vim-code-dark')
+
+  call dein#end()
+  call dein#save_state()
 endif
-
-" Fuzzy Match completer
-call minpac#add('junegunn/fzf.vim')
-
-" git wrapper.
-call minpac#add('tpope/vim-fugitive')
-
-" Git Gutter
-call minpac#add('airblade/vim-gitgutter')
-
-" Better Sessions Management
-call minpac#add('xolox/vim-misc')
-call minpac#add('xolox/vim-session')
-
-" Rename Tabs Plugin
-call minpac#add('gcmt/taboo.vim')
-
-" General Syntax Highlighting
-call minpac#add('sheerun/vim-polyglot')
-
-"
-" MAC OS
-"
-if has('mac')
-  " Adds Support for Plist files on MacOS
-  call minpac#add('darfink/vim-plist', { 'type': 'opt' })
-
-  " Search Dash.app from vim
-  call minpac#add('rizzatti/dash.vim')
-endif
-" SPECIFIC
-"
-" Emmet for HTML and CSS
-call minpac#add('mattn/emmet-vim', { 'type': 'opt' })
-
-" Add Handlebars support to work with Meteor
-call minpac#add('slava/vim-spacebars', { 'type': 'opt' })
-
-"
-" COLOR SCHEMES
-"
-" Colorscheme pluggin.
-call minpac#add('flazz/vim-colorschemes')
-
-" Base16
-" call minpac#add('chriskempson/base16-vim')
-call minpac#add('danielwe/base16-vim')
-
-" Lucario
-call minpac#add('t1mxg0d/vim-lucario')
-
-" AYU
-call minpac#add('ayu-theme/ayu-vim')
-
-" Solarized Colorscheme
-call minpac#add('altercation/vim-colors-solarized')
-
-" VS Code Dark
-call minpac#add('tomasiser/vim-code-dark')
-
-"
-" Commands for minpac
-"
-command! PackUpdate call minpac#update()
-command! PackClean call minpac#clean()
-command! PackStatus call minpac#status()
 

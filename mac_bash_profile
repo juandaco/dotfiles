@@ -15,7 +15,8 @@ export HISTCONTROL=ignoredups
 export HISTSIZE=1000
 
 # Shell Prompt Color Customization.
-export PS1="\\[\\033[36m\\]\\u\\[\\033[m\\]@\\[\\033[32m\\]\\h:\\[\\033[1;33m\\]\\w\\[\\033[m\\] \$ "
+# export PS1="\\[\\033[36m\\]\\u\\[\\033[m\\]@\\[\\033[32m\\]\\h:\\[\\033[1;33m\\]\\w\\[\\033[m\\] \$ "
+export PS1="\\[\\033[1;33m\\]\\w\\[\\033[m\\] \$ "
 export CLICOLOR=1
 
 # Add current branch to prompt.
@@ -72,8 +73,8 @@ SQLITE_BIN_PATH='/usr/local/opt/sqlite/bin'
 CARGO_BIN_PATH="$HOME/.cargo/bin"
 # OpenSSL
 OPEN_SSL_BIN_PATH="/usr/local/opt/openssl/bin"
-# Python pip PATH
-PYTHON_PIP3_PATH="/Users/juandaco/Library/Python/3.7/bin"
+# # Python pip PATH
+# PYTHON_PIP3_PATH="/Users/juandaco/Library/Python/3.7/bin"
 
 PATH="\
 $HOMEBREW_BIN_PATHS:\
@@ -85,7 +86,6 @@ $GRADLE_BIN_PATH:\
 $SQLITE_BIN_PATH:\
 $CARGO_BIN_PATH:\
 $OPEN_SSL_BIN_PATH:\
-$PYTHON_PIP3_PATH:\
 $PATH"
 
 # Get Network SSID
@@ -98,3 +98,6 @@ function ssid() {
     echo "Pass network interface(en0, lo0) as an argument."
   fi
 }
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash" || true
+

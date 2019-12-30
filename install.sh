@@ -46,6 +46,12 @@ ln -vf mappings.vim ~/.vim/mappings.vim
 # Link functions.vim
 ln -vf functions.vim ~/.vim/functions.vim
 
+# Link functions.vim
+ln -vf general.vim ~/.vim/general.vim
+
+# Link coc-nvim.vim
+ln -vf coc-nvim.vim ~/.vim/coc-nvim.vim
+
 # ftplugin
 mkdir -p ~/.vim/ftplugin
 for file in ftplugin/*; do
@@ -58,12 +64,11 @@ for file in UltiSnips/*; do
   ln -vf "$file" "$HOME/.vim/$file"
 done
 
-# Install Plug Package manager if not installed.
-if [ ! -d ~/.vim/pack/minpac/opt/minpac ]; then
-  printf "Installing Plug Package Manager... \\n"
-  mkdir -p ~/.vim/pack/minpac/opt
-  cd ~/.vim/pack/minpac/opt || echo 'Failed to ' || exit
-  git clone https://github.com/k-takata/minpac
+# Install Package manager if not installed.
+if [ ! -d "$HOME/.local/share/dein" ]; then
+  printf "Installing Package Manager... \\n"
+  mkdir -p "$HOME/.local/share/dein"
+  git clone https://github.com/Shougo/dein.vim "$HOME/.local/share/dein/repos/github.com/Shougo/dein.vim"
 fi
 
 OS="$(uname -s)"
@@ -101,7 +106,7 @@ elif [[ $OS =~ "Linux" ]]; then
   if [ -z "$(command -v fd)" ]; then
     pushd ~/bin >> /dev/null || exit
 
-    FD_PACKAGE_VERSION='v7.3.0'
+    FD_PACKAGE_VERSION='v7.4.0'
 
     if [[ $(uname -m) =~ 'arm' ]]; then
       # Raspberry Pi
@@ -126,7 +131,7 @@ elif [[ $OS =~ "Linux" ]]; then
   if [ -z "$(command -v bat)" ]; then
     pushd ~/bin >> /dev/null || exit
 
-    BAT_PACKAGE_VERSION="v0.11.0"
+    BAT_PACKAGE_VERSION="v0.12.1"
 
     if [[ $(uname -m) =~ 'arm' ]]; then
       # Raspberry Pi
@@ -146,6 +151,7 @@ elif [[ $OS =~ "Linux" ]]; then
   fi
 fi
 
-# Run vim and Install all packages.
-vim -c "packadd minpac | source ~/.vim/packages.vim | redraw | call minpac#update('', { 'do': 'quit' })"
+# Install all vim packages. Manually run call dein#update() one time.
+vim -c "try | call dein#update() | finally | qall! | endtry" \
+	-N -u "$HOME/.vim/vimrc" -U NONE -i NONE -V1 -e -s
 
