@@ -6,11 +6,15 @@
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
+  \ 'coc-json',
+  \ 'coc-yaml',
   \ 'coc-tsserver',
   \ 'coc-eslint',
   \ 'coc-prettier',
-  \ 'coc-json',
-  \ 'coc-emmet'
+  \ 'coc-html',
+  \ 'coc-emmet',
+  \ 'coc-css',
+  \ 'coc-vimlsp'
   \ ]
 
 " Some servers have issues with backup files, see #649
@@ -65,7 +69,9 @@ endfunction
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup HoldCusor
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup END
 
 " Remap for rename current word
 nmap <leader>krn <Plug>(coc-rename)
@@ -126,3 +132,4 @@ nmap <leader>kl :CocList<CR>
 " Toggle ESLint
 command! -nargs=0 ESLintToggle :call CocAction('toggleService', 'eslint')
 nmap <leader>kt :ESLintToggle<CR>
+

@@ -1,4 +1,3 @@
-
 " Add Packages
 runtime packages.vim
 
@@ -8,11 +7,11 @@ runtime pluggins.vim
 " Add Helper Functions
 runtime functions.vim
 
-" Add Keyboard Mappings
-runtime mappings.vim
-
 " General configurations
 runtime general.vim
 
+" Add Keyboard Mappings
+runtime mappings.vim
+
 " Autocomplete
-runtime coc-nvim.vim
+runtime coc.vim

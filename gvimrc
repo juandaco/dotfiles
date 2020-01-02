@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 " Set the font family and size.
 set guifont=InconsolataGO\ Nerd\ \Font:h16
 

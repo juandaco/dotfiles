@@ -1,0 +1,10 @@
+languages:
+  vim:
+    lint-command: "vint"
+    lint-stdin: false
+  sh:
+    lint-command: "shellcheck --format gcc -"
+    lint-formats:
+      - "%f:%l:%c: %m"
+    lint-stdin: true
+    format-command: "shfmt"

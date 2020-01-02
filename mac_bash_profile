@@ -24,7 +24,7 @@ export CLICOLOR=1
 # export PS1="$PS1$(echo '$(__git_ps1 "(%s)")\$ ')"
 
 # Alias file
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+[ -f ~/.bash_aliases ] && source "$HOME/.bash_aliases"
 
 HOMEBREW_PREFIX=$(brew --prefix)
 export BASH_COMPLETION_COMPAT_DIR="$HOMEBREW_PREFIX/etc/bash_completion.d"
