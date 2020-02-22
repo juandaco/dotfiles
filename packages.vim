@@ -27,6 +27,9 @@ call minpac#add('tpope/vim-unimpaired')
 " Surround with parenthesis/quotes
 call minpac#add('tpope/vim-surround')
 
+" Bracket pairing plugin
+call minpac#add('jiangmiao/auto-pairs')
+
 " Commenting stuff out with Operator `gc`
 call minpac#add('tpope/vim-commentary')
 

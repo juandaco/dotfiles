@@ -4,16 +4,14 @@
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
+      "filetypes": ["sh"]
     },
 
     // General purpose language server for linting and formatting
     "efm": {
       "command": "efm-langserver",
       "args": [],
-      "filetypes": ["vim", "sh"],
-      "ignoredRootPaths": ["~"]
+      "filetypes": ["vim", "sh"]
     },
 
     // Vim Language Server

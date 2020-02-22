@@ -83,7 +83,7 @@ if [ ! -d ~/.vim/pack/minpac/opt/minpac ]; then
 	printf "Installing Package Manager... \\n"
 	mkdir -p ~/.vim/pack/minpac/opt
 	cd ~/.vim/pack/minpac/opt || echo 'Failed to ' || exit
-	git clone https://github.com/k-takata/minpac
+	git clone "https://github.com/k-takata/minpac"
 fi
 
 OS="$(uname -s)"
@@ -103,7 +103,7 @@ elif [[ $OS =~ "Linux" ]]; then
 	# Install fzf
 	if [ ! -d ~/.fzf ]; then
 		# Install fzf when not present
-		git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+		git clone --depth 1 "https://github.com/junegunn/fzf.git" ~/.fzf
 		~/.fzf/install
 	else
 		# Update if needed
@@ -155,14 +155,28 @@ elif [[ $OS =~ "Linux" ]]; then
 			cp "$BAT_PACKAGE_NAME/bat" .
 			rm -rf "$BAT_PACKAGE_NAME"
 		else
-			# Regular Linux
+			# Debian Linux
 			BAT_PACKAGE_NAME="bat_${BAT_PACKAGE_VERSION:1}_amd64.deb"
 			wget "https://github.com/sharkdp/bat/releases/download/$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME"
 			sudo dpkg -i "$BAT_PACKAGE_NAME"
 			rm -rf "$BAT_PACKAGE_NAME"
 		fi
+
 		popd >>/dev/null || exit
 	fi
+
+  # Install bat-extras
+  if [ -z "$(command -v batman)" ]; then
+    pushd ~/bin >>/dev/null || exit
+
+    git clone "https://github.com/eth-p/bat-extras.git"
+    pushd bat-extras >>/dev/null || exit
+    ./build.sh --install --prefix="$HOME" --no-verify
+    popd >>/dev/null || exit
+    rm -rf bat-extras
+
+    popd >>/dev/null || exit
+  fi
 fi
 
 # Run vim and Install all packages.

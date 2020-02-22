@@ -5,7 +5,6 @@
 " Extensions used
 let g:coc_global_extensions = [
   \ 'coc-snippets',
-  \ 'coc-pairs',
   \ 'coc-json',
   \ 'coc-yaml',
   \ 'coc-tsserver',
@@ -14,7 +13,7 @@ let g:coc_global_extensions = [
   \ 'coc-html',
   \ 'coc-emmet',
   \ 'coc-css',
-  \ 'coc-vimlsp'
+  \ 'coc-vimlsp',
   \ ]
 
 " Some servers have issues with backup files, see #649

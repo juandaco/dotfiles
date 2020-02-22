@@ -42,14 +42,6 @@ export FZF_CTRL_R_OPTS='--layout=default --preview-window=hidden'
 # Don't store less history file.
 export LESSHISTFILE="/dev/null"
 
-# Add nvm path
-export NVM_DIR="$HOME/.nvm"
-# This loads nvm
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
-# This loads nvm bash_completion
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
-
-
 # Java External Libraries
 export CLASSPATH="/Users/juandaco/Programming/java/lib/*"
 JHOME=$(/usr/libexec/java_home -v 1.8)
@@ -90,14 +82,21 @@ $PATH"
 
 # Get Network SSID
 function ssid() {
-  if [ $# -eq 0 ]; then
-    networksetup -getairportnetwork "${1:-en0}" | cut -c 24-
-  elif [ $# -eq 1 ]; then
-    networksetup -getairportnetwork "$1"
-  else
-    echo "Pass network interface(en0, lo0) as an argument."
-  fi
+	if [ $# -eq 0 ]; then
+		networksetup -getairportnetwork "${1:-en0}" | cut -c 24-
+	elif [ $# -eq 1 ]; then
+		networksetup -getairportnetwork "$1"
+	else
+		echo "Pass network interface(en0, lo0) as an argument."
+	fi
 }
 
+# Shell Integration for iTerm2
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash" || true
+
+export NVM_DIR="$HOME/.nvm"
+# Load nvm
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && source "/usr/local/opt/nvm/nvm.sh"
+# Load nvm bash_completion
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && source "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
