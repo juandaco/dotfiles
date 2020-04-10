@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#
+# Installs or updates `bat-extras`.
+
+GIT_USER="eth-p"
+GIT_REPO="bat-extras"
+HOME_BIN="$HOME/bin"
+
+BAT_EXTRAS_PACKAGE_VERSION="$(curl --silent "https://api.github.com/repos/$GIT_USER/$GIT_REPO/releases/latest" | grep '"tag_name":' | awk '{print $2}' | tr -d '",v')"
+
+# Install bat-extras
+if [ -z "$(command -v batman)" ] || [ "$BAT_EXTRAS_PACKAGE_VERSION" != "$(batman --version | head -1 | awk '{print $2}' | tr -d '.')" ]; then
+  pushd "$HOME_BIN" >>/dev/null || exit 1
+
+  echo "Installing bat-extras"
+
+  git clone --quiet "https://github.com/$GIT_USER/$GIT_REPO.git"
+  pushd bat-extras >>/dev/null || exit
+  ./build.sh --install --prefix="$HOME" --no-verify
+  popd >>/dev/null || exit 1
+  rm -rf bat-extras
+
+  if [ -n "$(command -v batman)" ]; then
+    echo "bat-extras correctly installed."
+  else
+    echo "bat-extras was not installed." 1>&2
+  fi
+
+  popd >>/dev/null || exit
+fi

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+#
+# Installs `fzf`
+
+GIT_USER="junegunn"
+GIT_REPO="fzf"
+FZF_HOME="$HOME/.fzf"
+
+OS="$(uname -s)"
+
+if [ "$OS" == "Darwin" ]; then
+  # MacOS
+  if [ -z "$(command -v brew)" ]; then
+    echo "You must install brew first." 1>&2
+    exit 1
+  fi
+
+  # MacOS with brew installed
+  command -v fzf >>/dev/null || brew install fzf
+  command -v fzf >>/dev/null || "$(brew --prefix)/opt/fzf/install"
+
+elif [ "$OS" == "Linux" ]; then
+  # Linux
+
+  if [ ! -d "$FZF_HOME" ]; then
+    # Install fzf when not present
+    git clone --quiet --depth 1 "https://github.com/$GIT_USER/$GIT_REPO.git" "$FZF_HOME"
+    "$FZF_HOME"/install
+  else
+    # Update if needed
+    pushd "$FZF_HOME" >>/dev/null || exit 1
+    git fetch --quiet origin
+    if [ -n "$(git log HEAD..origin/master --oneline)" ]; then
+      git pull
+      ./install
+    fi
+    popd >>/dev/null || exit
+  fi
+
+else
+  # Other OS
+  echo "The OS $OS is not supported yet." 1>&2
+  exit 1
+
+fi

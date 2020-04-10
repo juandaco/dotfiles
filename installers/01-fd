@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+# Installs or updates `fd`.
+
+GIT_USER="sharkdp"
+GIT_REPO="fd"
+HOME_BIN="$HOME/bin"
+
+OS="$(uname -s)"
+
+if [ "$OS" == "Darwin" ]; then
+  # MacOS
+  if [ -z "$(command -v brew)" ]; then
+    echo "You must install brew first." 1>&2
+    exit 1
+  fi
+
+  command -v fd >>/dev/null || brew install fd
+
+elif [ "$OS" == "Linux" ]; then
+  # Linux
+
+  FD_PACKAGE_VERSION="$(curl --silent "https://api.github.com/repos/$GIT_USER/$GIT_REPO/releases/latest" | grep '"tag_name":' | awk '{print $2}' | tr -d '",v')"
+
+  if [ -z "$(command -v fd)" ] || [ "$FD_PACKAGE_VERSION" != "$(fd --version | head -1 | awk '{print $2}')" ]; then
+    pushd "$HOME_BIN" >>/dev/null || exit
+
+    echo "Installing fd..."
+
+    ARCHITECTURE="$(uname -m)"
+
+    if [ "$ARCHITECTURE" == "armv7l" ]; then
+      # Raspberry Pi 3+ B
+      FD_PACKAGE_NAME="fd_${FD_PACKAGE_VERSION}_armhf.deb"
+      wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$FD_PACKAGE_VERSION/$FD_PACKAGE_NAME"
+      sudo dpkg -i "$FD_PACKAGE_NAME"
+      rm -rf "$FD_PACKAGE_NAME"
+
+    elif [ "$ARCHITECTURE" == "x86_64" ]; then
+      # Debian 64bit
+      FD_PACKAGE_NAME="fd_${FD_PACKAGE_VERSION}_amd64.deb"
+      wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$FD_PACKAGE_VERSION/$FD_PACKAGE_NAME"
+      sudo dpkg -i "$FD_PACKAGE_NAME"
+      rm -rf "$FD_PACKAGE_NAME"
+
+    else
+      # Other Architecture
+      echo "The architecture $ARCHITECTURE is not supported yet." 1>&2
+      exit 1
+    fi
+
+    if [ -n "$(command -v fd)" ]; then
+      echo "fd correctly installed."
+    else
+      echo "fd was not installed." 1>&2
+      exit 1
+    fi
+
+    popd >>/dev/null || exit
+  fi
+
+else
+  # Other OS
+  echo "The OS $OS is not supported yet." 1>&2
+  exit 1
+
+fi

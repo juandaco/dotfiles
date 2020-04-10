@@ -15,13 +15,3 @@ set guioptions-=L
 "
 " MAPPINGS
 "
-
-" Autoformat
-map ƒ :ALEFix <CR>
-
-" Toggle Wrap
-map ∑ :set wrap! <bar> :set wrap? <CR>
-
-" Navigate Buffers
-map ≤ :bp <CR>
-map ≥ :bn <CR>

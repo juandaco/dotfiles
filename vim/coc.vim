@@ -14,6 +14,7 @@ let g:coc_global_extensions = [
   \ 'coc-emmet',
   \ 'coc-css',
   \ 'coc-vimlsp',
+  \ 'coc-diagnostic',
   \ ]
 
 " Some servers have issues with backup files, see #649

@@ -1,0 +1,10 @@
+# ~/.bash_profile
+# shellcheck disable=2148,1090
+
+# Setup environment variables
+[ -f "$HOME/.profile" ] && source "$HOME/.profile"
+
+# Setup bash interactive shells
+[ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"
+
+# vim: set ft=sh

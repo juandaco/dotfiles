@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+# Installs or updates `ripgrep`.
+
+GIT_USER="BurntSushi"
+GIT_REPO="ripgrep"
+HOME_BIN="$HOME/bin"
+
+OS="$(uname -s)"
+
+if [ "$OS" == "Darwin" ]; then
+  # MacOS
+  if [ -z "$(command -v brew)" ]; then
+    echo "You must install brew first." 1>&2
+    exit 1
+  fi
+
+  command -v ripgrep >>/dev/null || brew install ripgrep
+
+elif [ "$OS" == "Linux" ]; then
+  # Linux
+
+  RG_PACKAGE_VERSION="$(curl --silent "https://api.github.com/repos/$GIT_USER/$GIT_REPO/releases/latest" | grep '"tag_name":' | awk '{print $2}' | tr -d '",v')"
+
+  if [ -z "$(command -v rg)" ] || [ "$RG_PACKAGE_VERSION" != "$(rg --version | head -1 | awk '{print $2}')" ]; then
+    pushd "$HOME_BIN" >>/dev/null || exit 1
+
+    echo "Installing ripgrep..."
+
+    ARCHITECTURE="$(uname -m)"
+
+    if [ "$ARCHITECTURE" == "armv7l" ]; then
+      # Raspberry Pi 3+ B
+      RG_PACKAGE_NAME="ripgrep-$RG_PACKAGE_VERSION-arm-unknown-linux-gnueabihf"
+      wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$RG_PACKAGE_VERSION/$RG_PACKAGE_NAME.tar.gz"
+      tar -xzf "$RG_PACKAGE_NAME.tar.gz" && rm "$RG_PACKAGE_NAME.tar.gz"
+      cp "$RG_PACKAGE_NAME/rg" .
+      sudo cp "$RG_PACKAGE_NAME/complete/rg.bash" /etc/bash_completion.d/
+      rm -rf "$RG_PACKAGE_NAME"
+    elif [ "$ARCHITECTURE" == "x86_64" ]; then
+      # Debian 64bit
+      RG_PACKAGE_NAME="ripgrep_${RG_PACKAGE_VERSION}_amd64.deb"
+      wget "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$RG_PACKAGE_VERSION/$RG_PACKAGE_NAME"
+      sudo dpkg -i "$RG_PACKAGE_NAME"
+      rm -rf "$RG_PACKAGE_NAME"
+    else
+      # Other Architecture
+      echo "The architecture $ARCHITECTURE is not supported yet." 1>&2
+      exit 1
+    fi
+
+    if [ -n "$(command -v rg)" ]; then
+      echo "ripgrep correctly installed."
+    else
+      echo "ripgrep was not installed." 1>&2
+      exit 1
+    fi
+
+    popd >>/dev/null || exit 1
+  fi
+
+else
+  # Other OS
+  echo "The OS $OS is not supported yet." 1>&2
+  exit 1
+
+fi

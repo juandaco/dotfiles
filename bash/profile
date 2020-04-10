@@ -1,0 +1,97 @@
+# ~/.profile
+# shellcheck disable=2148,2090
+
+# Set the default editor.
+if [ -n "$(command -v nvim)" ]; then
+  EDITOR="nvim"
+elif [ -n "$(command -v vim)" ]; then
+  EDITOR="vim"
+else
+  EDITOR="vi"
+fi
+VISUAL="$EDITOR"
+
+# Default pager program.
+PAGER=less
+
+# `less` default options
+LESS=R
+# Don't store less history file.
+LESSHISTFILE="/dev/null"
+
+# Ignore duplicates in command history and increase
+# history size to 1000 lines
+HISTCONTROL=ignoredups
+HISTSIZE=1000
+
+# Rust configuration
+RUSTUP_HOME="$HOME/.config/rustup"
+CARGO_HOME="$HOME/.config/cargo"
+
+# `fzf` options
+FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# shellcheck disable=2089,2016
+FZF_DEFAULT_OPTS='--reverse --height 90% --margin=3% --preview '\''[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -500'\'
+FZF_ALT_C_OPTS='--preview-window=hidden'
+FZF_CTRL_R_OPTS='--layout=default --preview-window=hidden'
+
+########
+# PATH #
+########
+
+# Folder for my executable Scripts
+HOME_BIN="$HOME/bin"
+[ -d "$HOME_BIN" ] && PATH="$HOME_BIN:$PATH"
+
+# Cargo bin path
+CARGO_BIN="$CARGO_HOME/bin"
+[ -d "$CARGO_BIN" ] && PATH="$CARGO_BIN:$PATH"
+
+# For MacOs only
+if [ "$(uname)" = "Darwin" ] && [ -n "$(command -v brew)" ]; then
+  HOMEBREW_PREFIX=$(brew --prefix)
+
+  HOMEBREW_BIN="$HOMEBREW_PREFIX/bin"
+  [ -d "$HOMEBREW_BIN" ] && PATH="$HOMEBREW_BIN:$PATH"
+
+  HOMEBREW_SBIN="$HOMEBREW_PREFIX/sbin"
+  [ -d "$HOMEBREW_SBIN" ] && PATH="$HOMEBREW_SBIN:$PATH"
+
+  RUBY_BIN="/usr/local/opt/ruby/bin"
+  [ -d "$RUBY_BIN" ] && PATH="$RUBY_BIN:$PATH"
+
+  RUBY_GEMS_BIN="/usr/local/lib/ruby/gems/2.6.0/bin"
+  [ -d "$RUBY_GEMS_BIN" ] && PATH="$RUBY_GEMS_BIN:$PATH"
+
+  SQLITE_BIN='/usr/local/opt/sqlite/bin'
+  [ -d "$SQLITE_BIN" ] && PATH="$SQLITE_BIN:$PATH"
+
+  OPEN_SSL_BIN="/usr/local/opt/openssl/bin"
+  [ -d "$OPEN_SSL_BIN" ] && PATH="$OPEN_SSL_BIN:$PATH"
+fi
+
+##########
+# export #
+##########
+export \
+  PATH \
+  EDITOR \
+  VISUAL \
+  PAGER \
+  LESS \
+  LESSHISTFILE \
+  HISTCONTROL \
+  HISTSIZE \
+  RUSTUP_HOME \
+  CARGO_HOME \
+  FZF_DEFAULT_COMMAND \
+  FZF_DEFAULT_OPTS \
+  FZF_CTRL_T_COMMAND \
+  FZF_ALT_C_OPTS \
+  FZF_CTRL_R_OPTS \
+
+# Set umask for new created files
+umask 022
+
+# vim: ft=sh

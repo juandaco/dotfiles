@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+#
+# Installs or updates `bat`.
+
+GIT_USER="sharkdp"
+GIT_REPO="bat"
+HOME_BIN="$HOME/bin"
+
+OS="$(uname -s)"
+
+if [ "$OS" == "Darwin" ]; then
+  # MacOS
+  if [ -z "$(command -v brew)" ]; then
+    echo "You must install brew first." 1>&2
+    exit 1
+  fi
+
+  command -v bat >/dev/null || brew install bat
+
+elif [ "$OS" == "Linux" ]; then
+  # Linux
+
+  BAT_PACKAGE_VERSION="$(curl --silent "https://api.github.com/repos/$GIT_USER/$GIT_REPO/releases/latest" | grep '"tag_name":' | awk '{print $2}' | tr -d '",v')"
+
+  if [ -z "$(command -v bat)" ] || [ "$BAT_PACKAGE_VERSION" != "$(bat --version | head -1 | awk '{print $2}')" ]; then
+    pushd "$HOME_BIN" >>/dev/null || exit
+
+    echo "Installing bat..."
+
+    ARCHITECTURE="$(uname -m)"
+
+    if [ "$ARCHITECTURE" == "armv7l" ]; then
+      # Raspberry Pi 3+ B
+      BAT_PACKAGE_NAME="bat_${BAT_PACKAGE_VERSION}_armhf.deb"
+      wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME"
+      sudo dpkg -i "$BAT_PACKAGE_NAME"
+      rm -rf "$BAT_PACKAGE_NAME"
+    elif [ "$ARCHITECTURE" == "x86_64" ]; then
+      # Debian 64bit
+      BAT_PACKAGE_NAME="bat_${BAT_PACKAGE_VERSION}_amd64.deb"
+      wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME"
+      sudo dpkg -i "$BAT_PACKAGE_NAME"
+      rm -rf "$BAT_PACKAGE_NAME"
+    else
+      # Other Architecture
+      echo "The architecture $ARCHITECTURE is not supported yet." 1>&2
+      exit 1
+    fi
+
+    if [ -n "$(command -v bat)" ]; then
+      echo "bat correctly installed."
+    else
+      echo "bat was not installed." 1>&2
+      exit 1
+    fi
+
+    popd >>/dev/null || exit
+  fi
+
+else
+  # Other OS
+  echo "The OS $OS is not supported yet." 1>&2
+  exit 1
+
+fi
