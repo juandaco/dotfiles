@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
+# shellcheck disable=2139,1090
 
 # Force ls to output color.
-if [[ $(uname -s) == 'Darwin' ]]; then
+if [ "$(uname -s)" == 'Darwin' ]; then
   alias ls='CLICOLOR_FORCE=1 ls -G'
 fi
-# Force less to interpret color
-alias less='less -R'
+
 # Colorize tree and avoid diplaying node_modules
-alias tree='tree -C -I node_modules'
+alias tree='tree -C'
 
 # ls helpers
 alias ll='ls -la'
@@ -23,27 +23,8 @@ alias egrep='egrep --color=always'
 alias vi='nvim'
 alias vim='nvim'
 
-# Open VLC app from the command line
-alias vlc='open -a VLC'
-
 # HomeBrew update shortcut
 alias upgrade="brew update && brew upgrade && brew cleanup && npm -g update && gem update && brew cask upgrade"
-
-# Top as Activity Monitor
-alias ctop='top -o cpu -s 3 -n 37'
-alias mtop='top -o mem -s 3 -n 37'
-
-# Run VIM with a session
-alias gvims='gvim --servername' #session-name
-
-# Duplicate tab at same path location
-alias tab='open . -a iterm'
-
-# Chrome Debugger
-alias chrome-dev='open -a "Google Chrome" --args --remote-debugging-port=9222'
-
-# Correct error when running the Swift REPL with Python's Homebrew
-alias swift='PATH="/usr/bin:$PATH" swift'
 
 # Rum MIT Scheme with REPL completions (add -c for file completion)
 alias scheme='rlwrap -r -f "$HOME"/.scheme_repl_history scheme'
@@ -58,24 +39,31 @@ alias wifi-password='security find-generic-password -wa $(ssid)'
 # shellcheck disable=SC2142
 alias stash-recover='git log --graph --oneline --decorate $(git fsck --no-reflogs | awk '\''/dangling commit/ {print $3}'\'')'
 
+# Add copy paste commands from MacOS
+if [[ $(uname -s) == 'Linux' ]]; then
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
+fi
+
+alias copy-git-hash-HEAD='git rev-parse --short HEAD | tr -d "\n" | pbcopy'
+
+
+##########
+# Artimo #
+##########
+
 # Add environment variables needed for Artimo aliases
 [ -f "$HOME/.artimo_env_vars" ] && source "$HOME/.artimo_env_vars"
 [ -f "$HOME/.artimo_mongo_env_vars" ] && source "$HOME/.artimo_mongo_env_vars"
 
 # cd to Artimo directory
-# shellcheck disable=SC2139
 alias artimo="cd $ARTIMO_APP_DIR"
-# shellcheck disable=SC2139
 alias artimo-build="cd $ARTIMO_APP_DIR && meteor npm install && meteor build $ARTIMO_DEPLOY_DIR --architecture os.linux.x86_64"
-# shellcheck disable=SC2139
 alias artimo-copy-build-stage="scp -o ProxyCommand='ssh -W %h:%p $ARTIMO_USER@34.227.184.167' $ARTIMO_DEPLOY_DIR/app.tar.gz $ARTIMO_USER@10.0.33.120:."
-# shellcheck disable=SC2139
 alias artimo-copy-build-app1="scp -o ProxyCommand='ssh -W %h:%p $ARTIMO_USER@34.227.184.167' $ARTIMO_DEPLOY_DIR/app.tar.gz $ARTIMO_USER@10.0.33.81:."
-# shellcheck disable=SC2139
 alias artimo-copy-build-app2="scp -o ProxyCommand='ssh -W %h:%p $ARTIMO_USER@34.227.184.167' $ARTIMO_DEPLOY_DIR/app.tar.gz $ARTIMO_USER@10.0.33.82:."
 
 # Show the icons currently ine Artimo
-# shellcheck disable=SC2139
 alias artimo-open-icons="open $ARTIMO_APP_DIR/public/css/iconos-artimo/demo.html"
 
 # Common Artimo Queries
@@ -87,10 +75,3 @@ alias lmeteor='MONGO_URL=mongodb://127.0.0.1:27017/Artimo meteor run --inspect'
 # shellcheck disable=SC2139
 alias rmeteor="MONGO_URL=mongodb://$ARTIMO_DB_USER:$ARTIMO_DB_PASSWORD@$ARTIMO_DB_HOST:$ARTIMO_DB_PORT/Artimo meteor run --inspect"
 
-# Add copy paste commands from MacOS
-if [[ $(uname -s) == 'Linux' ]]; then
-  alias pbcopy='xsel --clipboard --input'
-  alias pbpaste='xsel --clipboard --output'
-fi
-
-alias copy-git-hash-HEAD='git rev-parse --short HEAD | tr -d "\n" | pbcopy'

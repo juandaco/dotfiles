@@ -20,9 +20,11 @@ LESS=R
 LESSHISTFILE="/dev/null"
 
 # Ignore duplicates in command history and increase
-# history size to 1000 lines
 HISTCONTROL=ignoredups
+# history size to 1000 lines
 HISTSIZE=1000
+# history file size
+HISTFILESIZE=2000
 
 # Rust configuration
 RUSTUP_HOME="$HOME/.config/rustup"

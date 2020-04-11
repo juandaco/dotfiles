@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+pushd "$(dirname "$0")/../bash" >/dev/null || exit 1
+
+# ~/.pforile
+ln -vf ./profile "$HOME/.profile"
+
+# ~/.bash_profile
+ln -vf ./bash_profile "$HOME/.bash_profile"
+
+# ~/.bashrc
+ln -vf ./bashrc "$HOME/.bashrc"
+
+# ~/.bash_aliases
+ln -vf ./bash_aliases "$HOME/.bash_aliases"
+
+popd >/dev/null || exit 1
