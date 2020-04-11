@@ -36,11 +36,18 @@ elif [ "$OS" == "Linux" ]; then
       sudo dpkg -i "$BAT_PACKAGE_NAME"
       rm -rf "$BAT_PACKAGE_NAME"
     elif [ "$ARCHITECTURE" == "x86_64" ]; then
-      # Debian 64bit
-      BAT_PACKAGE_NAME="bat_${BAT_PACKAGE_VERSION}_amd64.deb"
-      wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME"
-      sudo dpkg -i "$BAT_PACKAGE_NAME"
-      rm -rf "$BAT_PACKAGE_NAME"
+      # Linux 64bit
+      if grep --quiet arch /etc/os-release; then
+        # Arch
+        sudo pacman --needed -S bat
+      elif grep --quiet debian /etc/os-release; then
+        # Debian 64bit
+        BAT_PACKAGE_NAME="bat_${BAT_PACKAGE_VERSION}_amd64.deb"
+        wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME"
+        sudo dpkg -i "$BAT_PACKAGE_NAME"
+        rm -rf "$BAT_PACKAGE_NAME"
+      fi
+
     else
       # Other Architecture
       echo "The architecture $ARCHITECTURE is not supported yet." 1>&2

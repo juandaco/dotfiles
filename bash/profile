@@ -15,6 +15,9 @@ else
 fi
 VISUAL="$EDITOR"
 
+BROWSER="firefox"
+TERMINAL="alacritty"
+
 # Default pager program.
 PAGER=less
 
@@ -86,6 +89,8 @@ export \
   PATH \
   EDITOR \
   VISUAL \
+  BROWSER \
+  TERMINAL \
   PAGER \
   LESS \
   LESSHISTFILE \

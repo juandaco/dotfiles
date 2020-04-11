@@ -38,11 +38,17 @@ elif [ "$OS" == "Linux" ]; then
       sudo cp "$RG_PACKAGE_NAME/complete/rg.bash" /etc/bash_completion.d/
       rm -rf "$RG_PACKAGE_NAME"
     elif [ "$ARCHITECTURE" == "x86_64" ]; then
-      # Debian 64bit
-      RG_PACKAGE_NAME="ripgrep_${RG_PACKAGE_VERSION}_amd64.deb"
-      wget "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$RG_PACKAGE_VERSION/$RG_PACKAGE_NAME"
-      sudo dpkg -i "$RG_PACKAGE_NAME"
-      rm -rf "$RG_PACKAGE_NAME"
+      # Linux 64bit
+      if grep --quiet arch /etc/os-release; then
+        # Arch
+        sudo pacman --needed -S ripgrep
+      elif grep --quiet debian /etc/os-release; then
+        # Debian
+        RG_PACKAGE_NAME="ripgrep_${RG_PACKAGE_VERSION}_amd64.deb"
+        wget "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$RG_PACKAGE_VERSION/$RG_PACKAGE_NAME"
+        sudo dpkg -i "$RG_PACKAGE_NAME"
+        rm -rf "$RG_PACKAGE_NAME"
+      fi
     else
       # Other Architecture
       echo "The architecture $ARCHITECTURE is not supported yet." 1>&2

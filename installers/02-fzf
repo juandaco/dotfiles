@@ -21,20 +21,24 @@ if [ "$OS" == "Darwin" ]; then
 
 elif [ "$OS" == "Linux" ]; then
   # Linux
-
-  if [ ! -d "$FZF_HOME" ]; then
-    # Install fzf when not present
-    git clone --quiet --depth 1 "https://github.com/$GIT_USER/$GIT_REPO.git" "$FZF_HOME"
-    "$FZF_HOME"/install
+  if grep --quiet arch /etc/os-release; then
+    # Arch
+    sudo pacman --needed -S fzf
   else
-    # Update if needed
-    pushd "$FZF_HOME" >>/dev/null || exit 1
-    git fetch --quiet origin
-    if [ -n "$(git log HEAD..origin/master --oneline)" ]; then
-      git pull
-      ./install
+    if [ ! -d "$FZF_HOME" ]; then
+      # Install fzf when not present
+      git clone --quiet --depth 1 "https://github.com/$GIT_USER/$GIT_REPO.git" "$FZF_HOME"
+      "$FZF_HOME"/install
+    else
+      # Update if needed
+      pushd "$FZF_HOME" >>/dev/null || exit 1
+      git fetch --quiet origin
+      if [ -n "$(git log HEAD..origin/master --oneline)" ]; then
+        git pull
+        ./install
+      fi
+      popd >>/dev/null || exit
     fi
-    popd >>/dev/null || exit
   fi
 
 else

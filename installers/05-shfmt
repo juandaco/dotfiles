@@ -34,17 +34,26 @@ elif [ "$OS" == "Linux" ]; then
     if [ "$ARCHITECTURE" == "armv7l" ]; then
       # Raspberry Pi 3+ B
       SHFMT_PACKAGE_NAME="shfmt_${SHFMT_PACKAGE_VERSION}_linux_arm"
+      wget --quiet --output-document=shfmt "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$SHFMT_PACKAGE_VERSION/$SHFMT_PACKAGE_NAME"
+      chmod u+x shfmt
+
     elif [ "$ARCHITECTURE" == "x86_64" ]; then
       # Linux 64bit
-      SHFMT_PACKAGE_NAME="shfmt_${SHFMT_PACKAGE_VERSION}_linux_amd64"
+      if grep --quiet arch /etc/os-release; then
+        # Arch
+        sudo pacman --needed -S shfmt
+      elif grep --quiet debian /etc/os-release; then
+        # Debian
+        SHFMT_PACKAGE_NAME="shfmt_${SHFMT_PACKAGE_VERSION}_linux_amd64"
+        wget --quiet --output-document=shfmt "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$SHFMT_PACKAGE_VERSION/$SHFMT_PACKAGE_NAME"
+        chmod u+x shfmt
+      fi
+
     else
       # Other Architecture
       echo "The architecture $ARCHITECTURE is not supported yet." 1>&2
       exit 1
     fi
-
-    wget --quiet --output-document=shfmt "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$SHFMT_PACKAGE_VERSION/$SHFMT_PACKAGE_NAME"
-    chmod u+x shfmt
 
     if [ -n "$(command -v shfmt)" ]; then
       echo "shfmt correctly installed."
@@ -61,4 +70,3 @@ else
   exit 1
 
 fi
-

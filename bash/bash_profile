@@ -7,4 +7,13 @@
 # Setup bash interactive shells
 [ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"
 
+if [ -n "$(command -v solaar)" ]; then
+  solaar config 2 fn-swap false >>/dev/null 2>&1
+fi
+
+# Start Windows Manager conditionally
+if [[ "$(tty)" == "/dev/tty1" ]]; then
+  pgrep bspwm || startx
+fi
+
 # vim: set ft=sh

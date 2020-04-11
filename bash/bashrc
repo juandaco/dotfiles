@@ -2,10 +2,7 @@
 # shellcheck disable=2148,1090
 
 # If not running interactively, don't do anything
-case $- in
-  *i*) ;;
-  *) return ;;
-esac
+[[ $- != *i* ]] && return
 
 # Shell Prompt Color Customization.
 export PS1="\\[\\e[01;34m\\]\\u\\[\\e[m\\]@\\[\\e[01;32m\\]\\h\\[\\e[m\\]:\\[\\e[01;33m\\]\\w\\[\\e[m\\] \\$ "

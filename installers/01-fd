@@ -37,11 +37,17 @@ elif [ "$OS" == "Linux" ]; then
       rm -rf "$FD_PACKAGE_NAME"
 
     elif [ "$ARCHITECTURE" == "x86_64" ]; then
-      # Debian 64bit
-      FD_PACKAGE_NAME="fd_${FD_PACKAGE_VERSION}_amd64.deb"
-      wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$FD_PACKAGE_VERSION/$FD_PACKAGE_NAME"
-      sudo dpkg -i "$FD_PACKAGE_NAME"
-      rm -rf "$FD_PACKAGE_NAME"
+      # Linux 64bit
+      if grep --quiet arch /etc/os-release; then
+        # Arch
+        sudo pacman --needed -S fd
+      elif grep --quiet debian /etc/os-release; then
+        # Debian 64bit
+        FD_PACKAGE_NAME="fd_${FD_PACKAGE_VERSION}_amd64.deb"
+        wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$FD_PACKAGE_VERSION/$FD_PACKAGE_NAME"
+        sudo dpkg -i "$FD_PACKAGE_NAME"
+        rm -rf "$FD_PACKAGE_NAME"
+      fi
 
     else
       # Other Architecture
