@@ -9,7 +9,7 @@ if [ "$OS" == "Darwin" ]; then
     exit 1
   fi
 
-  if [ -z "$(command -v node)" ]; then
+  if [ -z "$(brew list | grep --quiet 'node@12')" ]; then
     brew install node@12
     brew link --force --overwrite node@12
 
