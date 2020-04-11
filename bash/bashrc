@@ -25,7 +25,7 @@ shopt -s histappend
 #########
 if [ "$(uname)" = "Darwin" ]; then
   # `brew` options
-  if comand -v brew; then
+  if [ -n "$(command -v brew)" ]; then
     HOMEBREW_PREFIX=$(brew --prefix)
     export BASH_COMPLETION_COMPAT_DIR="$HOMEBREW_PREFIX/etc/bash_completion.d"
     # Bash Completions from bash-completion Homebrew package.

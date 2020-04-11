@@ -15,7 +15,7 @@ if [ "$OS" == "Darwin" ]; then
     exit 1
   fi
 
-  command -v ripgrep >>/dev/null || brew install ripgrep
+  command -v rg >>/dev/null || brew install ripgrep
 
 elif [ "$OS" == "Linux" ]; then
   # Linux
