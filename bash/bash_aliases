@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 # shellcheck disable=2139,1090
 
+OS="$(uname -s)"
 # Force ls to output color.
-if [ "$(uname -s)" == 'Darwin' ]; then
+if [ "$OS" == "Darwin" ]; then
   alias ls='CLICOLOR_FORCE=1 ls -G'
+elif [ "$OS" == "Linux" ]; then
+  alias ls='ls --color=always'
 fi
 
 # Colorize tree and avoid diplaying node_modules
 alias tree='tree -C'
 
-alias ls='ls --color=always'
 # ls helpers
 alias ll='ls -la'
 alias la='ls -a'
@@ -20,34 +22,31 @@ alias grep='grep --color=always'
 alias fgrep='fgrep --color=always'
 alias egrep='egrep --color=always'
 
-# Run vim instead of vi.
-alias vi='nvim'
-alias vim='nvim'
+if [ "$OS" == "Darwin" ]; then
+  # HomeBrew update shortcut
+  alias upgrade="brew update && brew upgrade && brew cleanup && npm -g update && gem update && brew cask upgrade"
 
-# HomeBrew update shortcut
-alias upgrade="brew update && brew upgrade && brew cleanup && npm -g update && gem update && brew cask upgrade"
+  # Rum MIT Scheme with REPL completions (add -c for file completion)
+  alias scheme='rlwrap -r -f "$HOME"/.scheme_repl_history scheme'
 
-# Rum MIT Scheme with REPL completions (add -c for file completion)
-alias scheme='rlwrap -r -f "$HOME"/.scheme_repl_history scheme'
+  # Connect to Android Phone
+  alias nexus6p='adb connect 192.168.2.182:5555 && sleep 1 && adb shell'
 
-# Connect to Android Phone
-alias nexus6p='adb connect 192.168.2.182:5555 && sleep 1 && adb shell'
-
-# Get Wifi Password
-alias wifi-password='security find-generic-password -wa $(ssid)'
+  # Get Wifi Password
+  alias wifi-password='security find-generic-password -wa $(ssid)'
+fi
 
 # Git
 # shellcheck disable=SC2142
 alias stash-recover='git log --graph --oneline --decorate $(git fsck --no-reflogs | awk '\''/dangling commit/ {print $3}'\'')'
 
 # Add copy paste commands from MacOS
-if [[ $(uname -s) == 'Linux' ]]; then
+if [ "$OS" == "Linux" ]; then
   alias pbcopy='xsel --clipboard --input'
   alias pbpaste='xsel --clipboard --output'
 fi
 
 alias copy-git-hash-HEAD='git rev-parse --short HEAD | tr -d "\n" | pbcopy'
-
 
 ##########
 # Artimo #
