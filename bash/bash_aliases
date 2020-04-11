@@ -9,6 +9,7 @@ fi
 # Colorize tree and avoid diplaying node_modules
 alias tree='tree -C'
 
+alias ls='ls --color=always'
 # ls helpers
 alias ll='ls -la'
 alias la='ls -a'

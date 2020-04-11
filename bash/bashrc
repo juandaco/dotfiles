@@ -3,12 +3,12 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+  *i*) ;;
+  *) return ;;
 esac
 
 # Shell Prompt Color Customization.
-export PS1="\\[\\033[1;33m\\]\\w\\[\\033[m\\] \$ "
+export PS1="\\[\\e[01;34m\\]\\u\\[\\e[m\\]@\\[\\e[01;32m\\]\\h\\[\\e[m\\]:\\[\\e[01;33m\\]\\w\\[\\e[m\\] \\$ "
 export CLICOLOR=1
 
 # append to the history file, don't overwrite it
