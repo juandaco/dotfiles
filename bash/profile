@@ -58,17 +58,17 @@ CARGO_BIN="$CARGO_HOME/bin"
 [ -d "$CARGO_BIN" ] && PATH="$CARGO_BIN:$PATH"
 
 # For MacOs only
-if [ "$(uname)" = "Darwin" ] && [ -n "$(command -v brew)" ]; then
+if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
   HOMEBREW_PREFIX=$(brew --prefix)
+
+  NODE_LTS_BIN="$HOMEBREW_PREFIX/opt/node@12/bin"
+  [ -d "$NODE_LTS_BIN" ] && PATH="$NODE_LTS_BIN:$PATH"
 
   HOMEBREW_BIN="$HOMEBREW_PREFIX/bin"
   [ -d "$HOMEBREW_BIN" ] && PATH="$HOMEBREW_BIN:$PATH"
 
   HOMEBREW_SBIN="$HOMEBREW_PREFIX/sbin"
   [ -d "$HOMEBREW_SBIN" ] && PATH="$HOMEBREW_SBIN:$PATH"
-
-  NODE_LTS_PATH="$HOMEBREW_PREFIX/opt/node@12/bin"
-  [ -d "$NODE_LTS_PATH" ] && PATH="$NODE_LTS_PATH:$PATH"
 
   RUBY_BIN="$HOMEBREW_PREFIX/opt/ruby/bin"
   [ -d "$RUBY_BIN" ] && PATH="$RUBY_BIN:$PATH"

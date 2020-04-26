@@ -1,14 +1,11 @@
-" Add Packages
-runtime packages.vim
+" General configurations
+runtime general.vim
 
 " Add Plugin Configurations
 runtime pluggins.vim
 
-" Add Helper Functions
-runtime functions.vim
-
-" General configurations
-runtime general.vim
+" Add Packages
+runtime packages.vim
 
 " Add Keyboard Mappings
 runtime mappings.vim

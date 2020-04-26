@@ -134,4 +134,3 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Show CocList
 nmap <leader>kl :CocList<CR>
-

@@ -2,10 +2,10 @@
 " PACKAGES
 "
 
-command! PackUpdate packadd minpac | source $MYVIMRC | redraw | call minpac#update('', {'do': 'call minpac#status()'})
-command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
-command! PackStatus packadd minpac | source $MYVIMRC | call minpac#status()
+" Load minpac
+packadd minpac
 
+" Don't continue if `minpac` is not available
 if !exists('*minpac#init')
   finish
 endif
@@ -114,3 +114,9 @@ call minpac#add('altercation/vim-colors-solarized')
 " VS Code Dark
 call minpac#add('tomasiser/vim-code-dark')
 
+"
+" Commands
+"
+command! PackUpdate call minpac#update('', {'do': 'call minpac#status()'})
+command! PackClean  call minpac#clean()
+command! PackStatus call minpac#status()
