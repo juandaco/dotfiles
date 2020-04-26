@@ -18,10 +18,6 @@ ln -vf init.vim ~/.config/nvim/init.vim
 # Link vimrc.
 ln -vf vimrc ~/.vim/vimrc
 
-# Link the gvimrc.
-ln -vf gvimrc ~/.vim/gvimrc
-ln -vf gvimrc ~/.config/nvim/ginit.vim
-
 # Link packages.vim
 ln -vf packages.vim ~/.vim/packages.vim
 

@@ -24,7 +24,7 @@ alias egrep='egrep --color=always'
 
 if [ "$OS" == "Darwin" ]; then
   # HomeBrew update shortcut
-  alias upgrade="brew update && brew upgrade && brew cleanup && npm -g update && gem update && brew cask upgrade"
+  alias upgrade="brew update && brew upgrade && brew cask upgrade && brew cleanup && npm -g update && gem update"
 
   # Rum MIT Scheme with REPL completions (add -c for file completion)
   alias scheme='rlwrap -r -f "$HOME"/.scheme_repl_history scheme'

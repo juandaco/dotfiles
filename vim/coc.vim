@@ -5,6 +5,8 @@
 " Extensions used
 let g:coc_global_extensions = [
   \ 'coc-snippets',
+  \ 'coc-diagnostic',
+  \ 'coc-spell-checker',
   \ 'coc-json',
   \ 'coc-yaml',
   \ 'coc-tsserver',
@@ -14,10 +16,14 @@ let g:coc_global_extensions = [
   \ 'coc-emmet',
   \ 'coc-css',
   \ 'coc-vimlsp',
-  \ 'coc-diagnostic',
+  \ 'coc-texlab',
+  \ 'coc-rust-analyzer',
+  \ 'coc-python',
+  \ 'coc-markdownlint',
+  \ 'coc-highlight',
   \ ]
 
-" Some servers have issues with backup files, see #649
+" Some servers have issues with backup files
 set nobackup
 set nowritebackup
 
@@ -50,7 +56,7 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Remap keys for gotos
+" Remap keys for go-tos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -69,7 +75,7 @@ endfunction
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " Highlight symbol under cursor on CursorHold
-augroup HoldCusor
+augroup HoldCursor
   autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup END
 
@@ -77,7 +83,7 @@ augroup END
 nmap <leader>krn <Plug>(coc-rename)
 nmap <F2> <Plug>(coc-rename)
 
-augroup mygroup
+augroup myGroup
   autocmd!
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
@@ -128,8 +134,4 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Show CocList
 nmap <leader>kl :CocList<CR>
-
-" Toggle ESLint
-command! -nargs=0 ESLintToggle :call CocAction('toggleService', 'eslint')
-nmap <leader>kt :ESLintToggle<CR>
 

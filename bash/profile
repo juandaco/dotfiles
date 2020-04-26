@@ -67,16 +67,19 @@ if [ "$(uname)" = "Darwin" ] && [ -n "$(command -v brew)" ]; then
   HOMEBREW_SBIN="$HOMEBREW_PREFIX/sbin"
   [ -d "$HOMEBREW_SBIN" ] && PATH="$HOMEBREW_SBIN:$PATH"
 
-  RUBY_BIN="/usr/local/opt/ruby/bin"
+  NODE_LTS_PATH="$HOMEBREW_PREFIX/opt/node@12/bin"
+  [ -d "$NODE_LTS_PATH" ] && PATH="$NODE_LTS_PATH:$PATH"
+
+  RUBY_BIN="$HOMEBREW_PREFIX/opt/ruby/bin"
   [ -d "$RUBY_BIN" ] && PATH="$RUBY_BIN:$PATH"
 
-  RUBY_GEMS_BIN="/usr/local/lib/ruby/gems/2.6.0/bin"
+  RUBY_GEMS_BIN="$HOMEBREW_PREFIX/lib/ruby/gems/2.7.0/bin"
   [ -d "$RUBY_GEMS_BIN" ] && PATH="$RUBY_GEMS_BIN:$PATH"
 
-  SQLITE_BIN='/usr/local/opt/sqlite/bin'
+  SQLITE_BIN="$HOMEBREW_PREFIX/opt/sqlite/bin"
   [ -d "$SQLITE_BIN" ] && PATH="$SQLITE_BIN:$PATH"
 
-  OPEN_SSL_BIN="/usr/local/opt/openssl/bin"
+  OPEN_SSL_BIN="$HOMEBREW_PREFIX/opt/openssl/bin"
   [ -d "$OPEN_SSL_BIN" ] && PATH="$OPEN_SSL_BIN:$PATH"
 fi
 
