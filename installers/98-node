@@ -11,7 +11,6 @@ if [ "$OS" == "Darwin" ]; then
 
   if brew list | grep --quiet 'node@12'; then
     brew install node@12
-    brew link --force --overwrite node@12
 
     # Install `neovim` if needed
     if [ -z "$(command -v neovim-node-host)" ]; then
