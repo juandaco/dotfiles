@@ -11,12 +11,6 @@ export CLICOLOR=1
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# Alias file
-[ -f ~/.bash_aliases ] && source "$HOME/.bash_aliases"
-
-# fzf configurations
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 #########
 # MacOS #
 #########
@@ -24,7 +18,6 @@ if [ "$(uname)" = "Darwin" ]; then
   # `brew` options
   if [ -n "$(command -v brew)" ]; then
     HOMEBREW_PREFIX=$(brew --prefix)
-    export BASH_COMPLETION_COMPAT_DIR="$HOMEBREW_PREFIX/etc/bash_completion.d"
     # Bash Completions from bash-completion Homebrew package.
     [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
   fi
@@ -44,5 +37,11 @@ if [ "$(uname)" = "Darwin" ]; then
   }
   export -f ssid
 fi
+
+# Alias file
+[ -f ~/.bash_aliases ] && source "$HOME/.bash_aliases"
+
+# fzf configurations
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # vim: ft=sh
