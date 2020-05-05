@@ -61,9 +61,6 @@ CARGO_BIN="$CARGO_HOME/bin"
 if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
   HOMEBREW_PREFIX=$(brew --prefix)
 
-  NODE_LTS_BIN="$HOMEBREW_PREFIX/opt/node@12/bin"
-  [ -d "$NODE_LTS_BIN" ] && PATH="$NODE_LTS_BIN:$PATH"
-
   HOMEBREW_BIN="$HOMEBREW_PREFIX/bin"
   [ -d "$HOMEBREW_BIN" ] && PATH="$HOMEBREW_BIN:$PATH"
 
@@ -81,6 +78,9 @@ if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
 
   OPEN_SSL_BIN="$HOMEBREW_PREFIX/opt/openssl/bin"
   [ -d "$OPEN_SSL_BIN" ] && PATH="$OPEN_SSL_BIN:$PATH"
+
+  NODE_LTS_BIN="$HOMEBREW_PREFIX/opt/node@12/bin"
+  [ -d "$NODE_LTS_BIN" ] && PATH="$NODE_LTS_BIN:$PATH"
 fi
 
 ##########
