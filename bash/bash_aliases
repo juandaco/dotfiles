@@ -22,6 +22,12 @@ alias grep='grep --color=always'
 alias fgrep='fgrep --color=always'
 alias egrep='egrep --color=always'
 
+# Git
+# shellcheck disable=SC2142
+alias stash-recover='git log --graph --oneline --decorate $(git fsck --no-reflogs | awk '\''/dangling commit/ {print $3}'\'')'
+
+alias copy-git-hash-HEAD='git rev-parse --short HEAD | tr -d "\n" | pbcopy'
+
 if [ "$OS" == "Darwin" ]; then
   # HomeBrew update shortcut
   alias upgrade="brew update && brew upgrade && brew cask upgrade && brew cleanup && npm -g update && gem update"
@@ -36,42 +42,8 @@ if [ "$OS" == "Darwin" ]; then
   alias wifi-password='security find-generic-password -wa $(ssid)'
 fi
 
-# Git
-# shellcheck disable=SC2142
-alias stash-recover='git log --graph --oneline --decorate $(git fsck --no-reflogs | awk '\''/dangling commit/ {print $3}'\'')'
-
 # Add copy paste commands from MacOS
 if [ "$OS" == "Linux" ]; then
   alias pbcopy='xsel --clipboard --input'
   alias pbpaste='xsel --clipboard --output'
 fi
-
-alias copy-git-hash-HEAD='git rev-parse --short HEAD | tr -d "\n" | pbcopy'
-
-##########
-# Artimo #
-##########
-
-# Add environment variables needed for Artimo aliases
-[ -f "$HOME/.artimo_env_vars" ] && source "$HOME/.artimo_env_vars"
-[ -f "$HOME/.artimo_mongo_env_vars" ] && source "$HOME/.artimo_mongo_env_vars"
-
-# cd to Artimo directory
-alias artimo="cd $ARTIMO_APP_DIR"
-alias artimo-build="cd $ARTIMO_APP_DIR && meteor npm install && meteor build $ARTIMO_DEPLOY_DIR --architecture os.linux.x86_64"
-alias artimo-copy-build-stage="scp -o ProxyCommand='ssh -W %h:%p $ARTIMO_USER@34.227.184.167' $ARTIMO_DEPLOY_DIR/app.tar.gz $ARTIMO_USER@10.0.33.120:."
-alias artimo-copy-build-app1="scp -o ProxyCommand='ssh -W %h:%p $ARTIMO_USER@34.227.184.167' $ARTIMO_DEPLOY_DIR/app.tar.gz $ARTIMO_USER@10.0.33.81:."
-alias artimo-copy-build-app2="scp -o ProxyCommand='ssh -W %h:%p $ARTIMO_USER@34.227.184.167' $ARTIMO_DEPLOY_DIR/app.tar.gz $ARTIMO_USER@10.0.33.82:."
-
-# Show the icons currently ine Artimo
-alias artimo-open-icons="open $ARTIMO_APP_DIR/public/css/iconos-artimo/demo.html"
-
-# Common Artimo Queries
-alias query='QUERY_PATH=/Users/juandaco/src/artimo-queries/; find "$QUERY_PATH" -name *.js -exec basename {} \; | cat "$QUERY_PATH""$(fzf)" | pbcopy'
-
-# Artimo
-# Start Application
-alias lmeteor='MONGO_URL=mongodb://127.0.0.1:27017/Artimo meteor run --inspect'
-# shellcheck disable=SC2139
-alias rmeteor="MONGO_URL=mongodb://$ARTIMO_DB_USER:$ARTIMO_DB_PASSWORD@$ARTIMO_DB_HOST:$ARTIMO_DB_PORT/Artimo meteor run --inspect"
-

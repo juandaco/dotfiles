@@ -2,8 +2,8 @@
 # shellcheck disable=2148,2090
 
 # Setup locale
-LC_ALL=en_US.UTF-8
-LANG=en_US.UTF-8
+LC_ALL='en_US.UTF-8'
+LANG='en_US.UTF-8'
 
 # Set the default editor.
 if [ -n "$(command -v nvim)" ]; then
@@ -111,3 +111,4 @@ export \
 umask 022
 
 # vim: ft=sh
+
