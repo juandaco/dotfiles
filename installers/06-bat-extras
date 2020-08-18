@@ -16,7 +16,7 @@ if [ -z "$(command -v batman)" ] || [ "$BAT_EXTRAS_PACKAGE_VERSION" != "$(batman
 
   git clone --quiet "https://github.com/$GIT_USER/$GIT_REPO.git"
   pushd bat-extras >>/dev/null || exit
-  ./build.sh --install --prefix="$HOME" --no-verify
+  ./build.sh --install --prefix="$HOME" --minify all --compress --no-verify
   popd >>/dev/null || exit 1
   rm -rf bat-extras
 
