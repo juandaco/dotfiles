@@ -20,4 +20,5 @@
   rb = rebase
   rbm = rebase upstream/master
   rbd = rebase upstream/develop
-
+[pull]
+  ff = only
