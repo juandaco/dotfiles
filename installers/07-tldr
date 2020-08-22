@@ -36,7 +36,7 @@ elif [ "$OS" == "Linux" ]; then
       TLDR_PACKAGE_NAME="tldr-linux-armv7-musleabihf"
     elif [ "$ARCHITECTURE" == "x86_64" ]; then
       # Linux 64bit
-      TLDR_PACKAGE_NAME="tldr-linux-x86_64-musle"
+      TLDR_PACKAGE_NAME="tldr-linux-x86_64-musl"
     else
       # Other Architecture
       echo "The architecture $ARCHITECTURE is not supported yet." 1>&2
