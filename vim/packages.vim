@@ -6,7 +6,7 @@
 packadd minpac
 
 " Don't continue if `minpac` is not available
-if !exists('*minpac#init')
+if !exists('g:loaded_minpac')
   finish
 endif
 
