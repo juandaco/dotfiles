@@ -56,11 +56,7 @@ call minpac#add('kana/vim-textobj-entire')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
 
-" UltiSnips Sippets Engine (testing coc-snippets)
-" call minpac#add('SirVer/ultisnips')
-
-" Autocompletion
-call minpac#add('neoclide/coc.nvim', { 'branch': 'release' })
+call minpac#add('SirVer/ultisnips')
 
 " Fuzzy Match completer
 call minpac#add('junegunn/fzf.vim')

@@ -9,6 +9,3 @@ runtime packages.vim
 
 " Add Keyboard Mappings
 runtime mappings.vim
-
-" Autocomplete
-runtime coc.vim
