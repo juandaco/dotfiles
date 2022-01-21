@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 OS="$(uname -s)"
+NODE_VERSION=16
+NODE_CODE_NAME="gallium"
 
 if [ "$OS" == "Darwin" ]; then
   # MacOS
@@ -9,8 +11,8 @@ if [ "$OS" == "Darwin" ]; then
     exit 1
   fi
 
-  if brew list | grep --quiet 'node@12'; then
-    brew install node@12
+  if brew list | grep --quiet "node@$NODE_VERSION"; then
+    brew install "node@$NODE_VERSION"
 
     # Install `neovim` if needed
     if [ -z "$(command -v neovim-node-host)" ]; then
@@ -25,10 +27,10 @@ elif [ "$OS" == "Linux" ]; then
     # node is not installed
     if grep --quiet arch /etc/os-release; then
       # Arch
-      sudo pacman --needed -S nodejs-lts-erbium
+      sudo pacman --needed -S "nodejs-lts-$NODE_CODE_NAME"
     elif grep --quiet debian /etc/os-release; then
       # Debian
-      curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+      curl -sL "https://deb.nodesource.com/setup_$NODE_VERSION.x" | sudo -E bash -
       sudo apt-get install -y nodejs
 
       # Install `neovim` if needed
