@@ -57,6 +57,10 @@ HOME_BIN="$HOME/bin"
 CARGO_BIN="$CARGO_HOME/bin"
 [ -d "$CARGO_BIN" ] && PATH="$CARGO_BIN:$PATH"
 
+# Go bin path
+GO_BIN="/usr/local/go/bin"
+[ -d "$GO_BIN" ] && PATH="$GO_BIN:$PATH"
+
 # For MacOs only
 if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
   HOMEBREW_PREFIX=$(brew --prefix)

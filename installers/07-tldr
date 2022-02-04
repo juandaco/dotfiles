@@ -31,12 +31,12 @@ elif [ "$OS" == "Linux" ]; then
 
     ARCHITECTURE="$(uname -m)"
 
-    if [ "$ARCHITECTURE" == "armv7l" ]; then
-      # Raspberry Pi 3+ B
-      TLDR_PACKAGE_NAME="tldr-linux-armv7-musleabihf"
+    if [ "$ARCHITECTURE" == "aarch64" ]; then
+      # Raspberry Pi
+      TLDR_PACKAGE_NAME="tealdeer-linux-arm-musleabihf"
     elif [ "$ARCHITECTURE" == "x86_64" ]; then
       # Linux 64bit
-      TLDR_PACKAGE_NAME="tldr-linux-x86_64-musl"
+      TLDR_PACKAGE_NAME="tealdeer-linux-x86_64-musl"
     else
       # Other Architecture
       echo "The architecture $ARCHITECTURE is not supported yet." 1>&2
@@ -60,6 +60,4 @@ else
   # Other OS
   echo "The OS $OS is not supported yet." 1>&2
   exit 1
-
 fi
-
