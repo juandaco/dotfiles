@@ -30,8 +30,14 @@ elif [ "$OS" == "Linux" ]; then
     ARCHITECTURE="$(uname -m)"
 
     if [ "$ARCHITECTURE" == "armv7l" ]; then
-      # Raspberry Pi 3+ B
+      # Raspberry Pi 32bit
       BAT_PACKAGE_NAME="bat_${BAT_PACKAGE_VERSION}_armhf.deb"
+      wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME"
+      sudo dpkg -i "$BAT_PACKAGE_NAME"
+      rm -rf "$BAT_PACKAGE_NAME"
+    elif [ "$ARCHITECTURE" == "aarch64" ]; then
+      # Raspberry Pi 64bit
+      BAT_PACKAGE_NAME="bat_${BAT_PACKAGE_VERSION}_arm64.deb"
       wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$BAT_PACKAGE_VERSION/$BAT_PACKAGE_NAME"
       sudo dpkg -i "$BAT_PACKAGE_NAME"
       rm -rf "$BAT_PACKAGE_NAME"

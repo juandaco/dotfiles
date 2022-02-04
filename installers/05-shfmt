@@ -32,8 +32,14 @@ elif [ "$OS" == "Linux" ]; then
     ARCHITECTURE="$(uname -m)"
 
     if [ "$ARCHITECTURE" == "armv7l" ]; then
-      # Raspberry Pi 3+ B
+      # Raspberry Pi 32bit
       SHFMT_PACKAGE_NAME="shfmt_${SHFMT_PACKAGE_VERSION}_linux_arm"
+      wget --quiet --output-document=shfmt "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$SHFMT_PACKAGE_VERSION/$SHFMT_PACKAGE_NAME"
+      chmod u+x shfmt
+
+    elif [ "$ARCHITECTURE" == "aarch64" ]; then
+      # Raspberry Pi 64bit
+      SHFMT_PACKAGE_NAME="shfmt_${SHFMT_PACKAGE_VERSION}_linux_arm64"
       wget --quiet --output-document=shfmt "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$SHFMT_PACKAGE_VERSION/$SHFMT_PACKAGE_NAME"
       chmod u+x shfmt
 

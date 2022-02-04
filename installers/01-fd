@@ -28,10 +28,16 @@ elif [ "$OS" == "Linux" ]; then
     echo "Installing fd..."
 
     ARCHITECTURE="$(uname -m)"
-
     if [ "$ARCHITECTURE" == "armv7l" ]; then
-      # Raspberry Pi 3+ B
+      # Raspberry Pi 32bit
       FD_PACKAGE_NAME="fd_${FD_PACKAGE_VERSION}_armhf.deb"
+      wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$FD_PACKAGE_VERSION/$FD_PACKAGE_NAME"
+      sudo dpkg -i "$FD_PACKAGE_NAME"
+      rm -rf "$FD_PACKAGE_NAME"
+
+    elif [ "$ARCHITECTURE" == "aarch64" ]; then
+      # Raspberry Pi 64bit
+      FD_PACKAGE_NAME="fd_${FD_PACKAGE_VERSION}_arm64.deb"
       wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/v$FD_PACKAGE_VERSION/$FD_PACKAGE_NAME"
       sudo dpkg -i "$FD_PACKAGE_NAME"
       rm -rf "$FD_PACKAGE_NAME"

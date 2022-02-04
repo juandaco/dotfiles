@@ -33,13 +33,6 @@ ln -vf functions.vim ~/.vim/functions.vim
 # Link functions.vim
 ln -vf general.vim ~/.vim/general.vim
 
-# Link coc-nvim.vim
-ln -vf coc.vim ~/.vim/coc.vim
-
-# Link coc-settings.json
-ln -vf coc-settings.json ~/.vim/coc-settings.json
-ln -vf coc-settings.json ~/.config/nvim/coc-settings.json
-
 # ftplugin
 mkdir -p ~/.vim/ftplugin
 for file in ftplugin/*; do
