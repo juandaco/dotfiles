@@ -1,6 +1,9 @@
 # ~/.bash_profile
 # shellcheck disable=2148,1090
 
+# Setup Homebrew if available
+[ "$(uname -s)" == "Darwin" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Setup environment variables
 [ -f "$HOME/.profile" ] && source "$HOME/.profile"
 

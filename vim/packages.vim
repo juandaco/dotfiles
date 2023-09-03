@@ -65,7 +65,7 @@ call minpac#add('junegunn/fzf.vim')
 call minpac#add('tpope/vim-fugitive')
 
 " Git Gutter
-call minpac#add('airblade/vim-gitgutter')
+call minpac#add('airblade/vim-gitgutter', {'branch': 'main'})
 
 " Better Sessions Management
 call minpac#add('xolox/vim-misc')

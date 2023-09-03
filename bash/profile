@@ -74,7 +74,8 @@ if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
   RUBY_BIN="$HOMEBREW_PREFIX/opt/ruby/bin"
   [ -d "$RUBY_BIN" ] && PATH="$RUBY_BIN:$PATH"
 
-  RUBY_GEMS_BIN="$HOMEBREW_PREFIX/lib/ruby/gems/2.7.0/bin"
+  RUBY_VERSION="3.2.0"
+  RUBY_GEMS_BIN="$HOMEBREW_PREFIX/lib/ruby/gems/$RUBY_VERSION/bin"
   [ -d "$RUBY_GEMS_BIN" ] && PATH="$RUBY_GEMS_BIN:$PATH"
 
   SQLITE_BIN="$HOMEBREW_PREFIX/opt/sqlite/bin"
@@ -85,6 +86,13 @@ if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
 
   NODE_LTS_BIN="$HOMEBREW_PREFIX/opt/node@12/bin"
   [ -d "$NODE_LTS_BIN" ] && PATH="$NODE_LTS_BIN:$PATH"
+
+  JAVA_VERSION=17
+  JAVA_BIN="$HOMEBREW_PREFIX/opt/openjdk@$JAVA_VERSION/bin"
+  [ -d "$JAVA_BIN" ] && PATH="$JAVA_BIN:$PATH"
+
+  INTELLIJ_BIN="/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
+  [ -d "$INTELLIJ_BIN" ] && PATH="$INTELLIJ_BIN:$PATH"
 fi
 
 ##########

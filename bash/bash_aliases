@@ -30,7 +30,7 @@ alias copy-git-hash-HEAD='git rev-parse --short HEAD | tr -d "\n" | pbcopy'
 
 if [ "$OS" == "Darwin" ]; then
   # HomeBrew update shortcut
-  alias upgrade="brew update && brew upgrade && brew cask upgrade && brew cleanup && npm -g update && gem update"
+  alias upgrade="brew update && brew upgrade && brew upgrade --cask && brew cleanup && npm -g update && gem update"
 
   # Rum MIT Scheme with REPL completions (add -c for file completion)
   alias scheme='rlwrap -r -f "$HOME"/.scheme_repl_history scheme'
