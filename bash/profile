@@ -33,6 +33,9 @@ HISTSIZE=1000
 # history file size
 HISTFILESIZE=2000
 
+# Setup XDG (needed for MacOS)
+XDG_CONFIG_HOME="$HOME/.config"
+
 # Rust configuration
 RUSTUP_HOME="$HOME/.config/rustup"
 CARGO_HOME="$HOME/.config/cargo"
@@ -111,6 +114,7 @@ export \
   LESSHISTFILE \
   HISTCONTROL \
   HISTSIZE \
+  XDG_CONFIG_HOME \
   RUSTUP_HOME \
   CARGO_HOME \
   FZF_DEFAULT_COMMAND \
