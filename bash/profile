@@ -74,6 +74,9 @@ if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
   HOMEBREW_SBIN="$HOMEBREW_PREFIX/sbin"
   [ -d "$HOMEBREW_SBIN" ] && PATH="$HOMEBREW_SBIN:$PATH"
 
+  GO_BIN="$HOMEBREW_PREFIX/opt/go/bin"
+  [ -d "$GO_BIN" ] && PATH="$GO_BIN:$PATH"
+
   RUBY_BIN="$HOMEBREW_PREFIX/opt/ruby/bin"
   [ -d "$RUBY_BIN" ] && PATH="$RUBY_BIN:$PATH"
 
