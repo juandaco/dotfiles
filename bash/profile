@@ -61,7 +61,7 @@ CARGO_BIN="$CARGO_HOME/bin"
 [ -d "$CARGO_BIN" ] && PATH="$CARGO_BIN:$PATH"
 
 # Go bin path
-GO_BIN="/usr/local/go/bin"
+GO_BIN="$HOME/go/bin"
 [ -d "$GO_BIN" ] && PATH="$GO_BIN:$PATH"
 
 # For MacOs only
@@ -93,12 +93,8 @@ if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
   NODE_LTS_BIN="$HOMEBREW_PREFIX/opt/node@12/bin"
   [ -d "$NODE_LTS_BIN" ] && PATH="$NODE_LTS_BIN:$PATH"
 
-  JAVA_VERSION=17
-  JAVA_BIN="$HOMEBREW_PREFIX/opt/openjdk@$JAVA_VERSION/bin"
+  JAVA_BIN="$HOMEBREW_PREFIX/opt/openjdk/bin"
   [ -d "$JAVA_BIN" ] && PATH="$JAVA_BIN:$PATH"
-
-  INTELLIJ_BIN="/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
-  [ -d "$INTELLIJ_BIN" ] && PATH="$INTELLIJ_BIN:$PATH"
 fi
 
 ##########
