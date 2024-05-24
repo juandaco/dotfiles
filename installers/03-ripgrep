@@ -29,9 +29,9 @@ elif [ "$OS" == "Linux" ]; then
 
     ARCHITECTURE="$(uname -m)"
 
-    if [ "$ARCHITECTURE" == "armv7l" ]; then
+    if [ "$ARCHITECTURE" == "aarch64" ]; then
       # Raspberry Pi 3+ B
-      RG_PACKAGE_NAME="ripgrep-$RG_PACKAGE_VERSION-arm-unknown-linux-gnueabihf"
+      RG_PACKAGE_NAME="ripgrep-$RG_PACKAGE_VERSION-$ARCHITECTURE-unknown-linux-gnu"
       wget --quiet "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$RG_PACKAGE_VERSION/$RG_PACKAGE_NAME.tar.gz"
       tar -xzf "$RG_PACKAGE_NAME.tar.gz" && rm "$RG_PACKAGE_NAME.tar.gz"
       cp "$RG_PACKAGE_NAME/rg" .
