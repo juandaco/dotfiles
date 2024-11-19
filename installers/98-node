@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 OS="$(uname -s)"
-NODE_VERSION=20
+NODE_VERSION=22
 NODE_CODE_NAME="iron"
 
 if [ "$OS" == "Darwin" ]; then

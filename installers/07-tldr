@@ -2,7 +2,7 @@
 #
 # Installs or updates `tldr`.
 
-GIT_USER="dbrgn"
+GIT_USER="tealdeer-rs"
 GIT_REPO="tealdeer"
 HOME_BIN="$HOME/bin"
 
@@ -33,7 +33,7 @@ elif [ "$OS" == "Linux" ]; then
 
     if [ "$ARCHITECTURE" == "aarch64" ]; then
       # Raspberry Pi
-      TLDR_PACKAGE_NAME="tealdeer-linux-arm-musleabihf"
+      TLDR_PACKAGE_NAME="tealdeer-linux-aarch64-musl"
     elif [ "$ARCHITECTURE" == "x86_64" ]; then
       # Linux 64bit
       TLDR_PACKAGE_NAME="tealdeer-linux-x86_64-musl"
