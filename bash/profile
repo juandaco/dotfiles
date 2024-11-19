@@ -61,7 +61,7 @@ CARGO_BIN="$CARGO_HOME/bin"
 [ -d "$CARGO_BIN" ] && PATH="$CARGO_BIN:$PATH"
 
 # Go bin path
-GO_BIN="$HOME/go/bin"
+GO_BIN="/usr/local/go/bin"
 [ -d "$GO_BIN" ] && PATH="$GO_BIN:$PATH"
 
 # For MacOs only
