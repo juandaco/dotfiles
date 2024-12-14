@@ -1,0 +1,15 @@
+session_name: oamt
+windows:
+  - window_name: code
+    layout: even-vertical
+    start_directory: ~/src/personal/oigan-a-mi-tia
+    panes:
+      - pane
+      - pane
+      - pane
+  - window_name: remote
+    layout: even-vertical
+    panes:
+      - pane
+      - pane
+      - pane

@@ -1,0 +1,6 @@
+
+#!/usr/bin/env bash
+
+mkdir -p ~/.config/tmuxp
+
+ln -vf tmuxp/*.yaml ~/.config/tmuxp/
