@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+mkdir -p ~/.config/ghostty
+
+ln -vf ghostty.config ~/.config/ghostty/config
