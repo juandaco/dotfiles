@@ -1,5 +1,5 @@
 [user]
-  name = Juan D. Acosta
+  name = Juan David Acosta
   email = juandacorias@gmail.com
   username = juandaco
 [core]
@@ -16,7 +16,9 @@
   st = status
   unstage = reset HEAD --
   last = log -1 HEAD
+  rp = rev-parse HEAD
   dr = log --oneline --graph --all --decorate
   rb = rebase
+  ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi"
 [pull]
   ff = only

@@ -90,12 +90,9 @@ if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
   OPEN_SSL_BIN="$HOMEBREW_PREFIX/opt/openssl/bin"
   [ -d "$OPEN_SSL_BIN" ] && PATH="$OPEN_SSL_BIN:$PATH"
 
-  NODE_LTS_BIN="$HOMEBREW_PREFIX/opt/node@12/bin"
-  [ -d "$NODE_LTS_BIN" ] && PATH="$NODE_LTS_BIN:$PATH"
-
-  JAVA_VERSION=21
-  JAVA_BIN="$HOMEBREW_PREFIX/opt/openjdk@$JAVA_VERSION/bin"
-  [ -d "$JAVA_BIN" ] && PATH="$JAVA_BIN:$PATH"
+  # JetBrains Scripts
+  JETBRAINS_SCRIPTS_BIN="$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+  [ -d "$JETBRAINS_SCRIPTS_BIN" ] && PATH="$JETBRAINS_SCRIPTS_BIN:$PATH"
 fi
 
 ##########

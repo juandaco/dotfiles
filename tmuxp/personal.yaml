@@ -1,8 +1,8 @@
-session_name: oamt
+session_name: personal
 windows:
   - window_name: code
     layout: even-vertical
-    start_directory: ~/src/personal/oigan-a-mi-tia
+    start_directory: ~/src
     panes:
       - pane
       - pane
