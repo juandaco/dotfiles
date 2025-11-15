@@ -4,4 +4,5 @@ mkdir -p ~/.config/tmux
 
 ln -vf tmux.conf ~/.config/tmux/tmux.conf
 
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+TPM_DIR=~/.config/tmux/plugins/tpm
+[ ! -d "$TPM_DIR" ] && git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
