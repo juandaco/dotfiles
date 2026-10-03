@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+ln -vf ideavimrc ~/.ideavimrc
+

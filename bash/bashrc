@@ -21,31 +21,23 @@ if [ "$(uname)" = "Darwin" ]; then
     # Bash Completions from bash-completion Homebrew package.
     [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
   fi
-
-  # Shell Integration for iTerm2
-  [ -f "${HOME}/.iterm2_shell_integration.bash" ] && source "${HOME}/.iterm2_shell_integration.bash"
-
-  # Get Network SSID
-  function ssid() {
-    if [ $# -eq 0 ]; then
-      networksetup -getairportnetwork "${1:-en0}" | cut -c 24-
-    elif [ $# -eq 1 ]; then
-      networksetup -getairportnetwork "$1"
-    else
-      echo "Pass network interface(en0, lo0) as an argument."
-    fi
-  }
-  export -f ssid
 fi
 
 # Alias file
 [ -f ~/.bash_aliases ] && source "$HOME/.bash_aliases"
 
+# Bash Pre-Exec for hooks
+[ -f /opt/homebrew/etc/profile.d/bash-preexec.sh ] && . /opt/homebrew/etc/profile.d/bash-preexec.sh
+
 # fzf configurations
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# atuin configurations
+command -v atuin &> /dev/null && eval "$(atuin init bash)"
 
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # vim: ft=sh
+

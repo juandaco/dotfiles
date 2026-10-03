@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 OS="$(uname -s)"
-NODE_VERSION=22
-NODE_CODE_NAME="iron"
+NODE_VERSION=24
+NODE_CODE_NAME="krypton"
 
 if [ "$OS" == "Darwin" ]; then
   # MacOS
@@ -11,7 +11,7 @@ if [ "$OS" == "Darwin" ]; then
     exit 1
   fi
 
-  if brew list | grep --quiet "node@$NODE_VERSION"; then
+  if ! brew list "node@$NODE_VERSION" &>/dev/null; then
     brew install "node@$NODE_VERSION"
 
     # Install `neovim` if needed

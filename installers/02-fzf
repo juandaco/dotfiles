@@ -2,10 +2,6 @@
 #
 # Installs `fzf`
 
-GIT_USER="junegunn"
-GIT_REPO="fzf"
-FZF_HOME="$HOME/.fzf"
-
 OS="$(uname -s)"
 
 if [ "$OS" == "Darwin" ]; then
@@ -25,6 +21,10 @@ elif [ "$OS" == "Linux" ]; then
     # Arch
     sudo pacman --needed -S fzf
   else
+    GIT_USER="junegunn"
+    GIT_REPO="fzf"
+    FZF_HOME="$HOME/.fzf"
+
     if [ ! -d "$FZF_HOME" ]; then
       # Install fzf when not present
       git clone --quiet --depth 1 "https://github.com/$GIT_USER/$GIT_REPO.git" "$FZF_HOME"

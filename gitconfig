@@ -1,9 +1,9 @@
 [user]
   name = Juan David Acosta
   email = juandacorias@gmail.com
-  username = juandaco
+  username = juandacorias@gmail.com
 [core]
-  editor = vim
+  editor = nvim
 [diff]
   tool = default-difftool
 [difftool "default-difftool"]

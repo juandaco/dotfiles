@@ -2,9 +2,6 @@
 #
 # Installs or updates `tldr`.
 
-GIT_USER="tealdeer-rs"
-GIT_REPO="tealdeer"
-HOME_BIN="$HOME/bin"
 
 OS="$(uname -s)"
 
@@ -19,7 +16,10 @@ if [ "$OS" == "Darwin" ]; then
   command -v tldr >>/dev/null || brew install tealdeer
 
 elif [ "$OS" == "Linux" ]; then
-  # Linux
+
+  GIT_USER="tealdeer-rs"
+  GIT_REPO="tealdeer"
+  HOME_BIN="$HOME/.local/bin"
 
   # Install tldr (from GitHub)
   TLDR_PACKAGE_VERSION="$(curl --silent "https://api.github.com/repos/$GIT_USER/$GIT_REPO/releases/latest" | grep '"tag_name":' | awk '{print $2}' | tr -d '",')"

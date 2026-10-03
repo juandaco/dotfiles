@@ -2,9 +2,6 @@
 #
 # Installs or updates `shfmt`.
 
-GIT_USER="mvdan"
-GIT_REPO="sh"
-HOME_BIN="$HOME/bin"
 
 OS="$(uname -s)"
 
@@ -19,7 +16,10 @@ if [ "$OS" == "Darwin" ]; then
   command -v shfmt >>/dev/null || brew install shfmt
 
 elif [ "$OS" == "Linux" ]; then
-  # Linux
+
+  GIT_USER="mvdan"
+  GIT_REPO="sh"
+  HOME_BIN="$HOME/.local/bin"
 
   # Install shfmt (from GitHub)
   SHFMT_PACKAGE_VERSION="$(curl --silent "https://api.github.com/repos/$GIT_USER/$GIT_REPO/releases/latest" | grep '"tag_name":' | awk '{print $2}' | tr -d '",')"

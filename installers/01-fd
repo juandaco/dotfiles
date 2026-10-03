@@ -2,10 +2,6 @@
 #
 # Installs or updates `fd`.
 
-GIT_USER="sharkdp"
-GIT_REPO="fd"
-HOME_BIN="$HOME/bin"
-
 OS="$(uname -s)"
 
 if [ "$OS" == "Darwin" ]; then
@@ -18,7 +14,11 @@ if [ "$OS" == "Darwin" ]; then
   command -v fd >>/dev/null || brew install fd
 
 elif [ "$OS" == "Linux" ]; then
-  # Linux
+
+  GIT_USER="sharkdp"
+  GIT_REPO="fd"
+  HOME_BIN="$HOME/.local/bin"
+
 
   FD_PACKAGE_VERSION="$(curl --silent "https://api.github.com/repos/$GIT_USER/$GIT_REPO/releases/latest" | grep '"tag_name":' | awk '{print $2}' | tr -d '",v')"
 

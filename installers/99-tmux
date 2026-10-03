@@ -4,5 +4,11 @@ mkdir -p ~/.config/tmux
 
 ln -vf tmux.conf ~/.config/tmux/tmux.conf
 
-TPM_DIR=~/.config/tmux/plugins/tpm
-[ ! -d "$TPM_DIR" ] && git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+PLUGIN_DIR="$HOME/.config/tmux/plugins"
+if [ ! -d "$PLUGIN_DIR/tpm" ]; then
+  git clone https://github.com/tmux-plugins/tpm "$PLUGIN_DIR/tpm"
+fi
+
+if  [ ! -d "$PLUGIN_DIR/tmux-themepack" ]; then
+  git clone https://github.com/jimeh/tmux-themepack.git "$PLUGIN_DIR/tmux-themepack"
+fi

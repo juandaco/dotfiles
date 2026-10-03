@@ -15,7 +15,7 @@ else
 fi
 VISUAL="$EDITOR"
 
-BROWSER="firefox"
+BROWSER="chrome"
 TERMINAL="alacritty"
 
 # Default pager program.
@@ -52,10 +52,6 @@ FZF_CTRL_R_OPTS='--layout=default --preview-window=hidden'
 # PATH #
 ########
 
-# Folder for my executable Scripts
-HOME_BIN="$HOME/bin"
-[ -d "$HOME_BIN" ] && PATH="$HOME_BIN:$PATH"
-
 # Cargo bin path
 CARGO_BIN="$CARGO_HOME/bin"
 [ -d "$CARGO_BIN" ] && PATH="$CARGO_BIN:$PATH"
@@ -63,6 +59,13 @@ CARGO_BIN="$CARGO_HOME/bin"
 # Go bin path
 GO_BIN="/usr/local/go/bin"
 [ -d "$GO_BIN" ] && PATH="$GO_BIN:$PATH"
+
+GO_BIN="$HOME/go/bin"
+[ -d "$GO_BIN" ] && PATH="$GO_BIN:$PATH"
+
+# Hidden Local BIN
+LOCAL_BIN="$HOME/.local/bin"
+[ -d "$LOCAL_BIN" ] && PATH="$LOCAL_BIN:$PATH"
 
 # For MacOs only
 if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
@@ -73,6 +76,9 @@ if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
 
   HOMEBREW_SBIN="$HOMEBREW_PREFIX/sbin"
   [ -d "$HOMEBREW_SBIN" ] && PATH="$HOMEBREW_SBIN:$PATH"
+
+  KREW_BIN="$HOME/.krew/bin"
+  [ -d "$KREW_BIN" ] && PATH="$KREW_BIN:$PATH"
 
   GO_BIN="$HOMEBREW_PREFIX/opt/go/bin"
   [ -d "$GO_BIN" ] && PATH="$GO_BIN:$PATH"
@@ -93,6 +99,13 @@ if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
   # JetBrains Scripts
   JETBRAINS_SCRIPTS_BIN="$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
   [ -d "$JETBRAINS_SCRIPTS_BIN" ] && PATH="$JETBRAINS_SCRIPTS_BIN:$PATH"
+
+  # SRE Scripts
+  SRE_CLI_TOOLS="$HOME/src/sre-cli-tools/scripts"
+  [ -d "$SRE_CLI_TOOLS" ] && PATH="$SRE_CLI_TOOLS:$PATH"
+
+  # Colima DOCKER_HOST
+  # DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 fi
 
 ##########
@@ -102,6 +115,7 @@ export \
   LC_ALL \
   LANG \
   PATH \
+  DOCKER_HOST \
   EDITOR \
   VISUAL \
   BROWSER \
@@ -123,6 +137,8 @@ export \
 
 # Set umask for new created files
 umask 022
+
+. "$HOME/.config/cargo/env"
 
 # vim: ft=sh
 

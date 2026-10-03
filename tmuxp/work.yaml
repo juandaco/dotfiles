@@ -2,12 +2,19 @@ session_name: work
 windows:
   - window_name: code
     layout: even-vertical
-    start_directory: ~/src
+    start_directory: ~/src/promocode
     panes:
       - pane
       - pane
       - pane
   - window_name: ops
+    layout: even-vertical
+    start_directory: ~/
+    panes:
+      - pane
+      - pane
+      - pane
+  - window_name: other
     layout: even-vertical
     start_directory: ~/
     panes:
