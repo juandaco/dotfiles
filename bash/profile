@@ -67,6 +67,10 @@ GO_BIN="$HOME/go/bin"
 LOCAL_BIN="$HOME/.local/bin"
 [ -d "$LOCAL_BIN" ] && PATH="$LOCAL_BIN:$PATH"
 
+# Atuin bin path
+ATUIN_BIN="$HOME/.atuin/bin"
+[ -d "$ATUIN_BIN" ] && PATH="$ATUIN_BIN:$PATH"
+
 # For MacOs only
 if [ "$(uname)" == "Darwin" ] && [ -n "$(command -v brew)" ]; then
   HOMEBREW_PREFIX=$(brew --prefix)
