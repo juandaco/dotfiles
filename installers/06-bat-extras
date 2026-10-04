@@ -27,7 +27,7 @@ elif [ "$OS" == "Linux" ]; then
 
     git clone --quiet "https://github.com/$GIT_USER/$GIT_REPO.git"
     pushd bat-extras >>/dev/null || exit
-    ./build.sh --install --prefix="$HOME" --minify all --compress --no-verify
+    ./build.sh --install --prefix="$HOME/.local" --minify all --compress --no-verify
     popd >>/dev/null || exit 1
     rm -rf bat-extras
 
