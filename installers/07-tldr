@@ -2,62 +2,32 @@
 #
 # Installs or updates `tldr`.
 
+source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh" || exit 1
 
-OS="$(uname -s)"
+case "$PLATFORM" in
+macos) brew_install tealdeer tldr ;;
+arch) pacman_install tealdeer ;;
+debian | linux)
+  GIT_REPO="tealdeer-rs/tealdeer"
+  VERSION="$(github_latest_version "$GIT_REPO")" || fail "Could not find the latest version of tldr."
 
-if [ "$OS" == "Darwin" ]; then
-  # Verify that homebrew is installed
-  if [ -z "$(command -v brew)" ]; then
-    echo "You need to install homebrew." 1>&2
-    exit 1
+  if [ "$(installed_version tldr)" != "$VERSION" ]; then
+    echo "Installing tldr $VERSION..."
+
+    case "$(linux_arch)" in
+    arm64) TARGET="linux-aarch64-musl" ;;
+    armhf) TARGET="linux-arm-musleabihf" ;;
+    amd64) TARGET="linux-x86_64-musl" ;;
+    *) unsupported_arch ;;
+    esac
+
+    make_tmp_dir
+    download "https://github.com/$GIT_REPO/releases/download/v$VERSION/tealdeer-$TARGET" "$TMP_DIR/tldr"
+    download "https://github.com/$GIT_REPO/releases/download/v$VERSION/completions_bash" "$TMP_DIR/completions_bash"
+    install_bin "$TMP_DIR/tldr" tldr
+    install_completion "$TMP_DIR/completions_bash" tldr
+    verify_installed tldr "$VERSION"
   fi
-
-  # MacOS with brew installed
-  command -v tldr >>/dev/null || brew install tealdeer
-
-elif [ "$OS" == "Linux" ]; then
-
-  GIT_USER="tealdeer-rs"
-  GIT_REPO="tealdeer"
-  HOME_BIN="$HOME/.local/bin"
-
-  # Install tldr (from GitHub)
-  TLDR_PACKAGE_VERSION="$(curl --silent "https://api.github.com/repos/$GIT_USER/$GIT_REPO/releases/latest" | grep '"tag_name":' | awk '{print $2}' | tr -d '",')"
-
-  if [ -z "$(command -v tldr)" ] || [ "$(tldr --version | head -1 | awk '{print $2}')" != "$TLDR_PACKAGE_VERSION" ]; then
-    pushd "$HOME_BIN" >>/dev/null || exit
-
-    echo "Installing tldr..."
-
-    ARCHITECTURE="$(uname -m)"
-
-    if [ "$ARCHITECTURE" == "aarch64" ]; then
-      # Raspberry Pi
-      TLDR_PACKAGE_NAME="tealdeer-linux-aarch64-musl"
-    elif [ "$ARCHITECTURE" == "x86_64" ]; then
-      # Linux 64bit
-      TLDR_PACKAGE_NAME="tealdeer-linux-x86_64-musl"
-    else
-      # Other Architecture
-      echo "The architecture $ARCHITECTURE is not supported yet." 1>&2
-      exit 1
-    fi
-
-    wget --quiet --output-document=tldr "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$TLDR_PACKAGE_VERSION/$TLDR_PACKAGE_NAME"
-    sudo wget --quiet --output-document=/etc/bash_completion.d/tldr.bash "https://github.com/$GIT_USER/$GIT_REPO/releases/download/$TLDR_PACKAGE_VERSION/completions_bash"
-    chmod u+x tldr
-
-    if [ -n "$(command -v tldr)" ]; then
-      echo "tldr correctly installed."
-    else
-      echo "tldr was not installed." 1>&2
-    fi
-
-    popd >>/dev/null || exit
-  fi
-
-else
-  # Other OS
-  echo "The OS $OS is not supported yet." 1>&2
-  exit 1
-fi
+  ;;
+*) unsupported_platform ;;
+esac

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # shellcheck disable=1090
 
+# Run from the repository, since the paths below are relative to it
+cd "$(dirname "$0")" || exit 1
+
 # Link Git configuration file
 ln -vf gitconfig ~/.gitconfig
 
@@ -8,7 +11,7 @@ ln -vf gitconfig ~/.gitconfig
 mkdir -p "$HOME/bin"
 
 # Install bash directories
-pushd "$(dirname "$0")/bash" >/dev/null || exit 1
+pushd bash >/dev/null || exit 1
 
 # ~/.pforile
 ln -vf ./profile "$HOME/.profile"
@@ -28,5 +31,6 @@ source "$HOME/.bash_profile"
 
 # Run all installer scripts
 for file in ./installers/*; do
-  bash "$file"
+  [ -f "$file" ] || continue
+  bash "$file" || echo "The installer $file failed." 1>&2
 done

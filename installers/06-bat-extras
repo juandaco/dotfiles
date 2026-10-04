@@ -2,46 +2,29 @@
 #
 # Installs or updates `bat-extras`.
 
-OS="$(uname -s)"
+source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh" || exit 1
 
-if [ "$OS" == "Darwin" ]; then
-  # MacOS
-  if [ -z "$(command -v brew)" ]; then
-    echo "You must install brew first." 1>&2
-    exit 1
+case "$PLATFORM" in
+macos) brew_install bat-extras batman ;;
+arch) pacman_install bat-extras ;;
+debian | linux)
+  GIT_REPO="eth-p/bat-extras"
+  VERSION="$(github_latest_version "$GIT_REPO")" || fail "Could not find the latest version of bat-extras."
+
+  if [ "$(installed_version batman)" != "$VERSION" ]; then
+    echo "Installing bat-extras $VERSION..."
+
+    make_tmp_dir
+    git clone --quiet --depth 1 --branch "v$VERSION" "https://github.com/$GIT_REPO.git" "$TMP_DIR/bat-extras" 2>/dev/null ||
+      fail "Could not clone bat-extras."
+
+    # The scripts can only be minified when `shfmt` is available
+    if has shfmt; then MINIFY="all"; else MINIFY="none"; fi
+
+    (cd "$TMP_DIR/bat-extras" && ./build.sh --install --prefix="$HOME/.local" --minify "$MINIFY" --compress --no-verify) ||
+      fail "Could not build bat-extras."
+    verify_installed batman "$VERSION"
   fi
-
-  command -v batman >>/dev/null || brew install bat-extras
-
-elif [ "$OS" == "Linux" ]; then
-  GIT_USER="eth-p"
-  GIT_REPO="bat-extras"
-  HOME_BIN="$HOME/.local/bin"
-  BAT_EXTRAS_PACKAGE_VERSION="$(curl --silent "https://api.github.com/repos/$GIT_USER/$GIT_REPO/releases/latest" | grep '"tag_name":' | awk '{print $2}' | tr -d '",v')"
-
-  # Install bat-extras
-  if [ -z "$(command -v batman)" ] || [ "$BAT_EXTRAS_PACKAGE_VERSION" != "$(batman --version | head -1 | awk '{print $2}' | tr -d '.')" ]; then
-    pushd "$HOME_BIN" >>/dev/null || exit 1
-
-    echo "Installing bat-extras"
-
-    git clone --quiet "https://github.com/$GIT_USER/$GIT_REPO.git"
-    pushd bat-extras >>/dev/null || exit
-    ./build.sh --install --prefix="$HOME/.local" --minify all --compress --no-verify
-    popd >>/dev/null || exit 1
-    rm -rf bat-extras
-
-    if [ -n "$(command -v batman)" ]; then
-      echo "bat-extras correctly installed."
-    else
-      echo "bat-extras was not installed." 1>&2
-    fi
-
-    popd >>/dev/null || exit
-  fi
-else
-  # Other OS
-  echo "The OS $OS is not supported yet." 1>&2
-  exit 1
-
-fi
+  ;;
+*) unsupported_platform ;;
+esac

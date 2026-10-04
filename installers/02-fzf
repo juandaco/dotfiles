@@ -1,49 +1,38 @@
 #!/usr/bin/env bash
 #
-# Installs `fzf`
+# Installs or updates `fzf`.
 
-OS="$(uname -s)"
+source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh" || exit 1
 
-if [ "$OS" == "Darwin" ]; then
-  # MacOS
-  if [ -z "$(command -v brew)" ]; then
-    echo "You must install brew first." 1>&2
-    exit 1
-  fi
+# Generates `~/.fzf.bash` (sourced by `~/.bashrc`) without asking questions nor
+# editing the shell configuration files.
+FZF_INSTALL_OPTIONS=(--key-bindings --completion --no-update-rc --no-zsh --no-fish)
 
-  # MacOS with brew installed
-  command -v fzf >>/dev/null || brew install fzf
-  command -v fzf >>/dev/null || "$(brew --prefix)/opt/fzf/install"
+case "$PLATFORM" in
+macos)
+  brew_install fzf
+  [ -f "$HOME/.fzf.bash" ] || "$(brew --prefix)/opt/fzf/install" "${FZF_INSTALL_OPTIONS[@]}"
+  ;;
+arch) pacman_install fzf ;;
+debian | linux)
+  GIT_REPO="junegunn/fzf"
+  FZF_HOME="$HOME/.fzf"
 
-elif [ "$OS" == "Linux" ]; then
-  # Linux
-  if grep --quiet arch /etc/os-release; then
-    # Arch
-    sudo pacman --needed -S fzf
+  if [ ! -d "$FZF_HOME" ]; then
+    # Install fzf when not present
+    echo "Installing fzf..."
+    git clone --quiet --depth 1 "https://github.com/$GIT_REPO.git" "$FZF_HOME" || fail "Could not clone fzf."
+    "$FZF_HOME/install" "${FZF_INSTALL_OPTIONS[@]}" || fail "fzf was not installed."
   else
-    GIT_USER="junegunn"
-    GIT_REPO="fzf"
-    FZF_HOME="$HOME/.fzf"
+    # Update if needed
+    FZF_REVISION="$(git -C "$FZF_HOME" rev-parse HEAD)"
+    git -C "$FZF_HOME" pull --quiet --ff-only || fail "Could not update fzf."
 
-    if [ ! -d "$FZF_HOME" ]; then
-      # Install fzf when not present
-      git clone --quiet --depth 1 "https://github.com/$GIT_USER/$GIT_REPO.git" "$FZF_HOME"
-      "$FZF_HOME"/install
-    else
-      # Update if needed
-      pushd "$FZF_HOME" >>/dev/null || exit 1
-      git fetch --quiet origin
-      if [ -n "$(git log HEAD..origin/master --oneline)" ]; then
-        git pull
-        ./install
-      fi
-      popd >>/dev/null || exit
+    if [ "$FZF_REVISION" != "$(git -C "$FZF_HOME" rev-parse HEAD)" ] || [ ! -f "$HOME/.fzf.bash" ]; then
+      echo "Updating fzf..."
+      "$FZF_HOME/install" "${FZF_INSTALL_OPTIONS[@]}" || fail "fzf was not updated."
     fi
   fi
-
-else
-  # Other OS
-  echo "The OS $OS is not supported yet." 1>&2
-  exit 1
-
-fi
+  ;;
+*) unsupported_platform ;;
+esac

@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
+#
+# Installs and configures `tmux` and its plugins.
 
-mkdir -p ~/.config/tmux
+source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh" || exit 1
 
-ln -vf tmux.conf ~/.config/tmux/tmux.conf
+package_install tmux
+
+link_file tmux.conf "$HOME/.config/tmux/tmux.conf"
 
 PLUGIN_DIR="$HOME/.config/tmux/plugins"
+
 if [ ! -d "$PLUGIN_DIR/tpm" ]; then
-  git clone https://github.com/tmux-plugins/tpm "$PLUGIN_DIR/tpm"
+  git clone --quiet https://github.com/tmux-plugins/tpm "$PLUGIN_DIR/tpm" || fail "Could not install tpm."
 fi
 
-if  [ ! -d "$PLUGIN_DIR/tmux-themepack" ]; then
-  git clone https://github.com/jimeh/tmux-themepack.git "$PLUGIN_DIR/tmux-themepack"
+if [ ! -d "$PLUGIN_DIR/tmux-themepack" ]; then
+  git clone --quiet https://github.com/jimeh/tmux-themepack.git "$PLUGIN_DIR/tmux-themepack" || fail "Could not install tmux-themepack."
 fi

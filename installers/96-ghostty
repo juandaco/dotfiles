@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
+#
+# Configures `ghostty`.
 
-mkdir -p ~/.config/ghostty
+source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh" || exit 1
 
-ln -vf ghostty.config ~/.config/ghostty/config
+link_file ghostty.config "$HOME/.config/ghostty/config"

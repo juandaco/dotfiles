@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
+#
+# Installs and configures `tmuxp`.
 
-mkdir -p ~/.config/tmuxp
+source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh" || exit 1
 
-ln -vf tmuxp/*.yaml ~/.config/tmuxp/
+package_install tmuxp
+
+link_files "$HOME/.config/tmuxp" tmuxp/*.yaml

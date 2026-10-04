@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#
+# Configures `ideavim`.
 
-ln -vf ideavimrc ~/.ideavimrc
+source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh" || exit 1
 
+link_file ideavimrc "$HOME/.ideavimrc"

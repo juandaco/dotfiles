@@ -1,47 +1,46 @@
 #!/usr/bin/env bash
+#
+# Installs `node` and the `neovim` node host.
 
-OS="$(uname -s)"
+source "$(dirname "${BASH_SOURCE[0]}")/lib/common.sh" || exit 1
+
 NODE_VERSION=24
 NODE_CODE_NAME="krypton"
 
-if [ "$OS" == "Darwin" ]; then
-  # MacOS
-  if [ -z "$(command -v brew)" ]; then
-    echo "You must install brew first." 1>&2
-    exit 1
+case "$PLATFORM" in
+macos)
+  has brew || fail "You must install brew first."
+  brew list "node@$NODE_VERSION" &>/dev/null || brew install "node@$NODE_VERSION"
+
+  # The versioned formula is keg-only, so it is not in the PATH by default
+  has node || brew link --force --overwrite "node@$NODE_VERSION"
+  has npm || fail "node was not installed."
+
+  # Install `neovim` if needed
+  has neovim-node-host || npm -g install neovim
+  ;;
+arch)
+  has node || pacman_install "nodejs-lts-$NODE_CODE_NAME" npm
+  ;;
+debian)
+  if ! has node; then
+    echo "Installing node $NODE_VERSION..."
+
+    # NodeSource only publishes 64bit packages
+    case "$(linux_arch)" in
+    arm64 | amd64) ;;
+    *) unsupported_arch ;;
+    esac
+
+    make_tmp_dir
+    download "https://deb.nodesource.com/setup_$NODE_VERSION.x" "$TMP_DIR/setup_node"
+    sudo -E bash "$TMP_DIR/setup_node" || fail "Could not configure the node repository."
+    apt_install nodejs
+    has npm || fail "node was not installed."
   fi
 
-  if ! brew list "node@$NODE_VERSION" &>/dev/null; then
-    brew install "node@$NODE_VERSION"
-
-    # Install `neovim` if needed
-    if [ -z "$(command -v neovim-node-host)" ]; then
-      npm -g install neovim
-    fi
-  fi
-
-elif [ "$OS" == "Linux" ]; then
-  # Linux
-
-  if [ -z "$(command -v node)" ]; then
-    # node is not installed
-    if grep --quiet arch /etc/os-release; then
-      # Arch
-      sudo pacman --needed -S "nodejs-lts-$NODE_CODE_NAME"
-    elif grep --quiet debian /etc/os-release; then
-      # Debian
-      curl -sL "https://deb.nodesource.com/setup_$NODE_VERSION.x" | sudo -E bash -
-      sudo apt-get install -y nodejs
-
-      # Install `neovim` if needed
-      if [ -z "$(command -v neovim-node-host)" ]; then
-        sudo npm -g install neovim
-      fi
-    fi
-  fi
-
-else
-  echo "The OS $OS is not supported." 1>&2
-  exit 1
-
-fi
+  # Install `neovim` if needed
+  has neovim-node-host || sudo npm -g install neovim
+  ;;
+*) unsupported_platform ;;
+esac
