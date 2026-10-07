@@ -1,0 +1,146 @@
+# ~/.profile
+# shellcheck disable=2148,2089,2090
+
+# Setup locale
+LANG='en_US.UTF-8'
+
+# Set the default editor.
+if [ -n "$(command -v nvim)" ]; then
+  EDITOR="nvim"
+elif [ -n "$(command -v vim)" ]; then
+  EDITOR="vim"
+else
+  EDITOR="vi"
+fi
+VISUAL="$EDITOR"
+
+# Terminal
+TERMINAL="ghostty"
+
+# Default pager program.
+PAGER=less
+
+# `less` default options
+LESS=R
+# Don't store less history file.
+LESSHISTFILE="/dev/null"
+
+# Ignore duplicates in command history and increase
+HISTCONTROL=ignoredups
+# history size to 1000 lines
+HISTSIZE=1000
+# history file size
+HISTFILESIZE=2000
+
+# `fzf` options
+FZF_DEFAULT_COMMAND='fd --type f --hidden --no-ignore-parent --follow --exclude .git --exclude node_modules --exclude .venv'
+FZF_DEFAULT_OPTS='--reverse --height 90% --margin=3%'
+FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
+FZF_ALT_C_OPTS='--preview-window=hidden'
+FZF_CTRL_R_OPTS='--layout=default --preview-window=hidden'
+
+# Setup XDG (needed for MacOS)
+XDG_CONFIG_HOME="$HOME/.config"
+
+# Rust configuration
+RUSTUP_HOME="$XDG_CONFIG_HOME/rustup"
+CARGO_HOME="$XDG_CONFIG_HOME/cargo"
+
+########
+# PATH #
+########
+
+# Prepend a directory to PATH, removing any existing occurrence.
+# Moving to the front (instead of skipping) keeps the order right after
+# macOS path_helper reorders PATH in nested login shells (e.g. tmux).
+path_prepend() {
+  [ -d "$1" ] || return 0
+  _p=":$PATH:"
+  while :; do
+    case "$_p" in
+      *":$1:"*) _p="${_p%%:"$1":*}:${_p#*:"$1":}" ;;
+      *) break ;;
+    esac
+  done
+  _p="${_p#:}"
+  _p="${_p%:}"
+  PATH="$1${_p:+:$_p}"
+  unset _p
+}
+
+{{- if eq .chezmoi.os "linux" }}
+
+# Go Executable
+path_prepend "/usr/local/go/bin"
+
+# Atuin bin path
+path_prepend "$HOME/.atuin/bin"
+
+{{- else if eq .chezmoi.os "darwin" }}
+
+HOMEBREW_PREFIX="${HOMEBREW_PREFIX:=/opt/homebrew}"
+
+# Re-add Homebrew so path_helper and brew shellenv duplicates collapse
+path_prepend "$HOMEBREW_PREFIX/sbin"
+path_prepend "$HOMEBREW_PREFIX/bin"
+
+path_prepend "$HOMEBREW_PREFIX/opt/ruby/bin"
+path_prepend "$HOMEBREW_PREFIX/opt/sqlite/bin"
+path_prepend "$HOMEBREW_PREFIX/opt/openssl/bin"
+
+{{- if .work }}
+
+# SRE Scripts
+path_prepend "$HOME/src/sre-cli-tools/scripts"
+
+{{- end }}
+{{- end }}
+
+# Cargo bin path
+path_prepend "$CARGO_HOME/bin"
+
+# Go Bin
+path_prepend "$HOME/go/bin"
+
+# Local BIN
+path_prepend "$HOME/.local/bin"
+
+# Home BIN
+path_prepend "$HOME/bin"
+
+# Krew bin path
+path_prepend "$HOME/.krew/bin"
+
+unset -f path_prepend
+
+##########
+# export #
+##########
+export \
+  LANG \
+  PATH \
+  EDITOR \
+  VISUAL \
+  TERMINAL \
+  PAGER \
+  LESS \
+  LESSHISTFILE \
+  HISTCONTROL \
+  HISTSIZE \
+  HISTFILESIZE \
+  XDG_CONFIG_HOME \
+  RUSTUP_HOME \
+  CARGO_HOME \
+  FZF_DEFAULT_COMMAND \
+  FZF_DEFAULT_OPTS \
+  FZF_CTRL_T_COMMAND \
+  FZF_CTRL_T_OPTS \
+  FZF_ALT_C_OPTS \
+  FZF_CTRL_R_OPTS
+
+# Set umask for new created files
+umask 022
+
+# vim: ft=sh
+

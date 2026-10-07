@@ -1,0 +1,7 @@
+{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $work := promptBoolOnce . "work" "Work MacBook?" -}}
+data:
+  email: {{ $email | quote }}
+  work: {{ $work }}
+diff:
+  pager: delta

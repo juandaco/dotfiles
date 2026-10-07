@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# shellcheck disable=2139,1091
+
+# ls with color
+{{- if eq .chezmoi.os "linux" }}
+alias ls='ls --color=auto'
+{{- else if eq .chezmoi.os "darwin" }}
+alias ls='ls -G'
+{{- end }}
+
+# ls helpers
+alias ll='ls -la'
+alias la='ls -a'
+alias l.='ll -d .*'
+
+# Colorize tree and avoid diplaying node_modules
+alias tree='tree -C'
+
+# Colorize grep
+alias grep='grep --color=auto'
+alias fgrep='grep -F --color=auto'
+alias egrep='grep -E --color=auto'
+
+# Kubectx
+alias kx='kubectx'
+# Setup nerdctl as docker
+alias nerdctl='docker'
+
+{{- if eq .chezmoi.os "darwin" }}
+# HomeBrew update shortcut
+alias upgrade="brew update && brew upgrade && brew upgrade --cask && brew cleanup && npm -g update && gem update 2>/dev/null"
+{{- end }}
+
+# Alias to clear all active SSH sockets
+alias ssh-clean='rm -rf ~/.ssh/sockets/* && echo "SSH sockets cleared."'
+
+# Alias to list active sockets (to see what is currently connected)
+alias ssh-list='ls ~/.ssh/sockets'
+
+# vim: ft=sh
