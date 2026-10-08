@@ -4,16 +4,6 @@
 # Setup locale
 LANG='en_US.UTF-8'
 
-# Set the default editor.
-if [ -n "$(command -v nvim)" ]; then
-  EDITOR="nvim"
-elif [ -n "$(command -v vim)" ]; then
-  EDITOR="vim"
-else
-  EDITOR="vi"
-fi
-VISUAL="$EDITOR"
-
 # Terminal
 TERMINAL="ghostty"
 
@@ -25,12 +15,12 @@ LESS=R
 # Don't store less history file.
 LESSHISTFILE="/dev/null"
 
-# Ignore duplicates in command history and increase
-HISTCONTROL=ignoredups
-# history size to 1000 lines
-HISTSIZE=1000
+# Ignore duplicates and commands starting with a space in command history
+HISTCONTROL=ignoreboth
+# history size to 10000 lines
+HISTSIZE=10000
 # history file size
-HISTFILESIZE=2000
+HISTFILESIZE=20000
 
 # `fzf` options
 FZF_DEFAULT_COMMAND='fd --type f --hidden --no-ignore-parent --follow --exclude .git --exclude node_modules --exclude .venv'
@@ -113,6 +103,16 @@ path_prepend "$HOME/bin"
 path_prepend "$HOME/.krew/bin"
 
 unset -f path_prepend
+
+# Set the default editor (after PATH so tools in ~/.local/bin etc. are found).
+if command -v nvim >/dev/null 2>&1; then
+  EDITOR="nvim"
+elif command -v vim >/dev/null 2>&1; then
+  EDITOR="vim"
+else
+  EDITOR="vi"
+fi
+VISUAL="$EDITOR"
 
 ##########
 # export #

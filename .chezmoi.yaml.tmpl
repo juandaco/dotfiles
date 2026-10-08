@@ -1,7 +1,10 @@
-{{- $email := promptStringOnce . "email" "Email address" -}}
-{{- $work := promptBoolOnce . "work" "Work MacBook?" -}}
+{{- $work := and (eq .chezmoi.os "darwin") (promptBoolOnce . "work" "Work MacBook?") -}}
+{{- $defaultEmail := ($work | ternary "JuanDavid.Acosta@adidas.com" "juandacorias@gmail.com") -}}
+{{- $email := promptStringOnce . "email" "Email address" $defaultEmail -}}
 data:
-  email: {{ $email | quote }}
+  email: {{ $email }}
   work: {{ $work }}
+{{- if lookPath "delta" }}
 diff:
   pager: delta
+{{- end }}
