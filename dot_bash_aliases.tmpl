@@ -26,7 +26,10 @@ alias kx='kubectx'
 # Setup nerdctl as docker
 alias nerdctl='docker'
 
-{{- if eq .chezmoi.os "darwin" }}
+{{- if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "debian" "ubuntu")) }}
+# Linux APT Update
+alias upgrade="sudo apt update && sudo apt full-upgrade -y"
+{{- else if eq .chezmoi.os "darwin" }}
 # HomeBrew update shortcut
 alias upgrade="brew update && brew upgrade && brew upgrade --cask && brew cleanup && npm -g update && gem update 2>/dev/null"
 {{- end }}
@@ -37,4 +40,4 @@ alias ssh-clean='rm -rf ~/.ssh/sockets/* && echo "SSH sockets cleared."'
 # Alias to list active sockets (to see what is currently connected)
 alias ssh-list='ls ~/.ssh/sockets'
 
-# vim: ft=sh
+# vim: ft=bash
