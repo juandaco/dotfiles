@@ -1,0 +1,157 @@
+[".config/nvim"]
+type = "git-repo"
+url = "https://github.com/juandaco/nvim"
+refreshPeriod = "168h"
+pull.args = ["--ff-only"]
+[".config/tmux/plugins/tpm"]
+type = "git-repo"
+url = "https://github.com/tmux-plugins/tpm"
+refreshPeriod = "168h"
+
+{{- if eq .chezmoi.os "linux" -}}
+{{- /* `.chezmoi.arch` is `arm` for both ARMv6 (Pi 1, Zero) and ARMv7 (Pi 2+) */ -}}
+{{- $arch := .chezmoi.arch -}}
+{{- $armv6 := false -}}
+{{- if eq $arch "arm" -}}
+{{-   $armv6 = eq (output "uname" "-m" | trim) "armv6l" -}}
+{{- end -}}
+
+{{- $bin := ".local/bin" -}}
+{{- $completions := ".local/share/bash-completion/completions" -}}
+{{- $man := ".local/share/man/man1" -}}
+{{- $refresh := "168h" -}}
+
+{{- /* fd */ -}}
+{{- $fdTag := (gitHubLatestRelease "sharkdp/fd").TagName | trim -}}
+{{- $fdTarget := dict "arm64" "aarch64-unknown-linux-musl" "arm" "arm-unknown-linux-musleabihf" "amd64" "x86_64-unknown-linux-musl" | dig $arch "" -}}
+{{- $fdDir := printf "fd-%s-%s" $fdTag $fdTarget }}
+
+["{{ $bin }}/fd"]
+  type = "archive-file"
+  url = "https://github.com/sharkdp/fd/releases/download/{{ $fdTag }}/{{ $fdDir }}.tar.gz"
+  path = "{{ $fdDir }}/fd"
+  executable = true
+  refreshPeriod = "{{ $refresh }}"
+
+["{{ $completions }}/fd"]
+  type = "archive-file"
+  url = "https://github.com/sharkdp/fd/releases/download/{{ $fdTag }}/{{ $fdDir }}.tar.gz"
+  path = "{{ $fdDir }}/autocomplete/fd.bash"
+  refreshPeriod = "{{ $refresh }}"
+
+["{{ $man }}/fd.1"]
+  type = "archive-file"
+  url = "https://github.com/sharkdp/fd/releases/download/{{ $fdTag }}/{{ $fdDir }}.tar.gz"
+  path = "{{ $fdDir }}/fd.1"
+  refreshPeriod = "{{ $refresh }}"
+
+{{- /* bat */ -}}
+{{- $batTag := (gitHubLatestRelease "sharkdp/bat").TagName | trim -}}
+{{- $batTarget := dict "arm64" "aarch64-unknown-linux-musl" "arm" "arm-unknown-linux-musleabihf" "amd64" "x86_64-unknown-linux-musl" | dig $arch "" -}}
+{{- $batDir := printf "bat-%s-%s" $batTag $batTarget }}
+
+["{{ $bin }}/bat"]
+  type = "archive-file"
+  url = "https://github.com/sharkdp/bat/releases/download/{{ $batTag }}/{{ $batDir }}.tar.gz"
+  path = "{{ $batDir }}/bat"
+  executable = true
+  refreshPeriod = "{{ $refresh }}"
+
+["{{ $completions }}/bat"]
+  type = "archive-file"
+  url = "https://github.com/sharkdp/bat/releases/download/{{ $batTag }}/{{ $batDir }}.tar.gz"
+  path = "{{ $batDir }}/autocomplete/bat.bash"
+  refreshPeriod = "{{ $refresh }}"
+
+["{{ $man }}/bat.1"]
+  type = "archive-file"
+  url = "https://github.com/sharkdp/bat/releases/download/{{ $batTag }}/{{ $batDir }}.tar.gz"
+  path = "{{ $batDir }}/bat.1"
+  refreshPeriod = "{{ $refresh }}"
+
+{{- /* bat-extras (prebuilt shell scripts, so the same zip works on every architecture) */ -}}
+{{- $extrasTag := (gitHubLatestRelease "eth-p/bat-extras").TagName | trim -}}
+{{- $extrasUrl := printf "https://github.com/eth-p/bat-extras/releases/download/%s/bat-extras-%s.zip" $extrasTag ($extrasTag | trimPrefix "v") }}
+{{ range $name := list "bat-modules" "batdiff" "batgrep" "batman" "batpipe" "batwatch" "prettybat" }}
+["{{ $bin }}/{{ $name }}"]
+  type = "archive-file"
+  url = "{{ $extrasUrl }}"
+  path = "bin/{{ $name }}"
+  executable = true
+  refreshPeriod = "{{ $refresh }}"
+{{ end }}
+
+{{- range $name := list "batdiff" "batgrep" "batman" "batpipe" "batwatch" "prettybat" }}
+["{{ $man }}/{{ $name }}.1"]
+  type = "archive-file"
+  url = "{{ $extrasUrl }}"
+  path = "man/{{ $name }}.1"
+  refreshPeriod = "{{ $refresh }}"
+{{ end }}
+
+{{- /* ripgrep (its tags have no `v` prefix; there are no ARMv6 binaries) */ -}}
+{{- $rgTag := (gitHubLatestRelease "BurntSushi/ripgrep").TagName | trim -}}
+{{- $rgTarget := dict "arm64" "aarch64-unknown-linux-musl" "arm" "armv7-unknown-linux-musleabihf" "amd64" "x86_64-unknown-linux-musl" | dig $arch "" -}}
+{{- if and $rgTarget (not $armv6) }}
+{{- $rgDir := printf "ripgrep-%s-%s" $rgTag $rgTarget }}
+
+["{{ $bin }}/rg"]
+  type = "archive-file"
+  url = "https://github.com/BurntSushi/ripgrep/releases/download/{{ $rgTag }}/{{ $rgDir }}.tar.gz"
+  path = "{{ $rgDir }}/rg"
+  executable = true
+  refreshPeriod = "{{ $refresh }}"
+
+["{{ $completions }}/rg"]
+  type = "archive-file"
+  url = "https://github.com/BurntSushi/ripgrep/releases/download/{{ $rgTag }}/{{ $rgDir }}.tar.gz"
+  path = "{{ $rgDir }}/complete/rg.bash"
+  refreshPeriod = "{{ $refresh }}"
+
+["{{ $man }}/rg.1"]
+  type = "archive-file"
+  url = "https://github.com/BurntSushi/ripgrep/releases/download/{{ $rgTag }}/{{ $rgDir }}.tar.gz"
+  path = "{{ $rgDir }}/doc/rg.1"
+  refreshPeriod = "{{ $refresh }}"
+{{- end }}
+
+{{- /* fzf (the tag has a `v` prefix but the assets do not). Use `eval "$(fzf --bash)"` in the bashrc. */ -}}
+{{- $fzfTag := (gitHubLatestRelease "junegunn/fzf").TagName | trim -}}
+{{- $fzfArm := ternary "armv6" "armv7" $armv6 -}}
+{{- $fzfTarget := dict "arm64" "linux_arm64" "arm" (printf "linux_%s" $fzfArm) "amd64" "linux_amd64" | dig $arch "" }}
+
+["{{ $bin }}/fzf"]
+  type = "archive-file"
+  url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfTag }}/fzf-{{ $fzfTag | trimPrefix "v" }}-{{ $fzfTarget }}.tar.gz"
+  path = "fzf"
+  executable = true
+  refreshPeriod = "{{ $refresh }}"
+
+{{- /* shfmt */ -}}
+{{- $shfmtTag := (gitHubLatestRelease "mvdan/sh").TagName | trim -}}
+{{- $shfmtTarget := dict "arm64" "linux_arm64" "arm" "linux_arm" "amd64" "linux_amd64" | dig $arch "" }}
+
+["{{ $bin }}/shfmt"]
+  type = "file"
+  url = "https://github.com/mvdan/sh/releases/download/{{ $shfmtTag }}/shfmt_{{ $shfmtTag }}_{{ $shfmtTarget }}"
+  executable = true
+  refreshPeriod = "{{ $refresh }}"
+
+{{- /* tldr (tealdeer) */ -}}
+{{- $tldrTag := (gitHubLatestRelease "tealdeer-rs/tealdeer").TagName | trim -}}
+{{- $tldrArm := ternary "arm-musleabihf" "armv7-musleabihf" $armv6 -}}
+{{- $tldrTarget := dict "arm64" "linux-aarch64-musl" "arm" (printf "linux-%s" $tldrArm) "amd64" "linux-x86_64-musl" | dig $arch "" }}
+
+["{{ $bin }}/tldr"]
+  type = "file"
+  url = "https://github.com/tealdeer-rs/tealdeer/releases/download/{{ $tldrTag }}/tealdeer-{{ $tldrTarget }}"
+  executable = true
+  refreshPeriod = "{{ $refresh }}"
+
+["{{ $completions }}/tldr"]
+  type = "file"
+  url = "https://github.com/tealdeer-rs/tealdeer/releases/download/{{ $tldrTag }}/completions_bash"
+  refreshPeriod = "{{ $refresh }}"
+
+
+{{- end }}
