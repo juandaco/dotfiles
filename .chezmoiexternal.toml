@@ -1,4 +1,9 @@
+[".config/nvim"]
+type = "git-repo"
+url = "https://github.com/juandaco/nvim"
+refreshPeriod = "168h"
+pull.args = ["--ff-only"]
 [".config/tmux/plugins/tpm"]
-  type = "git-repo"
-  url = "https://github.com/tmux-plugins/tpm"
-  refreshPeriod = "168h"
+type = "git-repo"
+url = "https://github.com/tmux-plugins/tpm"
+refreshPeriod = "168h"
