@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{{ if .packages.npm -}}
+if command -v npm >/dev/null 2>&1; then
+  npm install -g {{ .packages.npm | join " " }}
+else
+  echo "npm not found, skipping global npm packages" >&2
+fi
+{{ end -}}

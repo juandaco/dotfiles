@@ -1,0 +1,11 @@
+session_name: updates
+windows:
+  - window_name: updates
+    layout: even-vertical
+    start_directory: ~/
+    panes:
+      - pane
+      - shell_command:
+        - ssh rpi5t
+      - shell_command:
+        - ssh rpi4t

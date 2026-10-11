@@ -1,0 +1,15 @@
+session_name: personal
+windows:
+  - window_name: code
+    layout: even-vertical
+    start_directory: ~/src
+    panes:
+      - pane
+      - pane
+      - pane
+  - window_name: remote
+    layout: even-vertical
+    panes:
+      - pane
+      - pane
+      - pane

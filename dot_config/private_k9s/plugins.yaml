@@ -1,0 +1,129 @@
+plugins:
+  debug:
+    shortCut: Shift-D
+    description: "Debug: Ephemeral Container"
+    dangerous: true
+    scopes:
+      - containers
+    command: bash
+    background: false
+    confirm: true
+    args:
+      - -c
+      - "kubectl debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=registry.tools.3stripes.net/eft-wm-images-public/tiny-tools:secure --profile=restricted --share-processes -- ash"
+
+  diff-deployment-revisions:
+    shortCut: Shift-D
+    confirm: false
+    description: "Diff Last 2 Revisions"
+    scopes:
+      - deployment
+    command: bash
+    background: false
+    args:
+      - -c
+      - |
+        # 1. Get ReplicaSets owned by this Deployment, sorted from oldest to newest
+        RS_ARRAY=($(kubectl get rs -n $NAMESPACE --sort-by=.metadata.creationTimestamp -o jsonpath="{range .items[?(@.metadata.ownerReferences[0].name=='$NAME')]}{.metadata.name}{' '}{end}"))
+        COUNT=${#RS_ARRAY[@]}
+        
+        # 2. Ensure we have at least two revisions to compare
+        if [ $COUNT -lt 2 ]; then
+          echo "Error: Need at least 2 ReplicaSets to perform a diff. Found: $COUNT"
+          read -s -n 1 -p "Press any key to exit..."
+          exit 0
+        fi
+        
+        # 3. Target the two most recent ReplicaSets
+        PREV_RS=${RS_ARRAY[$((COUNT-2))]}
+        CURR_RS=${RS_ARRAY[$((COUNT-1))]}
+        
+        # 4. Export their YAML definitions
+        kubectl get rs $PREV_RS -n $NAMESPACE -o yaml > /tmp/${NAME}_prev.yaml
+        kubectl get rs $CURR_RS -n $NAMESPACE -o yaml > /tmp/${NAME}_curr.yaml
+        
+        # 5. Diff them. If colordiff is installed, use it for better readability, otherwise fallback to standard diff
+        if command -v colordiff &> /dev/null; then
+          colordiff -u /tmp/${NAME}_prev.yaml /tmp/${NAME}_curr.yaml | less -R
+        fi
+        
+        # 6. Clean up temporary files
+        rm -f /tmp/${NAME}_prev.yaml /tmp/${NAME}_curr.yaml
+
+  helm-diff-previous:
+    shortCut: Shift-D
+    confirm: false
+    description: Diff with Previous Revision
+    scopes:
+      - helm
+    command: bash
+    background: false
+    args:
+      - -c
+      - >-
+        LAST_REVISION=$(($COL-REVISION-1));
+        helm diff revision $COL-NAME $COL-REVISION $LAST_REVISION --kube-context $CONTEXT --namespace $NAMESPACE --color | less -RK
+
+  helm-diff-current:
+    shortCut: Shift-Q
+    confirm: false
+    description: Diff with Current Revision
+    scopes:
+      - history
+    command: bash
+    background: false
+    args:
+      - -c
+      - >-
+        RELEASE_NAME=$(echo $NAME | cut -d':' -f1);
+        LATEST_REVISION=$(helm history -n $NAMESPACE --kube-context $CONTEXT $RELEASE_NAME | grep deployed | cut -d$'\t' -f1 | tr -d ' \t');
+        helm diff revision $RELEASE_NAME $LATEST_REVISION $COL-REVISION --kube-context $CONTEXT --namespace $NAMESPACE --color | less -RK
+
+  crd-wizard:
+    shortCut: Shift-W
+    description: CRD Wizard
+    dangerous: false
+    scopes:
+      - crds
+    command: bash
+    background: false
+    confirm: false
+    args:
+      - -c
+      - "crd-wizard tui --kind $COL-KIND"
+
+  dive:
+    shortCut: d
+    confirm: false
+    description: "Dive image"
+    scopes:
+      - containers
+    command: dive
+    background: false
+    args:
+      - $COL-IMAGE
+
+  dup:
+    shortCut: Shift-Y
+    description: Duplicate
+    scopes:
+      - all
+    command: bash
+    background: false
+    confirm: true
+    args:
+      - -c
+      - "kubectl dup $RESOURCE_NAME $NAME -n $NAMESPACE --context $CONTEXT"
+
+  watch-events:
+    shortCut: Shift-E
+    confirm: false
+    description: Get Events
+    scopes:
+    - all
+    command: sh
+    background: false
+    args:
+    - -c
+    - "kubectl events --context $CONTEXT --namespace $NAMESPACE --for $RESOURCE_NAME.${RESOURCE_GROUP:+.RESOURCE_GROUP}/$NAME --watch"
+
