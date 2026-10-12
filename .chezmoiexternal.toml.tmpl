@@ -153,5 +153,16 @@ refreshPeriod = "168h"
   url = "https://github.com/tealdeer-rs/tealdeer/releases/download/{{ $tldrTag }}/completions_bash"
   refreshPeriod = "{{ $refresh }}"
 
+{{- /* delta (its tags have no `v` prefix; only amd64 has a musl build). Use `eval "$(delta --generate-completion bash)"` in the bashrc. */ -}}
+{{- $deltaTag := (gitHubLatestRelease "dandavison/delta").TagName | trim -}}
+{{- $deltaTarget := dict "arm64" "aarch64-unknown-linux-gnu" "arm" "arm-unknown-linux-gnueabihf" "amd64" "x86_64-unknown-linux-musl" | dig $arch "" -}}
+{{- $deltaDir := printf "delta-%s-%s" $deltaTag $deltaTarget }}
+
+["{{ $bin }}/delta"]
+  type = "archive-file"
+  url = "https://github.com/dandavison/delta/releases/download/{{ $deltaTag }}/{{ $deltaDir }}.tar.gz"
+  path = "{{ $deltaDir }}/delta"
+  executable = true
+  refreshPeriod = "{{ $refresh }}"
 
 {{- end }}

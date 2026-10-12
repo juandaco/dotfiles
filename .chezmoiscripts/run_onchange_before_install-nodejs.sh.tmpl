@@ -1,5 +1,7 @@
-{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "debian" "ubuntu") -}}
-#!/bin/bash
+{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "debian" "ubuntu") -}}
+
+#!/usr/bin/env bash
+
 set -euo pipefail
 
 # Change this number to upgrade; the script re-runs because its content changed
@@ -14,4 +16,5 @@ echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.co
 
 sudo apt-get update
 sudo apt-get install -y nodejs
-{{ end -}}
+
+{{- end }}

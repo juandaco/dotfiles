@@ -1,0 +1,23 @@
+{{- /* Change this to follow another release series; there are no 32-bit ARM builds */ -}}
+{{- $series := "0.12" -}}
+{{- $target := dict "arm64" "arm64" "amd64" "x86_64" | dig .chezmoi.arch "" -}}
+{{- $tag := "" -}}
+{{- if and (eq .chezmoi.os "linux") $target -}}
+{{-   range gitHubReleases "neovim/neovim" -}}
+{{-     if and (not $tag) (not .GetPrerelease) (hasPrefix (printf "v%s." $series) .TagName) -}}
+{{-       $tag = .TagName -}}
+{{-     end -}}
+{{-   end -}}
+{{- end -}}
+{{- if $tag -}}
+
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# The newest {{ $series }} release; the script re-runs because its content changed
+NVIM_TAG="{{ $tag }}"
+
+curl -fsSL "https://github.com/neovim/neovim/releases/download/${NVIM_TAG}/nvim-linux-{{ $target }}.tar.gz" \
+  | sudo tar -xz -C /usr/local --strip-components=1
+{{- end }}

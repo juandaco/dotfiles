@@ -114,6 +114,14 @@ else
 fi
 VISUAL="$EDITOR"
 
+# GitHub token from `gh`, when installed and logged in (unauthenticated API
+# calls, like chezmoi's gitHub* template functions, are heavily rate limited).
+if command -v gh >/dev/null 2>&1 && _t=$(gh auth token 2>/dev/null); then
+  GITHUB_TOKEN="$_t"
+  export GITHUB_TOKEN
+fi
+unset _t
+
 ##########
 # export #
 ##########

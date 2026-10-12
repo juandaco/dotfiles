@@ -1,8 +1,9 @@
+{{- if eq .chezmoi.os "darwin" -}}
+
 #!/usr/bin/env bash
 
 set -eufo pipefail
 
-{{- if eq .chezmoi.os "darwin" }}
 if ! command -v brew >/dev/null 2>&1 \
    && [ ! -x /opt/homebrew/bin/brew ] \
    && [ ! -x /usr/local/bin/brew ]; then

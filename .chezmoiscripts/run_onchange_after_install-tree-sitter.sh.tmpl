@@ -1,0 +1,22 @@
+{{- if eq .chezmoi.os "linux" -}}
+
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# The newest release; the script re-runs because its content changed
+TS_VERSION="{{ (gitHubLatestRelease "tree-sitter/tree-sitter").TagName | trim | trimPrefix "v" }}"
+
+# Same locations as ~/.profile, which is not loaded yet on a first run
+export RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.config/rustup}"
+export CARGO_HOME="${CARGO_HOME:-$HOME/.config/cargo}"
+PATH="$CARGO_HOME/bin:$PATH"
+
+if command -v cargo >/dev/null 2>&1; then
+  cargo install tree-sitter-cli --locked --version "$TS_VERSION"
+  # Drop a prebuilt binary from an earlier apply; it shadows the cargo one
+  rm -f "$HOME/.local/bin/tree-sitter"
+else
+  echo "cargo not found, skipping tree-sitter CLI" >&2
+fi
+{{- end }}
