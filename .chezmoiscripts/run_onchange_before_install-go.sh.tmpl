@@ -1,0 +1,36 @@
+{{- /* go.dev lists the stable releases, newest first, with the checksum of every file */ -}}
+{{- $arch := dict "arm" "armv6l" | dig .chezmoi.arch .chezmoi.arch -}}
+{{- $file := dict -}}
+{{- if eq .chezmoi.os "linux" -}}
+{{-   $releases := output "curl" "-fsSL" "https://go.dev/dl/?mode=json" | fromJson -}}
+{{-   range (index $releases 0).files -}}
+{{-     if and (eq .os "linux") (eq .arch $arch) (eq .kind "archive") -}}
+{{-       $file = . -}}
+{{-     end -}}
+{{-   end -}}
+{{- end -}}
+{{- if $file -}}
+
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# The newest stable release; the script re-runs because its content changed
+GO_VERSION="{{ $file.version }}"
+GO_ARCHIVE="{{ $file.filename }}"
+GO_SHA256="{{ $file.sha256 }}"
+
+if [ "$(/usr/local/go/bin/go env GOVERSION 2>/dev/null)" = "$GO_VERSION" ]; then
+  exit 0
+fi
+
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+
+curl -fsSL -o "$tmp/$GO_ARCHIVE" "https://go.dev/dl/$GO_ARCHIVE"
+echo "$GO_SHA256  $tmp/$GO_ARCHIVE" | sha256sum -c --quiet -
+
+# Files from an older release must not survive under the new one
+sudo rm -rf /usr/local/go
+sudo tar -xzf "$tmp/$GO_ARCHIVE" -C /usr/local
+{{- end }}

@@ -22,7 +22,7 @@ The answers are stored in `~/.config/chezmoi/chezmoi.yaml`. Run `chezmoi init` a
 ### Requirements
 
 - `curl` and `git`
-- `sudo` access (Homebrew on macOS; apt packages, Neovim and global npm packages on Linux)
+- `sudo` access (Homebrew on macOS; apt packages, Neovim, Go and global npm packages on Linux)
 - On Linux, a C toolchain (`build-essential` on Debian/Ubuntu), needed to build `tree-sitter-cli`
 - On Linux, `tmux` is not installed by this repo; install it separately. Its plugins are installed on the next `chezmoi apply` after that
 
@@ -63,7 +63,7 @@ The lists live in `.chezmoidata/packages.yaml`. Editing them re-runs the matchin
 | ------------- | ---------------------------------------------------------------------------------------- |
 | macOS         | Homebrew, then every formula and cask in `packages.yaml` through `brew bundle`           |
 | Debian/Ubuntu | `gh` and Node.js 24 from their apt repositories                                          |
-| Linux         | Neovim 0.12.x into `/usr/local` (arm64 and amd64 only), `tree-sitter-cli` through cargo, Atuin into `~/.atuin` (arm64 and amd64 only) |
+| Linux         | Neovim 0.12.x into `/usr/local` (arm64 and amd64 only), the latest stable Go into `/usr/local/go`, `tree-sitter-cli` through cargo, Atuin into `~/.atuin` (arm64 and amd64 only) |
 | All           | `rustup`, the global npm packages, the tmux plugins                                      |
 
 Notes:
@@ -71,6 +71,7 @@ Notes:
 - 32-bit ARM has no Neovim or Atuin build, and ARMv6 has no `ripgrep` build; they are skipped there.
 - To change the Node.js major version, edit `NODE_MAJOR` in `run_onchange_before_install-nodejs.sh.tmpl`.
 - To change the Neovim release series, edit `$series` in `run_onchange_before_install-neovim.sh.tmpl`.
+- Go follows the newest stable release listed on [go.dev](https://go.dev/dl/); `chezmoi apply` replaces `/usr/local/go` when a new one is out.
 
 ## Daily use
 
