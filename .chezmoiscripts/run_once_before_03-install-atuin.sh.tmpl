@@ -1,0 +1,14 @@
+{{- /* Atuin only ships 64-bit Linux builds */ -}}
+{{- if and (eq .chezmoi.os "linux") (has .chezmoi.arch (list "arm64" "amd64")) -}}
+
+#!/usr/bin/env bash
+
+set -eufo pipefail
+
+if ! command -v atuin >/dev/null 2>&1 && [ ! -x "$HOME/.atuin/bin/atuin" ]; then
+  echo "Installing atuin..."
+  curl --proto '=https' --tlsv1.2 -LsSf https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh \
+    | ATUIN_NO_MODIFY_PATH=1 sh
+fi
+
+{{- end }}

@@ -1,0 +1,9 @@
+{{- /* Name of the versioned node formula in .packages.brews (e.g. node@24), or empty (always empty off macOS) */ -}}
+{{- if (eq .chezmoi.os "darwin") -}}
+{{- range .packages.brews -}}
+{{- if hasPrefix "node@" . -}}
+{{- . -}}
+{{- break -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}

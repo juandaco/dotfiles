@@ -4,6 +4,8 @@
 
 set -euo pipefail
 
+{{ template "brew-env" . }}
+
 brew bundle --file=/dev/stdin <<EOF
 {{ range .packages.brews -}}
 brew {{ . | quote }}

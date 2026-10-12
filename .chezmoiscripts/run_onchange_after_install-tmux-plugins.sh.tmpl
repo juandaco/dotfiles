@@ -1,4 +1,12 @@
 #!/bin/sh
 # tmux.conf hash: {{ include "dot_config/tmux/tmux.conf" | sha256sum }}
-"$HOME/.config/tmux/plugins/tpm/bin/install_plugins"
-"$HOME/.config/tmux/plugins/tpm/bin/clean_plugins"
+# tmux path, so a skipped run is retried once tmux is installed: {{ lookPath "tmux" }}
+
+{{ template "brew-env" . }}
+
+if command -v tmux >/dev/null 2>&1; then
+  "$HOME/.config/tmux/plugins/tpm/bin/install_plugins"
+  "$HOME/.config/tmux/plugins/tpm/bin/clean_plugins"
+else
+  echo "tmux not found, skipping tmux plugins" >&2
+fi

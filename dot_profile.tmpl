@@ -79,6 +79,11 @@ path_prepend "$HOMEBREW_PREFIX/opt/ruby/bin"
 path_prepend "$HOMEBREW_PREFIX/opt/sqlite/bin"
 path_prepend "$HOMEBREW_PREFIX/opt/openssl/bin"
 
+{{- with includeTemplate "brew-node-formula" . }}
+# Keg-only, so Homebrew does not link it into its bin
+path_prepend "$HOMEBREW_PREFIX/opt/{{ . }}/bin"
+{{- end }}
+
 {{- if .work }}
 
 # SRE Scripts
