@@ -24,6 +24,7 @@ The answers are stored in `~/.config/chezmoi/chezmoi.yaml`. Run `chezmoi init` a
 - `curl` and `git`
 - `sudo` access (Homebrew on macOS; apt packages, Neovim, Go and global npm packages on Linux)
 - On Linux, a C toolchain (`build-essential` on Debian/Ubuntu), needed to build `tree-sitter-cli`
+- `zip` and `unzip`, needed by the SDKMAN! installer
 - On Linux, `tmux` is not installed by this repo; install it separately. Its plugins are installed on the next `chezmoi apply` after that
 
 Unauthenticated GitHub API calls are heavily rate limited, and the Linux templates look up the latest releases of several tools. Once `gh` is installed, run `gh auth login`: `~/.profile` exports `GITHUB_TOKEN` from it.
@@ -64,7 +65,7 @@ The lists live in `.chezmoidata/packages.yaml`. Editing them re-runs the matchin
 | macOS         | Homebrew, then every formula and cask in `packages.yaml` through `brew bundle`           |
 | Debian/Ubuntu | `gh` and Node.js 24 from their apt repositories                                          |
 | Linux         | Neovim 0.12.x into `/usr/local` (arm64 and amd64 only), the latest stable Go into `/usr/local/go`, `tree-sitter-cli` through cargo, Atuin into `~/.atuin` (arm64 and amd64 only) |
-| All           | `rustup`, the global npm packages, the tmux plugins                                      |
+| All           | `rustup`, SDKMAN! into `~/.sdkman`, the global npm packages, the tmux plugins            |
 
 Notes:
 
