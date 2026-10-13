@@ -31,7 +31,7 @@ alias nerdctl='docker'
 alias upgrade="sudo apt update && sudo apt full-upgrade -y"
 {{- else if eq .chezmoi.os "darwin" }}
 # HomeBrew update shortcut
-alias upgrade="brew update && brew upgrade && brew upgrade --cask && brew cleanup && npm -g update && gem update 2>/dev/null"
+alias upgrade="brew update && brew upgrade && brew cleanup && npm -g update && gem update 2>/dev/null"
 {{- end }}
 
 # Alias to clear all active SSH sockets
