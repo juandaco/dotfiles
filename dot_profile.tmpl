@@ -23,12 +23,23 @@ HISTSIZE=10000
 HISTFILESIZE=20000
 
 # `fzf` options
-FZF_DEFAULT_COMMAND='fd --type f --hidden --no-ignore-parent --follow --exclude .git --exclude node_modules --exclude .venv'
-FZF_DEFAULT_OPTS='--reverse --height 90% --margin=3%'
-FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
-FZF_ALT_C_OPTS='--preview-window=hidden'
-FZF_CTRL_R_OPTS='--layout=default --preview-window=hidden'
+FD_FILES='fd --type f --hidden --follow'
+FD_DIRS='fd --type d --hidden --follow'
+
+export FZF_DEFAULT_COMMAND="$FD_FILES"
+export FZF_CTRL_T_COMMAND="$FD_FILES"
+export FZF_ALT_C_COMMAND="$FD_DIRS"
+
+export FZF_DEFAULT_OPTS='--reverse --height 90% --margin=3%'
+export FZF_CTRL_T_OPTS="
+  --preview 'bat -n --color=always {}'
+  --prompt 'files> '
+  --header 'alt-i: toggle gitignored'
+  --bind 'alt-i:transform:[ \"\$FZF_PROMPT\" = \"files> \" ] &&
+    echo \"change-prompt(all> )+reload($FD_FILES --no-ignore-vcs)\" ||
+    echo \"change-prompt(files> )+reload($FD_FILES)\"'"
+export FZF_ALT_C_OPTS='--preview-window=hidden'
+export FZF_CTRL_R_OPTS='--layout=default --preview-window=hidden'
 
 # Setup XDG (needed for MacOS)
 XDG_CONFIG_HOME="$HOME/.config"
