@@ -90,9 +90,6 @@ path_prepend "$HOMEBREW_PREFIX/bin"
 path_prepend "$HOMEBREW_PREFIX/opt/ruby/bin"
 path_prepend "$HOMEBREW_PREFIX/opt/sqlite/bin"
 path_prepend "$HOMEBREW_PREFIX/opt/openssl/bin"
-{{- with includeTemplate "brew-node-formula" . }}
-path_prepend "$HOMEBREW_PREFIX/opt/{{ . }}/bin"
-{{- end }}
 
 {{- if .work }}
 
