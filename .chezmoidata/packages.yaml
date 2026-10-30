@@ -28,6 +28,7 @@ packages:
     - htop
     - httpie
     - jq
+    - lazygit
     - lua
     - luarocks
     - neovim

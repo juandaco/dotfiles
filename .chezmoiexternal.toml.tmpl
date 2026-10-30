@@ -165,4 +165,15 @@ refreshPeriod = "168h"
   executable = true
   refreshPeriod = "{{ $refresh }}"
 
+{{- /* lazygit (the tag has a `v` prefix but the assets do not; the armv6 build also runs on ARMv7) */ -}}
+{{- $lazygitTag := (gitHubLatestRelease "jesseduffield/lazygit").TagName | trim -}}
+{{- $lazygitTarget := dict "arm64" "linux_arm64" "arm" "linux_armv6" "amd64" "linux_x86_64" | dig $arch "" }}
+
+["{{ $bin }}/lazygit"]
+  type = "archive-file"
+  url = "https://github.com/jesseduffield/lazygit/releases/download/{{ $lazygitTag }}/lazygit_{{ $lazygitTag | trimPrefix "v" }}_{{ $lazygitTarget }}.tar.gz"
+  path = "lazygit"
+  executable = true
+  refreshPeriod = "{{ $refresh }}"
+
 {{- end }}
